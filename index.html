@@ -1,0 +1,2149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الوحدة الأولى — أساسيات HTML</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange: #F4631E;
+  --orange-soft: rgba(244,99,30,0.12);
+  --orange-border: rgba(244,99,30,0.30);
+  --green: #22C55E;
+  --green-soft: rgba(34,197,94,0.1);
+  --blue: #3B82F6;
+  --blue-soft: rgba(59,130,246,0.1);
+  --yellow: #EAB308;
+  --yellow-soft: rgba(234,179,8,0.1);
+  --red: #EF4444;
+  --red-soft: rgba(239,68,68,0.1);
+  --purple: #A855F7;
+  --purple-soft: rgba(168,85,247,0.1);
+  --bg: #F7F5F1;
+  --bg-card: #FFFFFF;
+  --bg-dark: #111111;
+  --bg-dark-2: #1A1A1A;
+  --text: #1C1A18;
+  --text-soft: #6B6560;
+  --border: #E5E0D8;
+  --code-bg: #1E1E2E;
+  --code-text: #CDD6F4;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Tajawal', sans-serif;
+  line-height: 1.8;
+  font-size: 17px;
+}
+
+/* ===== TOP NAV ===== */
+.topnav {
+  background: var(--bg-dark);
+  padding: 14px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  border-bottom: 2px solid var(--orange);
+}
+
+.nav-logo {
+  color: white;
+  font-weight: 800;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-logo .html5-badge {
+  background: var(--orange);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 5px;
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 0.05em;
+}
+
+.nav-progress {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.nav-unit-label {
+  color: rgba(255,255,255,0.45);
+  font-size: 0.82rem;
+}
+
+.progress-dots {
+  display: flex;
+  gap: 5px;
+}
+
+.pdot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+}
+.pdot.done { background: var(--orange); }
+.pdot.active { background: var(--orange); box-shadow: 0 0 0 2px rgba(244,99,30,0.35); }
+
+/* ===== COURSE INTRO SECTION ===== */
+.course-intro {
+  background: var(--bg-dark);
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(244,99,30,0.2);
+}
+
+.course-intro-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 80px 48px 70px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.course-intro-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 100% 50%, rgba(244,99,30,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 0% 100%, rgba(59,130,246,0.05) 0%, transparent 70%);
+}
+
+.course-intro-bg-text {
+  position: absolute;
+  left: -10px;
+  bottom: -60px;
+  font-size: 22rem;
+  font-weight: 900;
+  color: rgba(244,99,30,0.04);
+  font-family: 'Fira Code', monospace;
+  pointer-events: none;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.course-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(244,99,30,0.12);
+  border: 1px solid rgba(244,99,30,0.28);
+  color: var(--orange);
+  font-size: 0.75rem;
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 22px;
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 0.04em;
+}
+
+.course-tag::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.course-intro h1 {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 1.12;
+  color: white;
+  margin-bottom: 18px;
+}
+
+.course-intro h1 .accent { color: var(--orange); }
+
+.course-intro .course-desc {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.8;
+  max-width: 540px;
+  margin-bottom: 36px;
+}
+
+.course-stats {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.stat-num {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: white;
+  line-height: 1;
+  font-family: 'Fira Code', monospace;
+}
+
+.stat-num span { color: var(--orange); }
+
+.stat-label {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.38);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.stat-divider {
+  width: 1px;
+  background: rgba(255,255,255,0.1);
+  align-self: stretch;
+}
+
+/* Roadmap panel */
+.course-roadmap {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 28px 24px;
+  min-width: 240px;
+}
+
+.roadmap-title {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: 'Fira Code', monospace;
+  margin-bottom: 18px;
+}
+
+.roadmap-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+}
+
+.roadmap-item:last-child { border-bottom: none; }
+
+.roadmap-icon {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.ri-active { background: var(--orange-soft); border: 1px solid var(--orange-border); }
+.ri-future { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); }
+
+.roadmap-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.roadmap-unit-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: white;
+}
+
+.roadmap-unit-name.future { color: rgba(255,255,255,0.35); }
+
+.roadmap-lessons {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.3);
+  font-family: 'Fira Code', monospace;
+}
+
+/* ===== UNIT HERO ===== */
+.unit-hero {
+  background: linear-gradient(135deg, #1A1A1A 0%, #0F0F0F 100%);
+  color: white;
+  padding: 60px 48px 52px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(244,99,30,0.15);
+}
+
+.unit-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 100% at 100% 50%, rgba(244,99,30,0.08) 0%, transparent 70%);
+}
+
+.unit-hero::after {
+  content: '01';
+  position: absolute;
+  left: -10px;
+  bottom: -60px;
+  font-size: 22rem;
+  font-weight: 900;
+  color: rgba(244,99,30,0.04);
+  font-family: 'Fira Code', monospace;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.unit-hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.unit-tag {
+  display: inline-block;
+  background: var(--orange-soft);
+  border: 1px solid var(--orange-border);
+  color: var(--orange);
+  font-size: 0.75rem;
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 18px;
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 0.04em;
+}
+
+.unit-hero h2 {
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-weight: 900;
+  line-height: 1.18;
+  margin-bottom: 14px;
+}
+
+.unit-hero h2 span { color: var(--orange); }
+
+.unit-hero p.unit-desc {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.55);
+  max-width: 560px;
+  margin-bottom: 30px;
+}
+
+.unit-meta {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.45);
+}
+
+.meta-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+
+/* ===== LESSON INDEX ===== */
+.lesson-index {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 18px 48px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 56px;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+.idx-label {
+  font-size: 0.78rem;
+  color: var(--text-soft);
+  margin-left: 6px;
+}
+
+.idx-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-soft);
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.8rem;
+  padding: 6px 14px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.idx-btn:hover, .idx-btn.active {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: white;
+}
+
+/* ===== MAIN LAYOUT ===== */
+.main-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 24px 120px;
+}
+
+/* ===== LESSON CARD ===== */
+.lesson-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 48px;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.05);
+  scroll-margin-top: 120px;
+  transition: box-shadow 0.3s;
+}
+
+.lesson-card:hover {
+  box-shadow: 0 4px 40px rgba(0,0,0,0.09);
+}
+
+.lesson-header {
+  background: var(--bg-dark);
+  color: white;
+  padding: 26px 36px;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.lesson-num-badge {
+  background: var(--orange);
+  color: white;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 7px;
+  flex-shrink: 0;
+  margin-top: 4px;
+  letter-spacing: 0.06em;
+}
+
+.lesson-header-text h2 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.lesson-header-text p {
+  font-size: 0.87rem;
+  color: rgba(255,255,255,0.45);
+}
+
+.lesson-body {
+  padding: 36px;
+}
+
+/* ===== SECTIONS ===== */
+.section {
+  margin-bottom: 34px;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-icon {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.icon-theory { background: var(--blue-soft); }
+.icon-code { background: rgba(30,30,46,0.07); }
+.icon-exercise { background: var(--green-soft); }
+.icon-tip { background: var(--yellow-soft); }
+.icon-star { background: var(--purple-soft); }
+
+.prose {
+  color: var(--text);
+  line-height: 1.9;
+  font-size: 1rem;
+}
+
+.prose p { margin-bottom: 12px; }
+.prose strong { color: var(--orange); font-weight: 700; }
+
+/* ===== CODE BLOCK ===== */
+.code-block {
+  background: var(--code-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 16px 0;
+  direction: ltr;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.code-header {
+  background: rgba(255,255,255,0.05);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.code-lang {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.7rem;
+  color: var(--orange);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.code-dots { display: flex; gap: 6px; }
+
+.code-dots span {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+
+.dot-red { background: #FF5F57; }
+.dot-yellow { background: #FFBD2E; }
+.dot-green { background: #28CA41; }
+
+pre {
+  padding: 20px 22px;
+  overflow-x: auto;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.87rem;
+  line-height: 1.75;
+  color: var(--code-text);
+}
+
+/* Syntax highlighting */
+.kw { color: #CBA6F7; }
+.at { color: #89B4FA; }
+.st { color: #A6E3A1; }
+.cm { color: #6C7086; font-style: italic; }
+.tx { color: #CDD6F4; }
+.tg { color: #F38BA8; }
+
+/* ===== NOTE BOXES ===== */
+.note-box {
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 16px 0;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  font-size: 0.93rem;
+}
+
+.note-box.info    { background: var(--blue-soft);   border-right: 3px solid var(--blue); }
+.note-box.warning { background: var(--yellow-soft);  border-right: 3px solid var(--yellow); }
+.note-box.tip     { background: var(--green-soft);   border-right: 3px solid var(--green); }
+.note-box.important { background: var(--orange-soft); border-right: 3px solid var(--orange); }
+
+.note-icon { font-size: 1.15rem; flex-shrink: 0; margin-top: 2px; }
+
+/* ===== EXERCISE BLOCK ===== */
+.exercise-block {
+  background: var(--green-soft);
+  border: 1px solid rgba(34,197,94,0.2);
+  border-radius: 14px;
+  padding: 22px 26px;
+  margin: 16px 0;
+}
+
+.exercise-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-weight: 700;
+  color: #15803D;
+  font-size: 0.98rem;
+}
+
+.exercise-num {
+  background: var(--green);
+  color: white;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem;
+  font-family: 'Fira Code', monospace;
+  flex-shrink: 0;
+}
+
+.exercise-block ol, .exercise-block ul {
+  padding-right: 22px;
+  color: var(--text);
+}
+
+.exercise-block li {
+  margin-bottom: 8px;
+  font-size: 0.93rem;
+}
+
+/* ===== ANSWER TOGGLE ===== */
+.answer-toggle {
+  background: none;
+  border: 1px dashed var(--orange-border);
+  color: var(--orange);
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.88rem;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 14px;
+  transition: all 0.2s;
+  width: 100%;
+  text-align: right;
+}
+
+.answer-toggle:hover { background: var(--orange-soft); }
+
+.answer-content {
+  display: none;
+  margin-top: 12px;
+}
+
+.answer-content.visible { display: block; }
+
+/* ===== DIVIDER ===== */
+.lesson-divider {
+  height: 1px;
+  background: linear-gradient(to left, transparent, var(--border), transparent);
+  margin: 30px 0;
+}
+
+/* ===== SUMMARY BOX ===== */
+.summary-box {
+  background: linear-gradient(135deg, #111111, #1F0D05);
+  border: 1px solid rgba(244,99,30,0.25);
+  border-radius: 16px;
+  padding: 26px 30px;
+  margin: 24px 0 0;
+  color: white;
+}
+
+.summary-box h3 {
+  color: var(--orange);
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 0.04em;
+}
+
+.summary-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.summary-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.91rem;
+  color: rgba(255,255,255,0.75);
+}
+
+.summary-list li::before {
+  content: '✓';
+  color: var(--green);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ===== CONCEPT CARDS ===== */
+.concept-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  margin: 16px 0;
+}
+
+.concept-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+
+.concept-card .cc-icon {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.concept-card .cc-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.concept-card .cc-desc {
+  font-size: 0.83rem;
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+
+/* ===== TABLE ===== */
+.html-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.html-table th {
+  background: var(--bg-dark);
+  color: white;
+  padding: 12px 18px;
+  text-align: right;
+  font-weight: 700;
+  font-size: 0.83rem;
+}
+
+.html-table td {
+  padding: 11px 18px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+.html-table tr:last-child td { border-bottom: none; }
+
+.html-table tr:nth-child(even) td {
+  background: rgba(0,0,0,0.02);
+}
+
+.html-table code {
+  font-family: 'Fira Code', monospace;
+  background: var(--orange-soft);
+  color: var(--orange);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.83rem;
+}
+
+/* ===== VISUAL STRUCTURE ===== */
+.html-visual {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 16px 0;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
+}
+
+.hv-block {
+  border: 2px dashed;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 8px 0;
+  position: relative;
+}
+
+.hv-block .hv-label {
+  position: absolute;
+  top: -10px;
+  right: 12px;
+  background: white;
+  padding: 0 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.hv-html { border-color: var(--orange); }
+.hv-html .hv-label { color: var(--orange); }
+.hv-head { border-color: var(--blue); }
+.hv-head .hv-label { color: var(--blue); }
+.hv-body { border-color: var(--green); }
+.hv-body .hv-label { color: var(--green); }
+
+.hv-content {
+  color: var(--text-soft);
+  font-size: 0.82rem;
+  padding: 4px 0;
+}
+
+/* ===== STEPS LIST ===== */
+.steps-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.steps-list li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.step-num {
+  background: var(--orange);
+  color: white;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.78rem;
+  font-family: 'Fira Code', monospace;
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.step-text {
+  font-size: 0.93rem;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.step-text strong { color: var(--orange); }
+
+/* ===== H TAG DEMO ===== */
+.h-demo {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 16px 0;
+}
+
+.h-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.h-row:last-child { border-bottom: none; }
+
+.h-tag {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+  background: var(--code-bg);
+  color: var(--orange);
+  padding: 3px 8px;
+  border-radius: 5px;
+  width: 50px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.h-preview { color: var(--text); }
+.h1-p { font-size: 1.7rem; font-weight: 900; }
+.h2-p { font-size: 1.4rem; font-weight: 800; }
+.h3-p { font-size: 1.2rem; font-weight: 700; }
+.h4-p { font-size: 1rem; font-weight: 700; }
+.h5-p { font-size: 0.9rem; font-weight: 600; }
+.h6-p { font-size: 0.82rem; font-weight: 600; color: var(--text-soft); }
+
+.h-size-bar {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+
+/* ===== FOOTER ===== */
+.course-footer {
+  text-align: center;
+  padding: 50px 20px;
+  border-top: 1px solid var(--border);
+  color: var(--text-soft);
+  font-size: 0.85rem;
+}
+
+.footer-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.footer-badge {
+  background: var(--bg-dark);
+  color: rgba(255,255,255,0.4);
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-size: 0.85rem;
+}
+
+.next-unit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--orange);
+  color: white;
+  padding: 14px 32px;
+  border-radius: 100px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  font-family: 'Tajawal', sans-serif;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.next-unit-btn:hover {
+  background: #e05510;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(244,99,30,0.3);
+}
+
+@media (max-width: 700px) {
+  .topnav { padding: 12px 20px; }
+  .course-intro-grid { grid-template-columns: 1fr; padding: 60px 24px 50px; gap: 40px; }
+  .course-roadmap { display: none; }
+  .unit-hero { padding: 50px 24px 42px; }
+  .lesson-index { padding: 14px 20px; top: 52px; }
+  .lesson-body { padding: 24px 20px; }
+  .lesson-header { padding: 22px 20px; }
+  .main-wrap { padding: 40px 14px 80px; }
+  .concept-grid { grid-template-columns: 1fr; }
+  .course-stats { gap: 16px; }
+  .stat-divider { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <div class="nav-logo">
+    <span class="html5-badge">HTML5</span>
+    دورة تعلم HTML و CSS
+  </div>
+  <div class="nav-progress">
+    <span class="nav-unit-label">الوحدة 1 من 6</span>
+    <div class="progress-dots">
+      <div class="pdot active"></div>
+      <div class="pdot"></div>
+      <div class="pdot"></div>
+      <div class="pdot"></div>
+      <div class="pdot"></div>
+      <div class="pdot"></div>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- COURSE INTRO SECTION (وحدة البداية) -->
+<!-- ════════════════════════════════════════════ -->
+<section class="course-intro">
+  <div class="course-intro-bg"></div>
+  <div class="course-intro-bg-text">HTML</div>
+  <div class="course-intro-grid">
+    <div class="course-intro-content">
+      <div class="course-tag">// دورة كاملة — 60 درساً</div>
+      <h1>
+        تعلّم <span class="accent">HTML</span><br>
+        من الصفر إلى الاحتراف
+      </h1>
+      <p class="course-desc">
+        دورة شاملة ومتكاملة باللغة العربية — تبدأ بأبسط المفاهيم وتصل إلى بناء مواقع ويب حقيقية.
+        كل درس يحتوي على شرح نظري، أمثلة كود، وتمارين عملية.
+      </p>
+      <div class="course-stats">
+        <div class="stat-item">
+          <div class="stat-num">60<span>+</span></div>
+          <div class="stat-label">درساً</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-num">6</div>
+          <div class="stat-label">وحدات</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">تمرين عملي</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-num">0<span>$</span></div>
+          <div class="stat-label">مجاناً</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Roadmap -->
+    <div class="course-roadmap">
+      <div class="roadmap-title">// خارطة الدورة</div>
+
+      <div class="roadmap-item">
+        <div class="roadmap-icon ri-active">🚀</div>
+        <div class="roadmap-text">
+          <div class="roadmap-unit-name">البداية والأساسيات</div>
+          <div class="roadmap-lessons">درس 00 → 04</div>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div class="roadmap-icon ri-future">📦</div>
+        <div class="roadmap-text">
+          <div class="roadmap-unit-name future">العناصر الأساسية</div>
+          <div class="roadmap-lessons">درس 05 → 11</div>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div class="roadmap-icon ri-future">🎬</div>
+        <div class="roadmap-text">
+          <div class="roadmap-unit-name future">الوسائط</div>
+          <div class="roadmap-lessons">درس 12 → 17</div>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div class="roadmap-icon ri-future">📝</div>
+        <div class="roadmap-text">
+          <div class="roadmap-unit-name future">النماذج</div>
+          <div class="roadmap-lessons">درس 18 → 25</div>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div class="roadmap-icon ri-future">⚙️</div>
+        <div class="roadmap-text">
+          <div class="roadmap-unit-name future">متقدم</div>
+          <div class="roadmap-lessons">درس 26 → 35</div>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div class="roadmap-icon ri-future">🏆</div>
+        <div class="roadmap-text">
+          <div class="roadmap-unit-name future">الاحتراف</div>
+          <div class="roadmap-lessons">درس 36 → 62</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- UNIT 1 HERO -->
+<!-- ════════════════════════════════════════════ -->
+<section class="unit-hero">
+  <div class="unit-hero-inner">
+    <div class="unit-tag">// الوحدة الأولى — Unit 01</div>
+    <h2>البداية و<span>الأساسيات</span></h2>
+    <p class="unit-desc">كل ما يحتاجه الطالب لبدء رحلته مع HTML — من تثبيت البرامج حتى كتابة أول صفحة ويب</p>
+    <div class="unit-meta">
+      <div class="meta-item"><div class="meta-dot"></div> 5 دروس (00 → 04)</div>
+      <div class="meta-item"><div class="meta-dot"></div> مستوى مبتدئ</div>
+      <div class="meta-item"><div class="meta-dot"></div> شرح + كود + تمارين</div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON INDEX -->
+<div class="lesson-index">
+  <span class="idx-label">انتقل إلى:</span>
+  <button class="idx-btn active" onclick="scrollToLesson('lesson-0', this)">00 — مقدمة</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-1', this)">01 — تثبيت البرامج</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-2', this)">02 — هيكل HTML</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-3', this)">03 — Headings</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-4', this)">04 — Meta</button>
+</div>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- MAIN CONTENT -->
+<!-- ════════════════════════════════════════════ -->
+<div class="main-wrap">
+
+  <!-- ══════════════════════ LESSON 0 ══════════════════════ -->
+  <div class="lesson-card" id="lesson-0">
+    <div class="lesson-header">
+      <div class="lesson-num-badge">LESSON 00</div>
+      <div class="lesson-header-text">
+        <h2>مقدمة الدورة — ما هو HTML؟</h2>
+        <p>لماذا نتعلم HTML؟ وكيف يعمل الويب؟</p>
+      </div>
+    </div>
+    <div class="lesson-body">
+
+      <div class="section">
+        <div class="section-title">
+          <div class="section-icon icon-theory">📖</div>
+          ما هو HTML؟
+        </div>
+        <div class="prose">
+          <p>
+            <strong>HTML</strong> هو اختصار لـ <strong>HyperText Markup Language</strong>، وبالعربية "لغة ترميز النص التشعبي".
+            هو ليس لغة برمجة بالمعنى الكامل، بل هو <strong>لغة هيكل</strong> — تستخدمه لتخبر المتصفح: "هنا يوجد عنوان، هنا فقرة، هنا صورة".
+          </p>
+          <p>
+            كل صفحة ويب تراها على الإنترنت — فيسبوك، يوتيوب، جوجل — مبنية في الأصل بـ HTML.
+            إنه <strong>العمود الفقري</strong> لكل موقع ويب في العالم.
+          </p>
+        </div>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="cc-icon">🦴</div>
+            <div class="cc-title">HTML</div>
+            <div class="cc-desc">هيكل الصفحة — مثل العمود الفقري للإنسان</div>
+          </div>
+          <div class="concept-card">
+            <div class="cc-icon">🎨</div>
+            <div class="cc-title">CSS</div>
+            <div class="cc-desc">تصميم وألوان — مثل الملابس والمظهر الخارجي</div>
+          </div>
+          <div class="concept-card">
+            <div class="cc-icon">⚡</div>
+            <div class="cc-title">JavaScript</div>
+            <div class="cc-desc">تفاعل وحركة — مثل عضلات وحركات الجسم</div>
+          </div>
+        </div>
+
+        <div class="note-box info">
+          <div class="note-icon">💡</div>
+          <div>
+            <strong>مثال حياتي:</strong> عندما تبني منزلاً — HTML هو الجدران والسقف والأبواب.
+            CSS هو الطلاء والديكور. JavaScript هو الكهرباء والحركة.
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-divider"></div>
+
+      <div class="section">
+        <div class="section-title">
+          <div class="section-icon icon-theory">🌐</div>
+          كيف يعمل الويب؟
+        </div>
+        <div class="prose">
+          <p>
+            عندما تكتب عنوان موقع في المتصفح، يحدث هذا:
+          </p>
+        </div>
+        <div class="html-visual" style="font-family:'Tajawal',sans-serif; font-size:0.9rem;">
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div style="display:flex; align-items:center; gap:14px;">
+              <div style="background:var(--bg-dark); color:white; padding:10px 16px; border-radius:10px; font-weight:700; white-space:nowrap;">🖥️ المتصفح</div>
+              <div style="flex:1; height:2px; background:var(--border); position:relative;">
+                <div style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); font-size:0.75rem; color:var(--text-soft); white-space:nowrap;">يطلب الصفحة</div>
+                <div style="position:absolute; left:50%; top:-2px; width:10px; height:10px; border-top:2px solid var(--orange); border-right:2px solid var(--orange); transform:rotate(45deg); margin-left:-5px;"></div>
+              </div>
+              <div style="background:var(--orange); color:white; padding:10px 16px; border-radius:10px; font-weight:700; white-space:nowrap;">🗄️ السيرفر</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:14px;">
+              <div style="background:var(--bg-dark); color:white; padding:10px 16px; border-radius:10px; font-weight:700; white-space:nowrap;">🖥️ المتصفح</div>
+              <div style="flex:1; height:2px; background:var(--border); position:relative;">
+                <div style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); font-size:0.75rem; color:var(--text-soft); white-space:nowrap;">يرسل ملف HTML</div>
+                <div style="position:absolute; right:50%; top:-2px; width:10px; height:10px; border-bottom:2px solid var(--green); border-left:2px solid var(--green); transform:rotate(45deg); margin-right:-5px;"></div>
+              </div>
+              <div style="background:var(--orange); color:white; padding:10px 16px; border-radius:10px; font-weight:700; white-space:nowrap;">🗄️ السيرفر</div>
+            </div>
+            <div style="text-align:center; color:var(--text-soft); font-size:0.85rem; padding-top:4px;">
+              ← يقرأ المتصفح ملف HTML ويعرضه كصفحة مرئية →
+            </div>
+          </div>
+        </div>
+        <div class="prose">
+          <p>
+            أنت كمطوّر تكتب ملف <strong>.html</strong> مثل <code style="background:#f0ede8;padding:2px 8px;border-radius:4px;font-family:'Fira Code',monospace;font-size:0.85em">index.html</code>، والمتصفح يقرأه ويحوّله إلى صفحة جميلة أمام المستخدم.
+          </p>
+        </div>
+      </div>
+
+      <div class="lesson-divider"></div>
+
+      <div class="section">
+        <div class="section-title">
+          <div class="section-icon icon-star">🗺️</div>
+          ما الذي ستتعلمه في هذه الدورة؟
+        </div>
+        <div class="prose">
+          <p>في نهاية هذه الدورة ستكون قادراً على:</p>
+        </div>
+        <div class="note-box tip">
+          <div class="note-icon">🎯</div>
+          <div>
+            بناء صفحات ويب كاملة من الصفر · إضافة نصوص وصور وروابط وجداول ·
+            إنشاء نماذج تسجيل وتسجيل دخول · تضمين فيديوهات وخرائط جوجل ·
+            ربط صفحاتك بـ CSS · رفع موقعك على الإنترنت مجاناً
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-box">
+        <h3>// ملخص الدرس</h3>
+        <ul class="summary-list">
+          <li>HTML هو لغة هيكل صفحات الويب</li>
+          <li>كل موقع إنترنت يستخدم HTML كأساس</li>
+          <li>المتصفح يقرأ ملف HTML ويعرضه كصفحة مرئية</li>
+          <li>ملفات HTML تنتهي بـ .html مثل index.html</li>
+          <li>HTML + CSS + JavaScript = موقع ويب متكامل</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════ LESSON 1 ══════════════════════ -->
+  <div class="lesson-card" id="lesson-1">
+    <div class="lesson-header">
+      <div class="lesson-num-badge">LESSON 01</div>
+      <div class="lesson-header-text">
+        <h2>تثبيت VS Code و Live Server</h2>
+        <p>Code Editor + Live Server — كل ما تحتاجه قبل أن تبدأ الكتابة</p>
+      </div>
+    </div>
+    <div class="lesson-body">
+
+      <div class="section">
+        <div class="section-title">
+          <div class="section-icon icon-theory">📖</div>
+          ما الذي نحتاجه؟
+        </div>
+        <div class="prose">
+          <p>قبل أن تكتب أي كود، تحتاج إلى أداتين أساسيتين:</p>
+        </div>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="cc-icon">📝</div>
+            <div class="cc-title">VS Code</div>
+            <div class="cc-desc">محرر الكود — البرنامج الذي ستكتب فيه HTML. مجاني وسهل ويدعم العربية.</div>
+          </div>
+          <div class="concept-card">
+            <div class="cc-icon">🔴</div>
+            <div class="cc-title">Live Server</div>
+            <div class="cc-desc">إضافة داخل VS Code تعرض تغييراتك في المتصفح فوراً عند الحفظ.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-divider"></div>
+
+      <div class="section">
+        <div class="section-title">
+          <div class="section-icon icon-code">💻</div>
+          خطوات التثبيت
+        </div>
+
+        <ul class="steps-list">
+          <li>
+            <div class="step-num">١</div>
+            <div class="step-text">افتح المتصفح وانتقل إلى <strong>code.visualstudio.com</strong> ← اضغط Download for Windows (أو Mac)</div>
+          </li>
+          <li>
+            <div class="step-num">٢</div>
+            <div class="step-text">ثبّت VS Code بشكل عادي مثل أي برنامج — Next → Next → Install → Finish</div>
+          </li>
+          <li>
+            <div class="step-num">٣</div>
+            <div class="step-text">افتح VS Code ← انقر على أيقونة <strong>Extensions</strong> في الشريط الجانبي (الأيقونة التي تشبه 4 مربعات)</div>
+          </li>
+          <li>
+            <div class="step-num">٤</div>
+            <div class="step-text">ابحث عن <strong>Live Server</strong> من Ritwick Dey ← اضغط <strong>Install</strong></div>
+          </li>
+          <li>
+            <div class="step-num">٥</div>
+            <div class="step-text">انتهى! ستجد في أسفل VS Code زراً يكتب عليه <strong>Go Live</strong></div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="lesson-divider"></div>
+
+      <div class="section">
+        <div class="section-title">
+          <div class="section-icon icon-code">💻</div>
+          إنشاء أول ملف HTML
+        </div>
+
+        <ul class="steps-list">
+          <li>
+            <div class="step-num">١</div>
+            <div class="step-text">أنشئ مجلداً جديداً على سطح المكتب — اسمه <strong>html-course</strong></div>
+          </li>
+          <li>
+            <div class="step-num">٢</div>
+            <div class="step-text">في VS Code: <strong>File → Open Folder</strong> ← اختر المجلد</div>
+          </li>
+          <li>
+            <div class="step-num">٣</div>
+            <div class="step-text">اضغط على أيقونة <strong>New File</strong> ← اكتب الاسم: <strong>index.html</strong></div>
+          </li>
+          <li>
+            <div class="step-num">٤</div>
+            <div class="step-text">داخل الملف اكتب <strong>!</strong> ثم اضغط <strong>Tab</strong> — سيولّد VS Code هيكل HTML تلقائياً 🪄</div>
+          </li>
+          <li>
+            <div class="step-num">٥</div>
+            <div class="step-text">اضغط كليك يمين على الملف ← <strong>Open with Live Server</strong> — سيفتح المتصفح تلقائياً</div>
+          </li>
+        </ul>
+
+        <div class="note-box info">
+          <div class="note-icon">⌨️</div>
+          <div>
+            <strong>اختصار مفيد:</strong> في VS Code، الضغط على <strong>!</strong> ثم <strong>Tab</strong> داخل ملف .html يولّد هيكل HTML5 كاملاً تلقائياً. هذا الاختصار يوفّر عليك وقتاً كل مرة.
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-divider"></div>
+
+      <div class="section">
+        <div class="section-title">
+          <div class="section-icon icon-exercise">✏️</div>
+          تمرين الدرس
+        </div>
+        <div class="exercise-block">
+          <div class="exercise-header">
+            <div class="exercise-num">1</div>
+            الإعداد الكامل
+          </div>
+          <ol>
+            <li>ثبّت VS Code على جهازك إذا لم يكن مثبّتاً</li>
+            <li>ثبّت إضافة Live Server</li>
+            <li>أنشئ مجلداً باسم <strong>html-course</strong> على سطح المكتب</li>
+            <li>أنشئ ملف <strong>index.html</strong> داخله</li>
+            <li>اضغط ! ثم Tab لتوليد الهيكل</li>
+            <li>شغّل Live Server وتأكد أن الصفحة تظهر في المتصفح</li>
+          </ol>
+          <button class="answer-toggle" onclick="toggleAnswer(this)">▼ عرض الكود المتوقع</button>
+          <div class="answer-content">
+            <div class="code-block" dir="ltr">
+              <div class="code-header">
+                <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+                <span class="code-lang">index.html — ناتج الضغط على ! ثم Tab</span>
+              </div>
+              <pre><span class="cm">&lt;!DOCTYPE html&gt;</span>
+<span class="kw">&lt;html</span> <span class="at">lang</span>=<span class="st">"en"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;head&gt;</span>
+    <span class="kw">&lt;meta</span> <span class="at">charset</span>=<span class="st">"UTF-8"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;meta</span> <span class="at">name</span>=<span class="st">"viewport"</span> <span class="at">content</span>=<span class="st">"width=device-width, initial-scale=1.0"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;title&gt;</span><span class="tx">Document</span><span class="tg">&lt;/title&gt;</span>
+<span class="tg">&lt;/head&gt;</span>
+<span class="kw">&lt;body&gt;</span>
+    <span class="cm">&lt;!-- هنا تضع محتوى صفحتك --&gt;</span>
+<span class="tg">&lt;/body&gt;</span>
+<span class="tg">&lt;/html&gt;</span></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-box">
+        <h3>// ملخص الدرس</h3>
+        <ul class="summary-list">
+          <li>VS Code هو أفضل محرر كود للمبتدئين — مجاني وقوي</li>
+          <li>Live Server يعرض تغييراتك مباشرةً في المتصفح دون إعادة تشغيل</li>
+          <li>الملف الرئيسي لأي موقع يُسمى index.html</li>
+          <li>الضغط على ! ثم Tab داخل VS Code يولّد هيكل HTML تلقائياً</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════ LESSON 2 ══════════════════════ -->
+  <div class="lesson-card" id="lesson-2">
+    <div class="lesson-header">
+      <div class="lesson-num-badge">LESSON 02</div>
+      <div class="lesson-header-text">
+        <h2>هيكل HTML الكامل</h2>
+        <p>DOCTYPE, html, head, body — تشريح صفحة HTML من الألف إلى الياء</p>
+      </div>
+    </div>
+    <div class="lesson-body">
+
+      <div class="section">
+        <div class="section-title">
+          <div class="section-icon icon-theory">📖</div>
+          ما هي الوسوم (Tags)؟
+        </div>
+        <div class="prose">
+          <p>
+            HTML مبني على <strong>الوسوم (Tags)</strong>. الوسم هو كلمة محاطة بقوسين زاويين <strong>&lt; &gt;</strong>.
+            معظم الوسوم لها وسم فتح ووسم إغلاق:
+          </p>
+        </div>
+        <div class="code-block" dir="ltr">
+          <div class="code-header">
+            <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+            <span class="code-lang">مثال — وسم وإغلاقه</span>
+          </div>
+          <pre><span class="kw">&lt;p&gt;</span><span class="tx">هذا نص داخل وسم الفقرة</span><span class="tg">&lt;/p&gt;</span>
+<span class="cm">↑ وسم الفتح                  ↑ وسم الإغلاق (لاحظ الشرطة /)</span></pre>
+        </div>
+        <div class="note-box warning">
+          <div class="note-icon">⚠️</div>
+          <div><strong>قاعدة أساسية:</strong> كل وسم فتحته يجب أن تغلقه. إذا كتبت <code style="font-family:'Fira Code',monospace">&lt;body&gt;</code> يجب أن تكتب <code style="font-family:'Fira Code',monospace">&lt;/body&gt;</code>.</div>
+        </div>
+      </div>
+
+      <div class="lesson-divider"></div>
+
+      <div class="section">
+        <div class="section-title">
+          <div class="section-icon icon-theory">🏗️</div>
+          هيكل صفحة HTML الكاملة
+        </div>
+        <div class="prose">
+          <p>كل صفحة HTML سليمة تتكون من 4 أجزاء رئيسية:</p>
+        </div>
+
+        <!-- Visual representation -->
+        <div class="html-visual">
+          <div class="hv-block hv-html">
+            <div class="hv-label">&lt;html&gt;</div>
+            <div class="hv-content">الوعاء الرئيسي — يحتوي على كل شيء</div>
+
+            <div class="hv-block hv-head" style="margin-top:10px;">
+              <div class="hv-label">&lt;head&gt;</div>
+              <div class="hv-content">معلومات الصفحة (لا تظهر للزائر)</div>
+              <div style="color:#89B4FA; font-size:0.78rem; padding:4px 0;">
+                &lt;title&gt; · &lt;meta&gt; · &lt;link&gt;
+              </div>
+            </div>
+
+            <div class="hv-block hv-body" style="margin-top:8px;">
+              <div class="hv-label">&lt;body&gt;</div>
+              <div class="hv-content">المحتوى المرئي (ما يراه الزائر)</div>
+              <div style="color:#A6E3A1; font-size:0.78rem; padding:4px 0;">
+                &lt;h1&gt; · &lt;p&gt; · &lt;img&gt; · &lt;a&gt; · كل شيء آخر
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="code-block" dir="ltr">
+          <div class="code-header">
+            <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+            <span class="code-lang">HTML — الهيكل الكامل مع الشرح</span>
+          </div>
+          <pre><span class="cm">&lt;!DOCTYPE html&gt;</span>          <span class="cm">← يخبر المتصفح: هذا HTML5</span>
+
+<span class="kw">&lt;html</span> <span class="at">lang</span>=<span class="st">"ar"</span><span class="kw">&gt;</span>            <span class="cm">← بداية الصفحة كاملة</span>
+
+  <span class="kw">&lt;head&gt;</span>                  <span class="cm">← معلومات الصفحة</span>
+    <span class="kw">&lt;meta</span> <span class="at">charset</span>=<span class="st">"UTF-8"</span><span class="kw">&gt;</span>  <span class="cm">← ترميز الحروف</span>
+    <span class="kw">&lt;title&gt;</span><span class="tx">اسم الصفحة</span><span class="tg">&lt;/title&gt;</span>  <span class="cm">← عنوان تبويب المتصفح</span>
+  <span class="tg">&lt;/head&gt;</span>
+
+  <span class="kw">&lt;body&gt;</span>                  <span class="cm">← المحتوى الظاهر للزائر</span>
+    <span class="kw">&lt;h1&gt;</span><span class="tx">مرحباً!</span><span class="tg">&lt;/h1&gt;</span>
+    <span class="kw">&lt;p&gt;</span><span class="tx">هذه صفحتي الأولى.</span><span class="tg">&lt;/p&gt;</span>
+  <span class="tg">&lt;/body&gt;</span>
+
+<span class="tg">&lt;/html&gt;</span>                   <span class="cm">← نهاية الصفحة</span></pre>
+        </div>
+      </div>
+
+      <div class="lesson-divider"></div>
+
+      <div class="section">
+        <div class="section-title">
+          <div class="section-icon icon-theory">📋</div>
+          شرح كل عنصر بالتفصيل
+        </div>
+
+        <table class="html-table">
+          <thead>
+            <tr>
+              <th>العنصر</th>
+              <th>الوظيفة</th>
+              <th>ملاحظة</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>&lt;!DOCTYPE html&gt;</code></td>
+              <td>يخبر المتصفح أن هذا ملف HTML5</td>
+              <td>دائماً في السطر الأول</td>
+            </tr>
+            <tr>
+              <td><code>&lt;html&gt;</code></td>
+              <td>الوسم الجذر — يحتوي على كل شيء</td>
+              <td>مفتوح حتى نهاية الملف</td>
+            </tr>
+            <tr>
+              <td><code>&lt;head&gt;</code></td>
+              <td>معلومات الصفحة — لا تظهر للزائر</td>
+              <td>يحتوي meta, title, link</td>
+            </tr>
+            <tr>
+              <td><code>&lt;title&gt;</code></td>
+              <td>اسم الصفحة في تبويب المتصفح</td>
+              <td>مهم لمحركات البحث</td>
+            </tr>
+            <tr>
+              <td><code>&lt;body&gt;</code></td>
+              <td>المحتوى المرئي للزائر</td>
+              <td>هنا تضع كل شيء</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="lesson-divider"></div>
+
+      <div class="section">
+        <div class="section-title">
+          <div class="section-icon icon-exercise">✏️</div>
+          تمارين الدرس
+        </div>
+
+        <div class="exercise-block">
+          <div class="exercise-header">
+            <div class="exercise-num">1</div>
+            تمرين من الذاكرة
+          </div>
+          <ol>
+            <li>أغلق الملف واكتب هيكل HTML الكامل من الذاكرة (بدون نسخ)</li>
+            <li>غيّر العنوان في &lt;title&gt; ليكون "مرحباً — أنا [اسمك]"</li>
+            <li>أضف 3 جمل داخل &lt;body&gt; باستخدام وسم &lt;p&gt;</li>
+          </ol>
+          <button class="answer-toggle" onclick="toggleAnswer(this)">▼ عرض الحل</button>
+          <div class="answer-content">
+            <div class="code-block" dir="ltr">
+              <div class="code-header">
+                <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+                <span class="code-lang">الحل</span>
+              </div>
+              <pre><span class="cm">&lt;!DOCTYPE html&gt;</span>
+<span class="kw">&lt;html</span> <span class="at">lang</span>=<span class="st">"ar"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;head&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="at">charset</span>=<span class="st">"UTF-8"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;title&gt;</span><span class="tx">مرحباً — أنا أحمد</span><span class="tg">&lt;/title&gt;</span>
+<span class="tg">&lt;/head&gt;</span>
+<span class="kw">&lt;body&gt;</span>
+  <span class="kw">&lt;p&gt;</span><span class="tx">أنا أتعلم HTML.</span><span class="tg">&lt;/p&gt;</span>
+  <span class="kw">&lt;p&gt;</span><span class="tx">HTML هو هيكل مواقع الويب.</span><span class="tg">&lt;/p&gt;</span>
+  <span class="kw">&lt;p&gt;</span><span class="tx">هذه صفحتي الأولى!</span><span class="tg">&lt;/p&gt;</span>
+<span class="tg">&lt;/body&gt;</span>
+<span class="tg">&lt;/html&gt;</span></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise-block">
+          <div class="exercise-header">
+            <div class="exercise-num">2</div>
+            أسئلة مراجعة
+          </div>
+          <ol>
+            <li>ما هي وظيفة وسم &lt;head&gt;؟</li>
+            <li>أين يوضع المحتوى الذي يراه الزائر؟</li>
+            <li>ما الفرق بين وسم الفتح ووسم الإغلاق؟</li>
+            <li>لماذا نكتب &lt;!DOCTYPE html&gt; في أول السطر؟</li>
+          </ol>
+          <button class="answer-toggle" onclick="toggleAnswer(this)">▼ عرض الإجابات</button>
+          <div class="answer-content">
+            <div class="note-box tip">
+              <div class="note-icon">✅</div>
+              <div>
+                <strong>١.</strong> &lt;head&gt; يحتوي على معلومات الصفحة كالعنوان والترميز — لا تظهر للزائر مباشرةً<br>
+                <strong>٢.</strong> داخل &lt;body&gt;<br>
+                <strong>٣.</strong> وسم الفتح &lt;p&gt; يبدأ العنصر، وسم الإغلاق &lt;/p&gt; ينهيه (بشرطة /)<br>
+                <strong>٤.</strong> لأخبر المتصفح أن هذا ملف HTML5 وليس نوعاً آخر
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-box">
+        <h3>// ملخص الدرس</h3>
+        <ul class="summary-list">
+          <li>كل صفحة HTML تبدأ بـ &lt;!DOCTYPE html&gt;</li>
+          <li>&lt;html&gt; هو الوعاء الرئيسي لكل الصفحة</li>
+          <li>&lt;head&gt; للمعلومات، &lt;body&gt; للمحتوى المرئي</li>
+          <li>&lt;title&gt; يظهر في تبويب المتصفح</li>
+          <li>كل وسم مفتوح يجب إغلاقه بـ &lt;/وسم&gt;</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════ LESSON 3 ══════════════════════ -->
+  <div class="lesson-card" id="lesson-3">
+    <div class="lesson-header">
+      <div class="lesson-num-badge">LESSON 03</div>
+      <div class="lesson-header-text">
+        <h2>عناوين النص — h1 إلى h6</h2>
+        <p>كيف تضيف عناوين من الأكبر إلى الأصغر وتنظّم محتوى صفحتك</p>
+      </div>
+    </div>
+    <div class="lesson-body">
+
+      <div class="section">
+        <div class="section-title">
+          <div class="section-icon icon-theory">📖</div>
+          ما هي Headings؟
+        </div>
+        <div class="prose">
+          <p>
+            وسوم العناوين تستخدم لإنشاء <strong>عناوين بأحجام مختلفة</strong> في الصفحة.
+            HTML يوفر 6 مستويات من العناوين: من <strong>h1</strong> (الأكبر والأهم) إلى <strong>h6</strong> (الأصغر).
+          </p>
+          <p>
+            المتصفح يجعل كل واحد منها بحجم مختلف تلقائياً — وهي أيضاً مهمة جداً لـ <strong>محركات البحث (SEO)</strong>.
+          </p>
+        </div>
+
+        <!-- Live h tag demo -->
+        <div class="h-demo">
+          <div class="h-row">
+            <div class="h-tag">h1</div>
+            <div class="h-size-bar" style="width:100px;"></div>
+            <div class="h-preview h1-p">عنوان رئيسي</div>
+          </div>
+          <div class="h-row">
+            <div class="h-tag">h2</div>
+            <div class="h-size-bar" style="width:80px;"></div>
+            <div class="h-preview h2-p">عنوان ثانوي</div>
+          </div>
+          <div class="h-row">
+            <div class="h-tag">h3</div>
+            <div class="h-size-bar" style="width:62px;"></div>
+            <div class="h-preview h3-p">عنوان ثالثي</div>
+          </div>
+          <div class="h-row">
+            <div class="h-tag">h4</div>
+            <div class="h-size-bar" style="width:46px;"></div>
+            <div class="h-preview h4-p">عنوان رابعي</div>
+          </div>
+          <div class="h-row">
+            <div class="h-tag">h5</div>
+            <div class="h-size-bar" style="width:32px;"></div>
+            <div class="h-preview h5-p">عنوان خامسي</div>
+          </div>
+          <div class="h-row">
+            <div class="h-tag">h6</div>
+            <div class="h-size-bar" style="width:20px; background:var(--text-soft);"></div>
+            <div class="h-preview h6-p">عنوان سادسي</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-divider"></div>
+
+      <div class="section">
+        <div class="section-title">
+          <div class="section-icon icon-code">💻</div>
+          الكود
+        </div>
+        <div class="code-block" dir="ltr">
+          <div class="code-header">
+            <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+            <span class="code-lang">HTML — جميع عناصر Heading</span>
+          </div>
+          <pre><span class="kw">&lt;h1&gt;</span><span class="tx">عنوان رئيسي — الأكبر</span><span class="tg">&lt;/h1&gt;</span>
+<span class="kw">&lt;h2&gt;</span><span class="tx">عنوان ثانوي</span><span class="tg">&lt;/h2&gt;</span>
+<span class="kw">&lt;h3&gt;</span><span class="tx">عنوان ثالثي</span><span class="tg">&lt;/h3&gt;</span>
+<span class="kw">&lt;h4&gt;</span><span class="tx">عنوان رابعي</span><span class="tg">&lt;/h4&gt;</span>
+<span class="kw">&lt;h5&gt;</span><span class="tx">عنوان خامسي</span><span class="tg">&lt;/h5&gt;</span>
+<span class="kw">&lt;h6&gt;</span><span class="tx">عنوان سادسي — الأصغر</span><span class="tg">&lt;/h6&gt;</span></pre>
+        </div>
+      </div>
+
+      <div class="lesson-divider"></div>
+
+      <div class="section">
+        <div class="section-title">
+          <div class="section-icon icon-tip">💡</div>
+          متى تستخدم كل مستوى؟
+        </div>
+
+        <table class="html-table">
+          <thead>
+            <tr>
+              <th>الوسم</th>
+              <th>الاستخدام</th>
+              <th>مثال</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>&lt;h1&gt;</code></td>
+              <td>العنوان الرئيسي للصفحة — مرة واحدة فقط</td>
+              <td>اسم الموقع أو الموضوع الرئيسي</td>
+            </tr>
+            <tr>
+              <td><code>&lt;h2&gt;</code></td>
+              <td>عناوين الأقسام الكبيرة</td>
+              <td>فصول المقال أو أقسام الصفحة</td>
+            </tr>
+            <tr>
+              <td><code>&lt;h3&gt;</code></td>
+              <td>عناوين فرعية داخل الأقسام</td>
+              <td>نقاط داخل كل فصل</td>
+            </tr>
+            <tr>
+              <td><code>h4 → h6</code></td>
+              <td>تفاصيل أعمق — نادرة الاستخدام</td>
+              <td>توثيق تقني أو محتوى معقد</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="note-box important">
+          <div class="note-icon">🔍</div>
+          <div>
+            <strong>مهم لـ SEO:</strong> استخدم <code style="font-family:'Fira Code',monospace">&lt;h1&gt;</code> مرة واحدة فقط في كل صفحة — فهو العنوان الرئيسي الذي تقرأه محركات البحث أولاً.
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-divider"></div>
+
+      <div class="section">
+        <div class="section-title">
+          <div class="section-icon icon-code">💻</div>
+          مثال عملي — هيكل مقال
+        </div>
+        <div class="code-block" dir="ltr">
+          <div class="code-header">
+            <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+            <span class="code-lang">مقال HTML — بنية واقعية</span>
+          </div>
+          <pre><span class="kw">&lt;body&gt;</span>
+  <span class="kw">&lt;h1&gt;</span><span class="tx">تعلم البرمجة من الصفر</span><span class="tg">&lt;/h1&gt;</span>
+  
+  <span class="kw">&lt;h2&gt;</span><span class="tx">لماذا تتعلم البرمجة؟</span><span class="tg">&lt;/h2&gt;</span>
+  <span class="kw">&lt;p&gt;</span><span class="tx">البرمجة مهارة مستقبلية...</span><span class="tg">&lt;/p&gt;</span>
+  
+  <span class="kw">&lt;h2&gt;</span><span class="tx">من أين تبدأ؟</span><span class="tg">&lt;/h2&gt;</span>
+  <span class="kw">&lt;h3&gt;</span><span class="tx">الخطوة الأولى: HTML</span><span class="tg">&lt;/h3&gt;</span>
+  <span class="kw">&lt;p&gt;</span><span class="tx">ابدأ بـ HTML لأنه الأساس...</span><span class="tg">&lt;/p&gt;</span>
+  <span class="kw">&lt;h3&gt;</span><span class="tx">الخطوة الثانية: CSS</span><span class="tg">&lt;/h3&gt;</span>
+  <span class="kw">&lt;p&gt;</span><span class="tx">بعد HTML تعلم CSS...</span><span class="tg">&lt;/p&gt;</span>
+<span class="tg">&lt;/body&gt;</span></pre>
+        </div>
+      </div>
+
+      <div class="lesson-divider"></div>
+
+      <div class="section">
+        <div class="section-title">
+          <div class="section-icon icon-exercise">✏️</div>
+          تمارين الدرس
+        </div>
+
+        <div class="exercise-block">
+          <div class="exercise-header">
+            <div class="exercise-num">1</div>
+            أنشئ هيكل مقال
+          </div>
+          <ol>
+            <li>أنشئ ملفاً باسم <strong>article.html</strong></li>
+            <li>أضف عنواناً h1 لاسم مقالتك</li>
+            <li>أضف 3 أقسام، لكل قسم عنوان h2 وعنوان فرعي h3</li>
+            <li>أضف فقرة نصية p تحت كل h3</li>
+          </ol>
+          <button class="answer-toggle" onclick="toggleAnswer(this)">▼ عرض الحل</button>
+          <div class="answer-content">
+            <div class="code-block" dir="ltr">
+              <div class="code-header">
+                <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+                <span class="code-lang">article.html</span>
+              </div>
+              <pre><span class="kw">&lt;body&gt;</span>
+  <span class="kw">&lt;h1&gt;</span><span class="tx">رحلتي في تعلم البرمجة</span><span class="tg">&lt;/h1&gt;</span>
+
+  <span class="kw">&lt;h2&gt;</span><span class="tx">البداية</span><span class="tg">&lt;/h2&gt;</span>
+  <span class="kw">&lt;h3&gt;</span><span class="tx">كيف بدأت؟</span><span class="tg">&lt;/h3&gt;</span>
+  <span class="kw">&lt;p&gt;</span><span class="tx">بدأت رحلتي بتعلم HTML...</span><span class="tg">&lt;/p&gt;</span>
+
+  <span class="kw">&lt;h2&gt;</span><span class="tx">التحديات</span><span class="tg">&lt;/h2&gt;</span>
+  <span class="kw">&lt;h3&gt;</span><span class="tx">ما هي أصعب الأمور؟</span><span class="tg">&lt;/h3&gt;</span>
+  <span class="kw">&lt;p&gt;</span><span class="tx">أصعب شيء كان فهم...</span><span class="tg">&lt;/p&gt;</span>
+
+  <span class="kw">&lt;h2&gt;</span><span class="tx">النتيجة</span><span class="tg">&lt;/h2&gt;</span>
+  <span class="kw">&lt;h3&gt;</span><span class="tx">ماذا تعلمت؟</span><span class="tg">&lt;/h3&gt;</span>
+  <span class="kw">&lt;p&gt;</span><span class="tx">تعلمت بناء مواقع كاملة...</span><span class="tg">&lt;/p&gt;</span>
+<span class="tg">&lt;/body&gt;</span></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise-block">
+          <div class="exercise-header">
+            <div class="exercise-num">2</div>
+            أسئلة مراجعة
+          </div>
+          <ol>
+            <li>كم عدد مستويات العناوين في HTML؟</li>
+            <li>أيهما أكبر حجماً: h1 أم h6؟</li>
+            <li>كم مرة يجب أن تستخدم h1 في الصفحة؟</li>
+            <li>لماذا العناوين مهمة لمحركات البحث؟</li>
+          </ol>
+          <button class="answer-toggle" onclick="toggleAnswer(this)">▼ عرض الإجابات</button>
+          <div class="answer-content">
+            <div class="note-box tip">
+              <div class="note-icon">✅</div>
+              <div>
+                <strong>١.</strong> 6 مستويات (h1 → h6)<br>
+                <strong>٢.</strong> h1 هو الأكبر، h6 هو الأصغر<br>
+                <strong>٣.</strong> مرة واحدة فقط في كل صفحة<br>
+                <strong>٤.</strong> لأن محركات البحث تقرأ العناوين لفهم موضوع الصفحة وترتيبها في النتائج
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-box">
+        <h3>// ملخص الدرس</h3>
+        <ul class="summary-list">
+          <li>h1 إلى h6 هي وسوم العناوين من الأكبر إلى الأصغر</li>
+          <li>h1 هو العنوان الرئيسي — يُستخدم مرة واحدة فقط</li>
+          <li>h2 لأقسام الصفحة، h3 للعناوين الفرعية</li>
+          <li>العناوين مهمة جداً لـ SEO ومحركات البحث</li>
+          <li>رتّب العناوين بشكل هرمي منطقي دائماً</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════ LESSON 4 ══════════════════════ -->
+  <div class="lesson-card" id="lesson-4">
+    <div class="lesson-header">
+      <div class="lesson-num-badge">LESSON 04</div>
+      <div class="lesson-header-text">
+        <h2>عنصر Meta — Charset و Language و Direction</h2>
+        <p>كيف تضبط إعدادات الصفحة: الترميز، اللغة، واتجاه الكتابة</p>
+      </div>
+    </div>
+    <div class="lesson-body">
+
+      <div class="section">
+        <div class="section-title">
+          <div class="section-icon icon-theory">📖</div>
+          ما هو وسم Meta؟
+        </div>
+        <div class="prose">
+          <p>
+            وسم <strong>&lt;meta&gt;</strong> يوضع داخل &lt;head&gt; ويستخدم لتحديد <strong>معلومات عن الصفحة</strong>
+            لا تظهر مباشرةً للزائر، لكنها مهمة جداً للمتصفح ومحركات البحث.
+          </p>
+          <p>
+            وسم &lt;meta&gt; هو وسم <strong>ذاتي الإغلاق (Self-closing)</strong> — لا يحتاج إلى وسم إغلاق منفصل.
+          </p>
+        </div>
+        <div class="note-box info">
+          <div class="note-icon">💡</div>
+          <div>
+            وسم &lt;meta&gt; يستخدم <strong>الخصائص (Attributes)</strong> بدلاً من المحتوى.
+            مثال: <code style="font-family:'Fira Code',monospace">&lt;meta charset="UTF-8"&gt;</code>
+            — هنا <strong>charset</strong> هي الخاصية وقيمتها هي <strong>UTF-8</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-divider"></div>
+
+      <div class="section">
+        <div class="section-title">
+          <div class="section-icon icon-code">💻</div>
+          charset — ترميز الحروف
+        </div>
+        <div class="prose">
+          <p>
+            <strong>charset</strong> يخبر المتصفح كيف يقرأ النصوص في الصفحة. القيمة الأهم هي <strong>UTF-8</strong>
+            لأنها تدعم جميع لغات العالم: العربية، الفرنسية، الصينية، اليابانية، وغيرها.
+          </p>
+        </div>
+        <div class="code-block" dir="ltr">
+          <div class="code-header">
+            <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+            <span class="code-lang">HTML</span>
+          </div>
+          <pre><span class="kw">&lt;head&gt;</span>
+  <span class="cm">&lt;!-- هذا السطر ضروري جداً — بدونه قد تظهر العربية مشوهة --&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="at">charset</span>=<span class="st">"UTF-8"</span><span class="kw">&gt;</span>
+<span class="tg">&lt;/head&gt;</span></pre>
+        </div>
+        <div class="note-box warning">
+          <div class="note-icon">⚠️</div>
+          <div>
+            <strong>مهم جداً:</strong> إذا نسيت <code style="font-family:'Fira Code',monospace">charset="UTF-8"</code> ستظهر الكلمات العربية كرموز غريبة: ??? أو أحرف مكسورة. <strong>لا تنسَه أبداً.</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-divider"></div>
+
+      <div class="section">
+        <div class="section-title">
+          <div class="section-icon icon-code">💻</div>
+          lang — لغة الصفحة
+        </div>
+        <div class="prose">
+          <p>
+            خاصية <strong>lang</strong> تُضاف إلى وسم &lt;html&gt; لتحديد لغة الصفحة.
+            هذا مهم لمحركات البحث والمتصفحات وإمكانية الوصول.
+          </p>
+        </div>
+        <div class="code-block" dir="ltr">
+          <div class="code-header">
+            <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+            <span class="code-lang">HTML — أمثلة اللغات</span>
+          </div>
+          <pre><span class="cm">&lt;!-- عربية --&gt;</span>
+<span class="kw">&lt;html</span> <span class="at">lang</span>=<span class="st">"ar"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- إنجليزية --&gt;</span>
+<span class="kw">&lt;html</span> <span class="at">lang</span>=<span class="st">"en"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- فرنسية --&gt;</span>
+<span class="kw">&lt;html</span> <span class="at">lang</span>=<span class="st">"fr"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- ألمانية --&gt;</span>
+<span class="kw">&lt;html</span> <span class="at">lang</span>=<span class="st">"de"</span><span class="kw">&gt;</span></pre>
+        </div>
+      </div>
+
+      <div class="lesson-divider"></div>
+
+      <div class="section">
+        <div class="section-title">
+          <div class="section-icon icon-code">💻</div>
+          dir — اتجاه الكتابة
+        </div>
+        <div class="prose">
+          <p>خاصية <strong>dir</strong> تحدد اتجاه الكتابة في الصفحة:</p>
+        </div>
+
+        <div class="concept-grid">
+          <div class="concept-card">
+            <div class="cc-icon" style="text-align:right; direction:rtl;">→ ←</div>
+            <div class="cc-title">dir="rtl"</div>
+            <div class="cc-desc">Right To Left — من اليمين لليسار<br>للعربية والعبرية</div>
+          </div>
+          <div class="concept-card">
+            <div class="cc-icon" style="text-align:left; direction:ltr;">← →</div>
+            <div class="cc-title">dir="ltr"</div>
+            <div class="cc-desc">Left To Right — من اليسار لليمين<br>للإنجليزية وأغلب اللغات</div>
+          </div>
+        </div>
+
+        <div class="code-block" dir="ltr">
+          <div class="code-header">
+            <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+            <span class="code-lang">HTML — صفحة عربية كاملة بالإعدادات الصحيحة</span>
+          </div>
+          <pre><span class="cm">&lt;!DOCTYPE html&gt;</span>
+<span class="kw">&lt;html</span> <span class="at">lang</span>=<span class="st">"ar"</span> <span class="at">dir</span>=<span class="st">"rtl"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;head&gt;</span>
+    <span class="kw">&lt;meta</span> <span class="at">charset</span>=<span class="st">"UTF-8"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;meta</span> <span class="at">name</span>=<span class="st">"viewport"</span> <span class="at">content</span>=<span class="st">"width=device-width, initial-scale=1.0"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;title&gt;</span><span class="tx">موقعي بالعربية</span><span class="tg">&lt;/title&gt;</span>
+  <span class="tg">&lt;/head&gt;</span>
+  <span class="kw">&lt;body&gt;</span>
+    <span class="kw">&lt;h1&gt;</span><span class="tx">مرحباً بكم في موقعي</span><span class="tg">&lt;/h1&gt;</span>
+    <span class="kw">&lt;p&gt;</span><span class="tx">هذه صفحة عربية كاملة بالإعدادات الصحيحة.</span><span class="tg">&lt;/p&gt;</span>
+  <span class="tg">&lt;/body&gt;</span>
+<span class="tg">&lt;/html&gt;</span></pre>
+        </div>
+        <div class="note-box tip">
+          <div class="note-icon">📱</div>
+          <div>
+            <code style="font-family:'Fira Code',monospace">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code>
+            ضروري لعرض الصفحة بشكل صحيح على الهاتف المحمول. <strong>احفظه دائماً في head.</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-divider"></div>
+
+      <div class="section">
+        <div class="section-title">
+          <div class="section-icon icon-exercise">✏️</div>
+          تمارين الدرس
+        </div>
+
+        <div class="exercise-block">
+          <div class="exercise-header">
+            <div class="exercise-num">1</div>
+            أنشئ صفحة عربية صحيحة
+          </div>
+          <ol>
+            <li>أنشئ ملفاً باسم <strong>arabic-page.html</strong></li>
+            <li>أضف جميع إعدادات Meta الصحيحة للغة العربية</li>
+            <li>اجعل اتجاه الصفحة من اليمين لليسار</li>
+            <li>أضف عنوان h1 وفقرتين p باللغة العربية</li>
+            <li>تحقق أن النصوص العربية تظهر بشكل صحيح في المتصفح</li>
+          </ol>
+          <button class="answer-toggle" onclick="toggleAnswer(this)">▼ عرض الحل</button>
+          <div class="answer-content">
+            <div class="code-block" dir="ltr">
+              <div class="code-header">
+                <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+                <span class="code-lang">arabic-page.html</span>
+              </div>
+              <pre><span class="cm">&lt;!DOCTYPE html&gt;</span>
+<span class="kw">&lt;html</span> <span class="at">lang</span>=<span class="st">"ar"</span> <span class="at">dir</span>=<span class="st">"rtl"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;head&gt;</span>
+    <span class="kw">&lt;meta</span> <span class="at">charset</span>=<span class="st">"UTF-8"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;meta</span> <span class="at">name</span>=<span class="st">"viewport"</span> <span class="at">content</span>=<span class="st">"width=device-width, initial-scale=1.0"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;title&gt;</span><span class="tx">صفحتي العربية</span><span class="tg">&lt;/title&gt;</span>
+  <span class="tg">&lt;/head&gt;</span>
+  <span class="kw">&lt;body&gt;</span>
+    <span class="kw">&lt;h1&gt;</span><span class="tx">أهلاً وسهلاً</span><span class="tg">&lt;/h1&gt;</span>
+    <span class="kw">&lt;p&gt;</span><span class="tx">هذه أول صفحة عربية أنشأتها باستخدام HTML.</span><span class="tg">&lt;/p&gt;</span>
+    <span class="kw">&lt;p&gt;</span><span class="tx">اتجاه الكتابة فيها من اليمين إلى اليسار.</span><span class="tg">&lt;/p&gt;</span>
+  <span class="tg">&lt;/body&gt;</span>
+<span class="tg">&lt;/html&gt;</span></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise-block">
+          <div class="exercise-header">
+            <div class="exercise-num">2</div>
+            أسئلة مراجعة
+          </div>
+          <ol>
+            <li>ما هي قيمة charset الصحيحة لدعم اللغة العربية؟</li>
+            <li>ما الفرق بين dir="rtl" و dir="ltr"؟</li>
+            <li>أين يوضع وسم &lt;meta&gt; في الصفحة؟</li>
+            <li>هل وسم &lt;meta&gt; يحتاج إلى وسم إغلاق؟</li>
+          </ol>
+          <button class="answer-toggle" onclick="toggleAnswer(this)">▼ عرض الإجابات</button>
+          <div class="answer-content">
+            <div class="note-box tip">
+              <div class="note-icon">✅</div>
+              <div>
+                <strong>١.</strong> charset="UTF-8"<br>
+                <strong>٢.</strong> rtl = اليمين لليسار (عربي)، ltr = اليسار لليمين (إنجليزي)<br>
+                <strong>٣.</strong> داخل &lt;head&gt;<br>
+                <strong>٤.</strong> لا، &lt;meta&gt; وسم ذاتي الإغلاق — لا يحتاج &lt;/meta&gt;
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-box">
+        <h3>// ملخص الدرس</h3>
+        <ul class="summary-list">
+          <li>meta charset="UTF-8" ضروري لعرض العربية بشكل صحيح</li>
+          <li>lang="ar" تحدد لغة الصفحة للمتصفح ومحركات البحث</li>
+          <li>dir="rtl" يجعل اتجاه الصفحة من اليمين لليسار</li>
+          <li>meta viewport ضروري لعرض الصفحة صحيحاً على الهاتف</li>
+          <li>وسم meta يوضع داخل head وهو ذاتي الإغلاق</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- end main-wrap -->
+
+<!-- ════════════════════════════════════════════ -->
+<!-- FOOTER -->
+<!-- ════════════════════════════════════════════ -->
+<footer class="course-footer">
+  <div class="footer-nav">
+    <span class="footer-badge">← الوحدة الأولى — مكتملة ✓</span>
+    <a href="2.html">
+      <button class="next-unit-btn">
+      الوحدة الثانية — العناصر الأساسية ←
+    </button>
+    </a>
+  </div>
+  <p>الوحدة 1 من 6 &nbsp;·&nbsp; دورة HTML والـ CSS الكاملة بالعربية &nbsp;·&nbsp; 60 درساً</p>
+</footer>
+
+<script>
+function toggleAnswer(btn) {
+  const content = btn.nextElementSibling;
+  content.classList.toggle('visible');
+  btn.textContent = content.classList.contains('visible')
+    ? '▲ إخفاء الحل'
+    : '▼ عرض الحل';
+}
+
+function scrollToLesson(id, btn) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.querySelectorAll('.idx-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// Auto-highlight active nav button on scroll
+const lessons = ['lesson-0','lesson-1','lesson-2','lesson-3','lesson-4'];
+const buttons = document.querySelectorAll('.idx-btn');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = lessons.indexOf(entry.target.id);
+      if (idx > -1) {
+        buttons.forEach(b => b.classList.remove('active'));
+        buttons[idx].classList.add('active');
+      }
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+
+lessons.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) observer.observe(el);
+});
+</script>
+</body>
+</html>
