@@ -1,0 +1,1941 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الوحدة الثالثة — الوسائط</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange: #F4631E;
+  --orange-soft: rgba(244,99,30,0.12);
+  --orange-border: rgba(244,99,30,0.28);
+  --green: #22C55E;
+  --green-soft: rgba(34,197,94,0.1);
+  --blue: #3B82F6;
+  --blue-soft: rgba(59,130,246,0.1);
+  --yellow: #EAB308;
+  --yellow-soft: rgba(234,179,8,0.1);
+  --red: #EF4444;
+  --red-soft: rgba(239,68,68,0.1);
+  --purple: #A855F7;
+  --purple-soft: rgba(168,85,247,0.1);
+  --teal: #14B8A6;
+  --teal-soft: rgba(20,184,166,0.1);
+  --bg: #F7F5F1;
+  --bg-card: #FFFFFF;
+  --bg-dark: #111111;
+  --text: #1C1A18;
+  --text-soft: #6B6560;
+  --border: #E5E0D8;
+  --code-bg: #1E1E2E;
+  --code-text: #CDD6F4;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Tajawal', sans-serif;
+  line-height: 1.8;
+  font-size: 17px;
+}
+
+/* ===== TOP NAV ===== */
+.topnav {
+  background: var(--bg-dark);
+  padding: 14px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  border-bottom: 2px solid var(--orange);
+}
+
+.nav-logo {
+  color: white;
+  font-weight: 800;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.html5-badge {
+  background: var(--orange);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 5px;
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 0.05em;
+}
+
+.nav-progress { display: flex; align-items: center; gap: 14px; }
+.nav-unit-label { color: rgba(255,255,255,0.45); font-size: 0.82rem; }
+.progress-dots { display: flex; gap: 5px; }
+
+.pdot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+}
+.pdot.done { background: rgba(244,99,30,0.5); }
+.pdot.active { background: var(--orange); box-shadow: 0 0 0 2px rgba(244,99,30,0.35); }
+
+/* ===== UNIT HERO ===== */
+.unit-hero {
+  background: var(--bg-dark);
+  color: white;
+  padding: 70px 48px 58px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(244,99,30,0.15);
+}
+
+.unit-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 100% at 100% 50%, rgba(244,99,30,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 60% at 10% 100%, rgba(20,184,166,0.05) 0%, transparent 60%);
+}
+
+.unit-hero::after {
+  content: '03';
+  position: absolute;
+  left: -10px;
+  bottom: -70px;
+  font-size: 24rem;
+  font-weight: 900;
+  color: rgba(244,99,30,0.04);
+  font-family: 'Fira Code', monospace;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.unit-hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 48px;
+  align-items: center;
+}
+
+.unit-tag {
+  display: inline-block;
+  background: var(--orange-soft);
+  border: 1px solid var(--orange-border);
+  color: var(--orange);
+  font-size: 0.75rem;
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 18px;
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 0.04em;
+}
+
+.unit-hero h1 {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+
+.unit-hero h1 span { color: var(--orange); }
+
+.unit-hero p.unit-desc {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.52);
+  max-width: 520px;
+  margin-bottom: 30px;
+}
+
+.unit-meta { display: flex; gap: 20px; flex-wrap: wrap; }
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.42);
+}
+
+.meta-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--orange); flex-shrink: 0; }
+
+/* lessons panel */
+.unit-lessons-panel {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  padding: 20px;
+  min-width: 220px;
+}
+
+.ulp-title {
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: 'Fira Code', monospace;
+  margin-bottom: 14px;
+}
+
+.ulp-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  cursor: pointer;
+}
+
+.ulp-item:last-child { border-bottom: none; }
+
+.ulp-num {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.68rem;
+  color: var(--orange);
+  width: 28px;
+  flex-shrink: 0;
+}
+
+.ulp-name { font-size: 0.82rem; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+.ulp-item:hover .ulp-name { color: white; }
+
+/* ===== LESSON INDEX ===== */
+.lesson-index {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 16px 48px;
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 56px;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+.idx-label { font-size: 0.78rem; color: var(--text-soft); margin-left: 6px; }
+
+.idx-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-soft);
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.78rem;
+  padding: 5px 13px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.idx-btn:hover, .idx-btn.active {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: white;
+}
+
+/* ===== MAIN ===== */
+.main-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 24px 120px;
+}
+
+/* ===== LESSON CARD ===== */
+.lesson-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 48px;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.05);
+  scroll-margin-top: 120px;
+  transition: box-shadow 0.3s;
+}
+
+.lesson-card:hover { box-shadow: 0 4px 40px rgba(0,0,0,0.09); }
+
+.lesson-header {
+  background: var(--bg-dark);
+  color: white;
+  padding: 26px 36px;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.lesson-num-badge {
+  background: var(--orange);
+  color: white;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 7px;
+  flex-shrink: 0;
+  margin-top: 4px;
+  letter-spacing: 0.06em;
+}
+
+.lesson-header-text h2 { font-size: 1.35rem; font-weight: 800; margin-bottom: 5px; }
+.lesson-header-text p { font-size: 0.87rem; color: rgba(255,255,255,0.45); }
+.lesson-body { padding: 36px; }
+
+/* ===== SECTIONS ===== */
+.section { margin-bottom: 34px; }
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-icon {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.icon-theory   { background: var(--blue-soft); }
+.icon-code     { background: rgba(30,30,46,0.07); }
+.icon-exercise { background: var(--green-soft); }
+.icon-tip      { background: var(--yellow-soft); }
+.icon-demo     { background: var(--teal-soft); }
+.icon-attrs    { background: var(--purple-soft); }
+.icon-compare  { background: var(--red-soft); }
+
+.prose { color: var(--text); line-height: 1.9; font-size: 1rem; }
+.prose p { margin-bottom: 12px; }
+.prose strong { color: var(--orange); font-weight: 700; }
+
+/* ===== CODE BLOCK ===== */
+.code-block {
+  background: var(--code-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 16px 0;
+  direction: ltr;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.code-header {
+  background: rgba(255,255,255,0.05);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.code-lang {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.7rem;
+  color: var(--orange);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.code-dots { display: flex; gap: 6px; }
+.code-dots span { width: 10px; height: 10px; border-radius: 50%; }
+.dot-red { background: #FF5F57; }
+.dot-yellow { background: #FFBD2E; }
+.dot-green { background: #28CA41; }
+
+pre {
+  padding: 20px 22px;
+  overflow-x: auto;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.87rem;
+  line-height: 1.75;
+  color: var(--code-text);
+}
+
+.kw { color: #CBA6F7; }
+.at { color: #89B4FA; }
+.st { color: #A6E3A1; }
+.cm { color: #6C7086; font-style: italic; }
+.tx { color: #CDD6F4; }
+.tg { color: #F38BA8; }
+
+/* ===== NOTE BOXES ===== */
+.note-box {
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 16px 0;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  font-size: 0.93rem;
+}
+
+.note-box.info      { background: var(--blue-soft);   border-right: 3px solid var(--blue); }
+.note-box.warning   { background: var(--yellow-soft);  border-right: 3px solid var(--yellow); }
+.note-box.tip       { background: var(--green-soft);   border-right: 3px solid var(--green); }
+.note-box.important { background: var(--orange-soft);  border-right: 3px solid var(--orange); }
+.note-box.purple    { background: var(--purple-soft);  border-right: 3px solid var(--purple); }
+
+.note-icon { font-size: 1.15rem; flex-shrink: 0; margin-top: 2px; }
+
+/* ===== EXERCISE BLOCK ===== */
+.exercise-block {
+  background: var(--green-soft);
+  border: 1px solid rgba(34,197,94,0.2);
+  border-radius: 14px;
+  padding: 22px 26px;
+  margin: 16px 0;
+}
+
+.exercise-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-weight: 700;
+  color: #15803D;
+  font-size: 0.98rem;
+}
+
+.exercise-num {
+  background: var(--green);
+  color: white;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem;
+  font-family: 'Fira Code', monospace;
+  flex-shrink: 0;
+}
+
+.exercise-block ol, .exercise-block ul { padding-right: 22px; color: var(--text); }
+.exercise-block li { margin-bottom: 8px; font-size: 0.93rem; }
+
+/* ===== ANSWER TOGGLE ===== */
+.answer-toggle {
+  background: none;
+  border: 1px dashed var(--orange-border);
+  color: var(--orange);
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.88rem;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 14px;
+  transition: all 0.2s;
+  width: 100%;
+  text-align: right;
+}
+
+.answer-toggle:hover { background: var(--orange-soft); }
+.answer-content { display: none; margin-top: 12px; }
+.answer-content.visible { display: block; }
+
+/* ===== DIVIDER ===== */
+.lesson-divider {
+  height: 1px;
+  background: linear-gradient(to left, transparent, var(--border), transparent);
+  margin: 30px 0;
+}
+
+/* ===== SUMMARY BOX ===== */
+.summary-box {
+  background: linear-gradient(135deg, #111111, #1F0D05);
+  border: 1px solid rgba(244,99,30,0.22);
+  border-radius: 16px;
+  padding: 26px 30px;
+  margin: 24px 0 0;
+}
+
+.summary-box h3 {
+  color: var(--orange);
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 0.04em;
+}
+
+.summary-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+.summary-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.91rem;
+  color: rgba(255,255,255,0.72);
+}
+
+.summary-list li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+
+/* ===== CONCEPT CARDS ===== */
+.concept-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.concept-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+
+.concept-card .cc-icon { font-size: 1.4rem; margin-bottom: 8px; }
+.concept-card .cc-title { font-weight: 700; font-size: 0.92rem; color: var(--text); margin-bottom: 5px; }
+.concept-card .cc-desc { font-size: 0.81rem; color: var(--text-soft); line-height: 1.6; }
+
+/* ===== ATTR TABLE ===== */
+.attr-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 0.88rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.attr-table th {
+  background: var(--bg-dark);
+  color: white;
+  padding: 11px 16px;
+  text-align: right;
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+.attr-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: top;
+}
+
+.attr-table tr:last-child td { border-bottom: none; }
+.attr-table tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
+
+.attr-table code {
+  font-family: 'Fira Code', monospace;
+  background: var(--orange-soft);
+  color: var(--orange);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.82rem;
+}
+
+/* ===== DEMO BOX ===== */
+.demo-box {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 16px 0;
+}
+
+.demo-label {
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 16px;
+  font-size: 0.75rem;
+  color: var(--text-soft);
+  font-family: 'Fira Code', monospace;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.demo-label::before { content: '▶'; color: var(--green); font-size: 0.6rem; }
+.demo-content { padding: 20px 24px; }
+
+/* ===== STEPS LIST ===== */
+.steps-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.steps-list li { display: flex; gap: 14px; align-items: flex-start; }
+
+.step-num {
+  background: var(--orange);
+  color: white;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.78rem;
+  font-family: 'Fira Code', monospace;
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.step-text { font-size: 0.93rem; color: var(--text); line-height: 1.7; }
+.step-text strong { color: var(--orange); }
+
+/* ===== COMPARE GRID ===== */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 16px 0;
+}
+
+.compare-card {
+  border-radius: 12px;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+}
+
+.compare-card.good { background: var(--green-soft); border-color: rgba(34,197,94,0.25); }
+.compare-card.bad  { background: var(--red-soft);   border-color: rgba(239,68,68,0.2); }
+
+.compare-card .cc-head {
+  font-weight: 800;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.compare-card.good .cc-head { color: #15803D; }
+.compare-card.bad  .cc-head { color: #B91C1C; }
+
+.compare-card ul { padding-right: 18px; }
+.compare-card li { font-size: 0.85rem; color: var(--text); margin-bottom: 6px; }
+
+/* ===== MEDIA ATTRS GRID ===== */
+.media-attrs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.media-attr-chip {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mac-name { font-family: 'Fira Code', monospace; font-size: 0.78rem; color: var(--blue); font-weight: 600; }
+.mac-desc { font-size: 0.78rem; color: var(--text-soft); line-height: 1.4; }
+
+/* ===== IFRAME DEMO ===== */
+.iframe-visual {
+  background: var(--bg);
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 16px 0;
+  text-align: center;
+}
+
+.iframe-box {
+  background: white;
+  border: 2px solid var(--blue);
+  border-radius: 8px;
+  padding: 24px;
+  display: inline-block;
+  min-width: 280px;
+  position: relative;
+}
+
+.iframe-box-label {
+  position: absolute;
+  top: -12px;
+  right: 12px;
+  background: var(--blue);
+  color: white;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.68rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.iframe-box-inner {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+/* ===== BUTTON / DETAILS DEMO ===== */
+.details-demo {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+
+.details-demo details {
+  margin-bottom: 10px;
+}
+
+.details-demo summary {
+  cursor: pointer;
+  font-weight: 700;
+  padding: 8px 12px;
+  background: var(--bg);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  font-size: 0.92rem;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.details-demo summary::before {
+  content: '▶';
+  font-size: 0.65rem;
+  color: var(--orange);
+  transition: transform 0.2s;
+}
+
+.details-demo details[open] summary::before { transform: rotate(90deg); }
+
+.details-demo details p {
+  padding: 12px 14px;
+  font-size: 0.9rem;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+}
+
+/* ===== BUTTON DEMO ===== */
+.btn-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0;
+  align-items: center;
+}
+
+.btn-demo {
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-demo span {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.65rem;
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+.btn-submit { background: var(--orange); color: white; border: none; }
+.btn-submit:hover { background: #e05510; }
+.btn-button { background: white; color: var(--text); border: 2px solid var(--border); }
+.btn-button:hover { border-color: var(--orange); color: var(--orange); }
+.btn-reset  { background: var(--blue-soft); color: var(--blue); border: 1px solid rgba(59,130,246,0.3); }
+.btn-reset:hover { background: var(--blue); color: white; }
+
+/* ===== BASE DEMO ===== */
+.base-demo {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 16px 0;
+}
+
+.base-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.88rem;
+  flex-wrap: wrap;
+}
+
+.base-row:last-child { border-bottom: none; }
+
+.base-tag {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.73rem;
+  background: var(--code-bg);
+  color: var(--teal);
+  padding: 3px 8px;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+.base-arrow { color: var(--text-soft); font-size: 0.8rem; }
+.base-result { color: var(--orange); font-family: 'Fira Code', monospace; font-size: 0.82rem; }
+
+/* ===== FOOTER ===== */
+.course-footer {
+  text-align: center;
+  padding: 50px 20px;
+  border-top: 1px solid var(--border);
+  color: var(--text-soft);
+  font-size: 0.85rem;
+}
+
+.footer-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.footer-badge {
+  background: var(--bg-dark);
+  color: rgba(255,255,255,0.4);
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border: none;
+  font-family: 'Tajawal', sans-serif;
+}
+
+.footer-badge:hover { background: #222; }
+
+.next-unit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--orange);
+  color: white;
+  padding: 14px 32px;
+  border-radius: 100px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  font-family: 'Tajawal', sans-serif;
+  transition: all 0.2s;
+}
+
+.next-unit-btn:hover {
+  background: #e05510;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(244,99,30,0.3);
+}
+
+@media (max-width: 700px) {
+  .topnav { padding: 12px 20px; }
+  .unit-hero { padding: 50px 24px 42px; }
+  .unit-hero-inner { grid-template-columns: 1fr; }
+  .unit-lessons-panel { display: none; }
+  .lesson-index { padding: 14px 20px; top: 52px; }
+  .lesson-body { padding: 24px 20px; }
+  .lesson-header { padding: 22px 20px; }
+  .main-wrap { padding: 40px 14px 80px; }
+  .compare-grid { grid-template-columns: 1fr; }
+  .media-attrs-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <div class="nav-logo">
+    <span class="html5-badge">HTML5</span>
+    دورة تعلم HTML و CSS
+  </div>
+  <div class="nav-progress">
+    <span class="nav-unit-label">الوحدة 3 من 6</span>
+    <div class="progress-dots">
+      <div class="pdot done"></div>
+      <div class="pdot done"></div>
+      <div class="pdot active"></div>
+      <div class="pdot"></div>
+      <div class="pdot"></div>
+      <div class="pdot"></div>
+    </div>
+  </div>
+</nav>
+
+<!-- UNIT HERO -->
+<section class="unit-hero">
+  <div class="unit-hero-inner">
+    <div>
+      <div class="unit-tag">// الوحدة الثالثة — Unit 03</div>
+      <h1>الوسائط <span>والتضمين</span></h1>
+      <p class="unit-desc">
+        PDF · embed · YouTube · base · details · buttons — كل ما يتعلق بتضمين المحتوى الخارجي والتفاعلي في صفحاتك
+      </p>
+      <div class="unit-meta">
+        <div class="meta-item"><div class="meta-dot"></div> 6 دروس (12 → 17)</div>
+        <div class="meta-item"><div class="meta-dot"></div> مستوى متوسط</div>
+        <div class="meta-item"><div class="meta-dot"></div> شرح + كود + تمارين</div>
+      </div>
+    </div>
+
+    <div class="unit-lessons-panel">
+      <div class="ulp-title">// دروس هذه الوحدة</div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-12')">
+        <span class="ulp-num">12</span><span class="ulp-name">عرض ملفات PDF</span>
+      </div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-13')">
+        <span class="ulp-num">13</span><span class="ulp-name">عنصر embed</span>
+      </div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-14')">
+        <span class="ulp-num">14</span><span class="ulp-name">YouTube iFrame</span>
+      </div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-15')">
+        <span class="ulp-num">15</span><span class="ulp-name">عنصر base</span>
+      </div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-16')">
+        <span class="ulp-num">16</span><span class="ulp-name">Details و Summary</span>
+      </div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-17')">
+        <span class="ulp-num">17</span><span class="ulp-name">الأزرار Buttons</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON INDEX -->
+<div class="lesson-index">
+  <span class="idx-label">انتقل إلى:</span>
+  <button class="idx-btn active" onclick="scrollToLesson('lesson-12', this)">12 — PDF</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-13', this)">13 — embed</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-14', this)">14 — YouTube</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-15', this)">15 — base</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-16', this)">16 — Details</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-17', this)">17 — Buttons</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-wrap">
+
+
+<!-- ══════════════════════ LESSON 12 ══════════════════════ -->
+<div class="lesson-card" id="lesson-12">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">LESSON 12</div>
+    <div class="lesson-header-text">
+      <h2>عرض ملفات PDF</h2>
+      <p>تضمين ملفات PDF مباشرة داخل صفحة الويب بطرق مختلفة</p>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-theory">📖</div> الطرق المتاحة لعرض PDF</div>
+      <div class="prose">
+        <p>هناك ثلاث طرق رئيسية لعرض ملفات PDF في HTML:</p>
+      </div>
+      <div class="concept-grid">
+        <div class="concept-card">
+          <div class="cc-icon">🖼️</div>
+          <div class="cc-title">&lt;iframe&gt;</div>
+          <div class="cc-desc">الأكثر توافقاً وتحكماً — يعرض الـ PDF داخل إطار مضمّن</div>
+        </div>
+        <div class="concept-card">
+          <div class="cc-icon">📎</div>
+          <div class="cc-title">&lt;embed&gt;</div>
+          <div class="cc-desc">وسم مباشر لتضمين الملفات — أبسط لكن أقل تحكماً</div>
+        </div>
+        <div class="concept-card">
+          <div class="cc-icon">🔗</div>
+          <div class="cc-title">رابط تحميل</div>
+          <div class="cc-desc">الأبسط — رابط &lt;a&gt; يفتح أو يحمّل الملف مباشرة</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-code">💻</div> الطريقة الأولى — &lt;iframe&gt;</div>
+      <div class="prose">
+        <p>هذه هي الطريقة الموصى بها لعرض PDF — تعطيك تحكماً كاملاً في الأبعاد وتعمل في جميع المتصفحات.</p>
+      </div>
+      <div class="code-block" dir="ltr">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-lang">HTML — PDF داخل iframe</span>
+        </div>
+        <pre><span class="cm">&lt;!-- عرض PDF بالعرض الكامل --&gt;</span>
+<span class="kw">&lt;iframe</span>
+  <span class="at">src</span>=<span class="st">"document.pdf"</span>
+  <span class="at">width</span>=<span class="st">"100%"</span>
+  <span class="at">height</span>=<span class="st">"600px"</span>
+  <span class="at">title</span>=<span class="st">"وثيقة PDF"</span>
+<span class="kw">&gt;</span>
+  <span class="cm">&lt;!-- نص بديل إذا لم يدعم المتصفح iframe --&gt;</span>
+  <span class="tx">متصفحك لا يدعم عرض PDF.</span>
+  <span class="kw">&lt;a</span> <span class="at">href</span>=<span class="st">"document.pdf"</span><span class="kw">&gt;</span><span class="tx">اضغط هنا لتحميله</span><span class="tg">&lt;/a&gt;</span>
+<span class="tg">&lt;/iframe&gt;</span></pre>
+      </div>
+
+      <div class="iframe-visual">
+        <div style="font-size:0.78rem; color:var(--text-soft); margin-bottom:12px; font-family:'Fira Code',monospace;">
+          // معاينة بصرية لما يبدو عليه iframe
+        </div>
+        <div class="iframe-box">
+          <div class="iframe-box-label">&lt;iframe&gt;</div>
+          <div class="iframe-box-inner">
+            <div style="font-size:0.8rem; color:var(--text-soft); text-align:center;">
+              📄 document.pdf<br>
+              <span style="font-size:0.72rem;">يعرض هنا مباشرة بشريط تمرير</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-code">💻</div> الطريقة الثانية — &lt;embed&gt;</div>
+      <div class="code-block" dir="ltr">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-lang">HTML — PDF بـ embed</span>
+        </div>
+        <pre><span class="kw">&lt;embed</span>
+  <span class="at">src</span>=<span class="st">"document.pdf"</span>
+  <span class="at">type</span>=<span class="st">"application/pdf"</span>
+  <span class="at">width</span>=<span class="st">"100%"</span>
+  <span class="at">height</span>=<span class="st">"500px"</span>
+<span class="kw">&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-code">💻</div> الطريقة الثالثة — رابط تحميل</div>
+      <div class="code-block" dir="ltr">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-lang">HTML — رابط فتح أو تحميل</span>
+        </div>
+        <pre><span class="cm">&lt;!-- يفتح الـ PDF في تبويب جديد --&gt;</span>
+<span class="kw">&lt;a</span> <span class="at">href</span>=<span class="st">"document.pdf"</span> <span class="at">target</span>=<span class="st">"_blank"</span><span class="kw">&gt;</span>
+  <span class="tx">📄 افتح الوثيقة</span>
+<span class="tg">&lt;/a&gt;</span>
+
+<span class="cm">&lt;!-- يُحمّل الـ PDF مباشرة (خاصية download) --&gt;</span>
+<span class="kw">&lt;a</span> <span class="at">href</span>=<span class="st">"document.pdf"</span> <span class="at">download</span>=<span class="st">"اسم-الملف.pdf"</span><span class="kw">&gt;</span>
+  <span class="tx">⬇️ حمّل الوثيقة</span>
+<span class="tg">&lt;/a&gt;</span></pre>
+      </div>
+      <div class="note-box tip">
+        <div class="note-icon">✅</div>
+        <div>
+          <strong>نصيحة عملية:</strong> الأفضل دائماً هو الجمع — اعرض الـ PDF بـ <code style="font-family:'Fira Code',monospace">&lt;iframe&gt;</code> وأضف رابط تحميل &lt;a download&gt; فوقه. هكذا تُرضي جميع المستخدمين.
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-exercise">✏️</div> تمرين</div>
+      <div class="exercise-block">
+        <div class="exercise-header"><div class="exercise-num">1</div> صفحة عرض وثيقة</div>
+        <ol>
+          <li>أنشئ صفحة HTML تعرض ملف PDF باستخدام iframe</li>
+          <li>اجعل عرضه 100% وارتفاعه 600px</li>
+          <li>أضف رابط تحميل فوق الـ iframe مباشرةً</li>
+          <li>أضف نصاً بديلاً داخل iframe للمتصفحات القديمة</li>
+        </ol>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">▼ عرض الحل</button>
+        <div class="answer-content">
+          <div class="code-block" dir="ltr">
+            <div class="code-header">
+              <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+              <span class="code-lang">الحل</span>
+            </div>
+            <pre><span class="kw">&lt;a</span> <span class="at">href</span>=<span class="st">"report.pdf"</span> <span class="at">download</span><span class="kw">&gt;</span><span class="tx">⬇️ تحميل التقرير</span><span class="tg">&lt;/a&gt;</span>
+
+<span class="kw">&lt;iframe</span>
+  <span class="at">src</span>=<span class="st">"report.pdf"</span>
+  <span class="at">width</span>=<span class="st">"100%"</span>
+  <span class="at">height</span>=<span class="st">"600px"</span>
+  <span class="at">title</span>=<span class="st">"تقرير سنوي"</span>
+<span class="kw">&gt;</span>
+  <span class="tx">متصفحك لا يدعم عرض PDF.</span>
+  <span class="kw">&lt;a</span> <span class="at">href</span>=<span class="st">"report.pdf"</span><span class="kw">&gt;</span><span class="tx">حمّله من هنا</span><span class="tg">&lt;/a&gt;</span>
+<span class="tg">&lt;/iframe&gt;</span></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <h3>// ملخص الدرس</h3>
+      <ul class="summary-list">
+        <li>iframe الأفضل لعرض PDF داخل الصفحة مع تحكم كامل</li>
+        <li>embed أبسط لكن أقل مرونة</li>
+        <li>&lt;a href="..." download&gt; لتحميل الملف مباشرةً</li>
+        <li>أضف دائماً نصاً بديلاً داخل iframe</li>
+        <li>الجمع بين iframe ورابط تحميل هو الأفضل عملياً</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════ LESSON 13 ══════════════════════ -->
+<div class="lesson-card" id="lesson-13">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">LESSON 13</div>
+    <div class="lesson-header-text">
+      <h2>عنصر &lt;embed&gt;</h2>
+      <p>تضمين محتوى خارجي مباشرة — ملفات، صوت، فيديو، مواقع</p>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-theory">📖</div> ما هو &lt;embed&gt;؟</div>
+      <div class="prose">
+        <p>
+          وسم <strong>&lt;embed&gt;</strong> هو وسم ذاتي الإغلاق يُضمّن محتوى خارجياً مباشرةً داخل الصفحة.
+          يمكنه تضمين: ملفات PDF، ملفات فلاش قديمة، وسائط، أو حتى صفحات ويب أخرى.
+        </p>
+        <p>
+          الفرق الرئيسي عن iframe: <strong>&lt;embed&gt;</strong> ذاتي الإغلاق ولا يمكنه احتواء نص بديل،
+          بينما <strong>&lt;iframe&gt;</strong> له وسم إغلاق ويمكن وضع محتوى بديل داخله.
+        </p>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-code">💻</div> الكود وأنواع الاستخدام</div>
+
+      <div class="code-block" dir="ltr">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-lang">HTML — embed لأنواع مختلفة</span>
+        </div>
+        <pre><span class="cm">&lt;!-- تضمين PDF --&gt;</span>
+<span class="kw">&lt;embed</span>
+  <span class="at">src</span>=<span class="st">"document.pdf"</span>
+  <span class="at">type</span>=<span class="st">"application/pdf"</span>
+  <span class="at">width</span>=<span class="st">"800"</span>
+  <span class="at">height</span>=<span class="st">"500"</span>
+<span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- تضمين صورة SVG --&gt;</span>
+<span class="kw">&lt;embed</span>
+  <span class="at">src</span>=<span class="st">"graphic.svg"</span>
+  <span class="at">type</span>=<span class="st">"image/svg+xml"</span>
+  <span class="at">width</span>=<span class="st">"400"</span>
+  <span class="at">height</span>=<span class="st">"300"</span>
+<span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- تضمين صفحة ويب (مثل iframe) --&gt;</span>
+<span class="kw">&lt;embed</span>
+  <span class="at">src</span>=<span class="st">"https://example.com"</span>
+  <span class="at">type</span>=<span class="st">"text/html"</span>
+  <span class="at">width</span>=<span class="st">"100%"</span>
+  <span class="at">height</span>=<span class="st">"400"</span>
+<span class="kw">&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-attrs">⚙️</div> خصائص &lt;embed&gt;</div>
+
+      <table class="attr-table">
+        <thead><tr><th>الخاصية</th><th>الوظيفة</th><th>مثال</th></tr></thead>
+        <tbody>
+          <tr><td><code>src</code></td><td>مسار أو رابط الملف — مطلوب</td><td><code>src="file.pdf"</code></td></tr>
+          <tr><td><code>type</code></td><td>نوع MIME للملف</td><td><code>type="application/pdf"</code></td></tr>
+          <tr><td><code>width</code></td><td>عرض منطقة العرض</td><td><code>width="800"</code></td></tr>
+          <tr><td><code>height</code></td><td>ارتفاع منطقة العرض</td><td><code>height="500"</code></td></tr>
+        </tbody>
+      </table>
+
+      <div class="note-box important">
+        <div class="note-icon">⚙️</div>
+        <div>
+          <strong>أنواع MIME الشائعة:</strong><br>
+          PDF → <code style="font-family:'Fira Code',monospace">application/pdf</code><br>
+          SVG → <code style="font-family:'Fira Code',monospace">image/svg+xml</code><br>
+          HTML → <code style="font-family:'Fira Code',monospace">text/html</code><br>
+          MP4 → <code style="font-family:'Fira Code',monospace">video/mp4</code>
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-compare">⚖️</div> embed مقابل iframe — متى تستخدم أيهما؟</div>
+
+      <div class="compare-grid">
+        <div class="compare-card good">
+          <div class="cc-head">✅ استخدم iframe</div>
+          <ul>
+            <li>تضمين صفحات ويب كاملة</li>
+            <li>تريد نصاً بديلاً للمتصفحات القديمة</li>
+            <li>تحتاج تحكماً أكبر (sandbox، allow)</li>
+            <li>تضمين YouTube وخرائط Google</li>
+          </ul>
+        </div>
+        <div class="compare-card bad">
+          <div class="cc-head">🟡 استخدم embed</div>
+          <ul>
+            <li>تضمين ملفات PDF بشكل مباشر</li>
+            <li>تضمين SVG أو وسائط مباشرة</li>
+            <li>لا تحتاج لنص بديل</li>
+            <li>تريد كوداً أقصر وأبسط</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <h3>// ملخص الدرس</h3>
+      <ul class="summary-list">
+        <li>&lt;embed&gt; وسم ذاتي الإغلاق لتضمين ملفات خارجية</li>
+        <li>يحتاج src و type (نوع MIME) و width و height</li>
+        <li>لا يدعم نصاً بديلاً — استخدم iframe إذا احتجت ذلك</li>
+        <li>الأفضل لـ PDF وSVG، أما المواقع فـ iframe أفضل</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════ LESSON 14 ══════════════════════ -->
+<div class="lesson-card" id="lesson-14">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">LESSON 14</div>
+    <div class="lesson-header-text">
+      <h2>تضمين YouTube — iFrame</h2>
+      <p>كيف تضمّن فيديوهات يوتيوب وغيرها في صفحتك بالشكل الصحيح</p>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-theory">📖</div> لماذا iframe لـ YouTube؟</div>
+      <div class="prose">
+        <p>
+          يوتيوب لا يسمح لك بتحميل الفيديو مباشرةً — بدلاً من ذلك يعطيك <strong>كود تضمين (Embed Code)</strong>
+          يعمل عبر <strong>&lt;iframe&gt;</strong> يُحمّل الفيديو من خوادم يوتيوب مباشرةً.
+        </p>
+        <p>هذا الأسلوب يعمل مع يوتيوب، فيميو، ساوند كلاود، وأي منصة وسائط أخرى.</p>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-code">💻</div> كيف تحصل على رابط التضمين</div>
+
+      <ul class="steps-list">
+        <li>
+          <div class="step-num">١</div>
+          <div class="step-text">افتح فيديو يوتيوب ← اضغط على زر <strong>Share (مشاركة)</strong></div>
+        </li>
+        <li>
+          <div class="step-num">٢</div>
+          <div class="step-text">اضغط على <strong>Embed (تضمين)</strong></div>
+        </li>
+        <li>
+          <div class="step-num">٣</div>
+          <div class="step-text">انسخ الكود — ستجد <code style="font-family:'Fira Code',monospace;background:#f0ede8;padding:2px 6px;border-radius:4px">https://www.youtube.com/embed/VIDEO_ID</code></div>
+        </li>
+        <li>
+          <div class="step-num">٤</div>
+          <div class="step-text">الصق الكود في صفحتك وعدّل الأبعاد كما تريد</div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-code">💻</div> الكود الكامل</div>
+
+      <div class="code-block" dir="ltr">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-lang">HTML — تضمين يوتيوب</span>
+        </div>
+        <pre><span class="cm">&lt;!-- الشكل الأساسي --&gt;</span>
+<span class="kw">&lt;iframe</span>
+  <span class="at">src</span>=<span class="st">"https://www.youtube.com/embed/VIDEO_ID"</span>
+  <span class="at">width</span>=<span class="st">"560"</span>
+  <span class="at">height</span>=<span class="st">"315"</span>
+  <span class="at">title</span>=<span class="st">"عنوان الفيديو"</span>
+  <span class="at">allowfullscreen</span>
+<span class="kw">&gt;&lt;/iframe&gt;</span>
+
+<span class="cm">&lt;!-- نسخة متجاوبة (Responsive) --&gt;</span>
+<span class="kw">&lt;div</span> <span class="at">style</span>=<span class="st">"position:relative; padding-bottom:56.25%; height:0; overflow:hidden;"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;iframe</span>
+    <span class="at">src</span>=<span class="st">"https://www.youtube.com/embed/VIDEO_ID"</span>
+    <span class="at">style</span>=<span class="st">"position:absolute; top:0; left:0; width:100%; height:100%;"</span>
+    <span class="at">title</span>=<span class="st">"عنوان الفيديو"</span>
+    <span class="at">allowfullscreen</span>
+  <span class="kw">&gt;&lt;/iframe&gt;</span>
+<span class="tg">&lt;/div&gt;</span></pre>
+      </div>
+
+      <div class="note-box info">
+        <div class="note-icon">📐</div>
+        <div>
+          <strong>56.25% في النسخة المتجاوبة</strong> = 9/16 × 100 — وهو نسبة حجم الفيديو القياسية (16:9).
+          هذه الحيلة تجعل الفيديو يتمدد ويتقلص مع حجم الشاشة بشكل صحيح تماماً.
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-attrs">⚙️</div> معاملات YouTube الإضافية</div>
+      <div class="prose"><p>يمكنك التحكم في سلوك فيديو يوتيوب بإضافة معاملات لرابط الـ src:</p></div>
+
+      <div class="code-block" dir="ltr">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-lang">HTML — معاملات YouTube</span>
+        </div>
+        <pre><span class="cm">&lt;!-- يبدأ من ثانية 30، مع تشغيل تلقائي، بدون شريط التحكم --&gt;</span>
+<span class="kw">&lt;iframe</span>
+  <span class="at">src</span>=<span class="st">"https://www.youtube.com/embed/VIDEO_ID?start=30&amp;autoplay=1&amp;controls=0"</span>
+  <span class="at">width</span>=<span class="st">"560"</span>
+  <span class="at">height</span>=<span class="st">"315"</span>
+  <span class="at">allowfullscreen</span>
+<span class="kw">&gt;&lt;/iframe&gt;</span></pre>
+      </div>
+
+      <table class="attr-table">
+        <thead><tr><th>المعامل</th><th>الوظيفة</th><th>مثال</th></tr></thead>
+        <tbody>
+          <tr><td><code>autoplay=1</code></td><td>تشغيل تلقائي (يشترط mute=1)</td><td><code>?autoplay=1&mute=1</code></td></tr>
+          <tr><td><code>controls=0</code></td><td>إخفاء شريط التحكم</td><td><code>?controls=0</code></td></tr>
+          <tr><td><code>loop=1</code></td><td>تكرار الفيديو</td><td><code>?loop=1&playlist=ID</code></td></tr>
+          <tr><td><code>start=N</code></td><td>البدء من ثانية N</td><td><code>?start=60</code></td></tr>
+          <tr><td><code>mute=1</code></td><td>كتم الصوت</td><td><code>?mute=1</code></td></tr>
+          <tr><td><code>rel=0</code></td><td>عدم عرض فيديوهات مقترحة في النهاية</td><td><code>?rel=0</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-exercise">✏️</div> تمرين</div>
+      <div class="exercise-block">
+        <div class="exercise-header"><div class="exercise-num">1</div> صفحة دروس فيديو</div>
+        <ol>
+          <li>اختر أي فيديو من يوتيوب وانسخ معرّفه (VIDEO_ID)</li>
+          <li>أضف الفيديو إلى صفحتك بعرض 100% وارتفاع 400px</li>
+          <li>أضف <strong>allowfullscreen</strong> وعنوان title مناسب</li>
+          <li>جرّب إضافة <code>?rel=0</code> لمنع الفيديوهات المقترحة</li>
+        </ol>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">▼ عرض الحل</button>
+        <div class="answer-content">
+          <div class="code-block" dir="ltr">
+            <div class="code-header">
+              <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+              <span class="code-lang">الحل</span>
+            </div>
+            <pre><span class="kw">&lt;h2&gt;</span><span class="tx">درس HTML الأول</span><span class="tg">&lt;/h2&gt;</span>
+
+<span class="kw">&lt;iframe</span>
+  <span class="at">src</span>=<span class="st">"https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0"</span>
+  <span class="at">width</span>=<span class="st">"100%"</span>
+  <span class="at">height</span>=<span class="st">"400"</span>
+  <span class="at">title</span>=<span class="st">"درس HTML للمبتدئين"</span>
+  <span class="at">allowfullscreen</span>
+<span class="kw">&gt;&lt;/iframe&gt;</span></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <h3>// ملخص الدرس</h3>
+      <ul class="summary-list">
+        <li>يوتيوب يُضمَّن عبر iframe باستخدام رابط /embed/VIDEO_ID</li>
+        <li>allowfullscreen يتيح للمستخدم توسيع الفيديو لملء الشاشة</li>
+        <li>النسخة المتجاوبة تستخدم padding-bottom: 56.25%</li>
+        <li>يمكن التحكم في السلوك بمعاملات URL مثل ?rel=0&amp;controls=0</li>
+        <li>أضف title دائماً لأسباب إمكانية الوصول والـ SEO</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════ LESSON 15 ══════════════════════ -->
+<div class="lesson-card" id="lesson-15">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">LESSON 15</div>
+    <div class="lesson-header-text">
+      <h2>عنصر &lt;base&gt;</h2>
+      <p>تحديد العنوان الأساسي لجميع الروابط في الصفحة دفعة واحدة</p>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-theory">📖</div> ما هو &lt;base&gt;؟</div>
+      <div class="prose">
+        <p>
+          وسم <strong>&lt;base&gt;</strong> يُوضع داخل &lt;head&gt; ويحدد <strong>العنوان الأساسي (Base URL)</strong>
+          الذي تُبنى عليه جميع الروابط النسبية في الصفحة.
+        </p>
+        <p>
+          بدلاً من كتابة المسار الكامل في كل رابط وصورة، تكتبه مرة واحدة في &lt;base&gt; والباقي يُكمل تلقائياً.
+        </p>
+      </div>
+      <div class="note-box warning">
+        <div class="note-icon">⚠️</div>
+        <div>
+          يُسمح بوسم &lt;base&gt; <strong>مرة واحدة فقط</strong> في كل صفحة، ويجب أن يكون <strong>أول شيء</strong> داخل &lt;head&gt; قبل أي روابط أو موارد.
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-code">💻</div> كيف يعمل &lt;base&gt;</div>
+
+      <div class="code-block" dir="ltr">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-lang">HTML — base في head</span>
+        </div>
+        <pre><span class="kw">&lt;head&gt;</span>
+  <span class="kw">&lt;base</span> <span class="at">href</span>=<span class="st">"https://www.mysite.com/pages/"</span> <span class="at">target</span>=<span class="st">"_blank"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="at">charset</span>=<span class="st">"UTF-8"</span><span class="kw">&gt;</span>
+<span class="tg">&lt;/head&gt;</span>
+<span class="kw">&lt;body&gt;</span>
+  <span class="cm">&lt;!-- بدون base: &lt;a href="https://www.mysite.com/pages/about.html"&gt; --&gt;</span>
+  <span class="cm">&lt;!-- مع base: يصبح الرابط النسبي يكفي --&gt;</span>
+  <span class="kw">&lt;a</span> <span class="at">href</span>=<span class="st">"about.html"</span><span class="kw">&gt;</span><span class="tx">من نحن</span><span class="tg">&lt;/a&gt;</span>
+  <span class="cm">&lt;!-- يُترجم تلقائياً إلى: https://www.mysite.com/pages/about.html --&gt;</span>
+
+  <span class="kw">&lt;img</span> <span class="at">src</span>=<span class="st">"logo.png"</span> <span class="at">alt</span>=<span class="st">"الشعار"</span><span class="kw">&gt;</span>
+  <span class="cm">&lt;!-- يُترجم إلى: https://www.mysite.com/pages/logo.png --&gt;</span>
+<span class="tg">&lt;/body&gt;</span></pre>
+      </div>
+
+      <div class="base-demo">
+        <div class="base-row">
+          <span class="base-tag">&lt;base href="..."&gt;</span>
+          <span style="font-family:'Fira Code',monospace;font-size:0.8rem;color:var(--text-soft)">https://mysite.com/pages/</span>
+        </div>
+        <div class="base-row">
+          <span class="base-tag">about.html</span>
+          <span class="base-arrow">→ يصبح →</span>
+          <span class="base-result">https://mysite.com/pages/about.html</span>
+        </div>
+        <div class="base-row">
+          <span class="base-tag">logo.png</span>
+          <span class="base-arrow">→ يصبح →</span>
+          <span class="base-result">https://mysite.com/pages/logo.png</span>
+        </div>
+        <div class="base-row">
+          <span class="base-tag">#section</span>
+          <span class="base-arrow">→ يبقى →</span>
+          <span class="base-result">#section (لا يتأثر)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-attrs">⚙️</div> خاصية target في &lt;base&gt;</div>
+      <div class="prose">
+        <p>
+          يمكن لـ &lt;base&gt; أيضاً تحديد <strong>target افتراضي</strong> لجميع روابط الصفحة.
+          مثلاً: <code style="background:#f0ede8;padding:2px 6px;border-radius:4px;font-family:'Fira Code',monospace">target="_blank"</code> يجعل كل الروابط تفتح في تبويب جديد تلقائياً.
+        </p>
+      </div>
+      <div class="code-block" dir="ltr">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-lang">HTML — base مع target</span>
+        </div>
+        <pre><span class="cm">&lt;!-- كل الروابط ستفتح في تبويب جديد --&gt;</span>
+<span class="kw">&lt;base</span> <span class="at">target</span>=<span class="st">"_blank"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- أو الجمع بين href و target --&gt;</span>
+<span class="kw">&lt;base</span>
+  <span class="at">href</span>=<span class="st">"https://cdn.mysite.com/assets/"</span>
+  <span class="at">target</span>=<span class="st">"_self"</span>
+<span class="kw">&gt;</span></pre>
+      </div>
+
+      <div class="note-box tip">
+        <div class="note-icon">💡</div>
+        <div>
+          <strong>متى تستخدم &lt;base&gt;؟</strong> مفيد جداً عند:
+          استخدام CDN لجميع الأصول (صور، ملفات CSS)، أو عند بناء موقع تكون فيه جميع صفحاتك في مجلد معين.
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <h3>// ملخص الدرس</h3>
+      <ul class="summary-list">
+        <li>&lt;base&gt; يحدد العنوان الأساسي لكل الروابط النسبية في الصفحة</li>
+        <li>يوضع داخل &lt;head&gt; — مرة واحدة فقط لكل صفحة</li>
+        <li>target في &lt;base&gt; يحدد هدف جميع الروابط افتراضياً</li>
+        <li>الروابط المطلقة (https://...) لا تتأثر بـ &lt;base&gt;</li>
+        <li>مفيد للمشاريع التي تستخدم CDN أو ملفات في مجلد مشترك</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════ LESSON 16 ══════════════════════ -->
+<div class="lesson-card" id="lesson-16">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">LESSON 16</div>
+    <div class="lesson-header-text">
+      <h2>Details و Summary</h2>
+      <p>إنشاء محتوى قابل للطي والتوسيع بدون JavaScript</p>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-theory">📖</div> ما هما details و summary؟</div>
+      <div class="prose">
+        <p>
+          <strong>&lt;details&gt;</strong> يُنشئ عنصراً قابلاً للطي — يخفي محتواه افتراضياً ويظهره عند الضغط.
+          <strong>&lt;summary&gt;</strong> هو عنوان ذلك العنصر — الجزء الظاهر دائماً الذي يُضغط عليه.
+        </p>
+        <p>الجميل في هذا العنصر أنه <strong>يعمل بدون JavaScript أو CSS</strong> — HTML صافٍ 100%.</p>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-demo">🎨</div> معاينة حية — اضغط لتجربة</div>
+
+      <div class="details-demo">
+        <details>
+          <summary>ما هو HTML؟</summary>
+          <p>HTML هو اختصار لـ HyperText Markup Language — لغة هيكل صفحات الويب.</p>
+        </details>
+        <details>
+          <summary>ما الفرق بين HTML و CSS؟</summary>
+          <p>HTML يبني الهيكل (عناوين، فقرات، صور)، بينما CSS يُنسّق ويُلوّن ويُجمّل ذلك الهيكل.</p>
+        </details>
+        <details open>
+          <summary>هل details يعمل بدون JavaScript؟ ✓</summary>
+          <p>نعم! هذا العنصر مدمج في HTML5 ويعمل بشكل كامل بدون أي كود JavaScript أو CSS.</p>
+        </details>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-code">💻</div> الكود</div>
+
+      <div class="code-block" dir="ltr">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-lang">HTML — details و summary</span>
+        </div>
+        <pre><span class="cm">&lt;!-- مغلق افتراضياً --&gt;</span>
+<span class="kw">&lt;details&gt;</span>
+  <span class="kw">&lt;summary&gt;</span><span class="tx">اضغط هنا لرؤية المزيد</span><span class="tg">&lt;/summary&gt;</span>
+  <span class="kw">&lt;p&gt;</span><span class="tx">هذا المحتوى كان مخفياً وظهر بعد الضغط.</span><span class="tg">&lt;/p&gt;</span>
+<span class="tg">&lt;/details&gt;</span>
+
+<span class="cm">&lt;!-- مفتوح افتراضياً بخاصية open --&gt;</span>
+<span class="kw">&lt;details</span> <span class="at">open</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;summary&gt;</span><span class="tx">هذا مفتوح افتراضياً</span><span class="tg">&lt;/summary&gt;</span>
+  <span class="kw">&lt;p&gt;</span><span class="tx">يمكن إغلاقه بالضغط على العنوان.</span><span class="tg">&lt;/p&gt;</span>
+<span class="tg">&lt;/details&gt;</span>
+
+<span class="cm">&lt;!-- يمكن وضع أي محتوى داخل details --&gt;</span>
+<span class="kw">&lt;details&gt;</span>
+  <span class="kw">&lt;summary&gt;</span><span class="tx">الإجابة النموذجية</span><span class="tg">&lt;/summary&gt;</span>
+  <span class="kw">&lt;ul&gt;</span>
+    <span class="kw">&lt;li&gt;</span><span class="tx">النقطة الأولى</span><span class="tg">&lt;/li&gt;</span>
+    <span class="kw">&lt;li&gt;</span><span class="tx">النقطة الثانية</span><span class="tg">&lt;/li&gt;</span>
+  <span class="tg">&lt;/ul&gt;</span>
+<span class="tg">&lt;/details&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-tip">💡</div> استخدامات عملية</div>
+
+      <div class="concept-grid">
+        <div class="concept-card">
+          <div class="cc-icon">❓</div>
+          <div class="cc-title">FAQ</div>
+          <div class="cc-desc">قسم الأسئلة الشائعة — كل سؤال details وإجابته داخله</div>
+        </div>
+        <div class="concept-card">
+          <div class="cc-icon">📖</div>
+          <div class="cc-title">إجابات التمارين</div>
+          <div class="cc-desc">اخفِ الحل واعرضه عند الطلب — مثالي للدورات التعليمية</div>
+        </div>
+        <div class="concept-card">
+          <div class="cc-icon">⚙️</div>
+          <div class="cc-title">إعدادات متقدمة</div>
+          <div class="cc-desc">خيارات إضافية يمكن طيّها لإبقاء الواجهة نظيفة</div>
+        </div>
+        <div class="concept-card">
+          <div class="cc-icon">📋</div>
+          <div class="cc-title">مصطلحات</div>
+          <div class="cc-desc">قائمة مصطلحات — اضغط على كل مصطلح لرؤية شرحه</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-exercise">✏️</div> تمرين</div>
+      <div class="exercise-block">
+        <div class="exercise-header"><div class="exercise-num">1</div> صفحة FAQ</div>
+        <ol>
+          <li>أنشئ صفحة تحتوي على 4 أسئلة شائعة</li>
+          <li>كل سؤال داخل عنصر details مع summary</li>
+          <li>اجعل السؤال الأول مفتوحاً افتراضياً بخاصية open</li>
+          <li>ضع إجابة كل سؤال كفقرة p داخل details</li>
+        </ol>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">▼ عرض الحل</button>
+        <div class="answer-content">
+          <div class="code-block" dir="ltr">
+            <div class="code-header">
+              <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+              <span class="code-lang">الحل</span>
+            </div>
+            <pre><span class="kw">&lt;h1&gt;</span><span class="tx">الأسئلة الشائعة</span><span class="tg">&lt;/h1&gt;</span>
+
+<span class="kw">&lt;details</span> <span class="at">open</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;summary&gt;</span><span class="tx">ما هو HTML؟</span><span class="tg">&lt;/summary&gt;</span>
+  <span class="kw">&lt;p&gt;</span><span class="tx">HTML هو لغة هيكل صفحات الويب.</span><span class="tg">&lt;/p&gt;</span>
+<span class="tg">&lt;/details&gt;</span>
+
+<span class="kw">&lt;details&gt;</span>
+  <span class="kw">&lt;summary&gt;</span><span class="tx">هل HTML لغة برمجة؟</span><span class="tg">&lt;/summary&gt;</span>
+  <span class="kw">&lt;p&gt;</span><span class="tx">لا، HTML لغة ترميز وليست برمجة.</span><span class="tg">&lt;/p&gt;</span>
+<span class="tg">&lt;/details&gt;</span>
+
+<span class="kw">&lt;details&gt;</span>
+  <span class="kw">&lt;summary&gt;</span><span class="tx">كم وقت يلزم لتعلم HTML؟</span><span class="tg">&lt;/summary&gt;</span>
+  <span class="kw">&lt;p&gt;</span><span class="tx">يمكن تعلم الأساسيات في أسبوع إلى أسبوعين.</span><span class="tg">&lt;/p&gt;</span>
+<span class="tg">&lt;/details&gt;</span>
+
+<span class="kw">&lt;details&gt;</span>
+  <span class="kw">&lt;summary&gt;</span><span class="tx">ما بعد HTML؟</span><span class="tg">&lt;/summary&gt;</span>
+  <span class="kw">&lt;p&gt;</span><span class="tx">بعد HTML تعلم CSS ثم JavaScript.</span><span class="tg">&lt;/p&gt;</span>
+<span class="tg">&lt;/details&gt;</span></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <h3>// ملخص الدرس</h3>
+      <ul class="summary-list">
+        <li>&lt;details&gt; يُنشئ محتوى قابلاً للطي بدون JavaScript</li>
+        <li>&lt;summary&gt; هو عنوان العنصر — دائماً ظاهر ويُضغط عليه</li>
+        <li>خاصية open تجعل العنصر مفتوحاً افتراضياً</li>
+        <li>مثالي للـ FAQ وإجابات التمارين والمحتوى الاختياري</li>
+        <li>يقبل أي محتوى HTML داخله (p, ul, img, table...)</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════ LESSON 17 ══════════════════════ -->
+<div class="lesson-card" id="lesson-17">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">LESSON 17</div>
+    <div class="lesson-header-text">
+      <h2>الأزرار — Buttons</h2>
+      <p>type="button" · type="submit" · type="reset" — الزر المناسب في المكان المناسب</p>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-theory">📖</div> وسم &lt;button&gt;</div>
+      <div class="prose">
+        <p>
+          وسم <strong>&lt;button&gt;</strong> ينشئ زراً قابلاً للنقر. يختلف عن &lt;input type="button"&gt;
+          في أنه يمكنه احتواء محتوى HTML (نصوص، أيقونات، صور).
+        </p>
+        <p>الخاصية الأهم هي <strong>type</strong> التي تحدد سلوك الزر:</p>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-demo">🎨</div> أنواع الأزرار — معاينة حية</div>
+
+      <div class="btn-grid">
+        <button class="btn-demo btn-submit" onclick="alert('تم الإرسال!')">
+          إرسال النموذج
+          <span>type="submit"</span>
+        </button>
+        <button class="btn-demo btn-button" onclick="alert('زر عادي!')">
+          زر عادي
+          <span>type="button"</span>
+        </button>
+        <button class="btn-demo btn-reset">
+          إعادة تعيين
+          <span>type="reset"</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-attrs">⚙️</div> أنواع type الثلاثة</div>
+
+      <table class="attr-table">
+        <thead><tr><th>النوع</th><th>الوظيفة</th><th>متى تستخدمه</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><code>type="submit"</code></td>
+            <td>يُرسل النموذج (form) — القيمة الافتراضية</td>
+            <td>زر إرسال نموذج تسجيل أو دخول</td>
+          </tr>
+          <tr>
+            <td><code>type="button"</code></td>
+            <td>زر عادي — لا يفعل شيئاً بدون JavaScript</td>
+            <td>أي زر تريد التحكم فيه بـ JS</td>
+          </tr>
+          <tr>
+            <td><code>type="reset"</code></td>
+            <td>يُعيد تعيين جميع حقول النموذج لقيمها الأولى</td>
+            <td>زر "مسح الكل" في النماذج</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="code-block" dir="ltr">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-lang">HTML — الأزرار الثلاثة</span>
+        </div>
+        <pre><span class="cm">&lt;!-- زر إرسال النموذج --&gt;</span>
+<span class="kw">&lt;button</span> <span class="at">type</span>=<span class="st">"submit"</span><span class="kw">&gt;</span><span class="tx">إرسال</span><span class="tg">&lt;/button&gt;</span>
+
+<span class="cm">&lt;!-- زر عادي يعمل مع JavaScript --&gt;</span>
+<span class="kw">&lt;button</span> <span class="at">type</span>=<span class="st">"button"</span> <span class="at">onclick</span>=<span class="st">"myFunction()"</span><span class="kw">&gt;</span>
+  <span class="tx">اضغط هنا</span>
+<span class="tg">&lt;/button&gt;</span>
+
+<span class="cm">&lt;!-- زر إعادة التعيين --&gt;</span>
+<span class="kw">&lt;button</span> <span class="at">type</span>=<span class="st">"reset"</span><span class="kw">&gt;</span><span class="tx">مسح الكل</span><span class="tg">&lt;/button&gt;</span></pre>
+      </div>
+
+      <div class="note-box warning">
+        <div class="note-icon">⚠️</div>
+        <div>
+          <strong>مهم:</strong> القيمة الافتراضية لـ type هي <code style="font-family:'Fira Code',monospace">submit</code>. إذا وضعت زراً داخل نموذج بدون تحديد type سيُرسل النموذج عند الضغط عليه — حدد type="button" صراحةً إذا لم تريد ذلك.
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-code">💻</div> خصائص إضافية مهمة</div>
+
+      <div class="code-block" dir="ltr">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-lang">HTML — خصائص الأزرار</span>
+        </div>
+        <pre><span class="cm">&lt;!-- زر معطّل --&gt;</span>
+<span class="kw">&lt;button</span> <span class="at">type</span>=<span class="st">"button"</span> <span class="at">disabled</span><span class="kw">&gt;</span><span class="tx">غير متاح الآن</span><span class="tg">&lt;/button&gt;</span>
+
+<span class="cm">&lt;!-- زر مع أيقونة وتلميح --&gt;</span>
+<span class="kw">&lt;button</span> <span class="at">type</span>=<span class="st">"button"</span> <span class="at">title</span>=<span class="st">"اضغط للحفظ"</span><span class="kw">&gt;</span>
+  💾 <span class="tx">حفظ</span>
+<span class="tg">&lt;/button&gt;</span>
+
+<span class="cm">&lt;!-- الأزرار داخل نموذج --&gt;</span>
+<span class="kw">&lt;form&gt;</span>
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"text"</span> <span class="at">placeholder</span>=<span class="st">"اكتب هنا..."</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;button</span> <span class="at">type</span>=<span class="st">"submit"</span><span class="kw">&gt;</span><span class="tx">إرسال</span><span class="tg">&lt;/button&gt;</span>
+  <span class="kw">&lt;button</span> <span class="at">type</span>=<span class="st">"reset"</span><span class="kw">&gt;</span><span class="tx">مسح</span><span class="tg">&lt;/button&gt;</span>
+<span class="tg">&lt;/form&gt;</span></pre>
+      </div>
+
+      <div class="note-box info">
+        <div class="note-icon">💡</div>
+        <div>
+          <strong>button vs input type="submit":</strong><br>
+          <code style="font-family:'Fira Code',monospace">&lt;button&gt;</code> أفضل لأنه يقبل HTML داخله (أيقونات، صور، تنسيق).
+          <code style="font-family:'Fira Code',monospace">&lt;input type="submit"&gt;</code> نص فقط ولا يقبل محتوى داخلي.
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-exercise">✏️</div> تمارين</div>
+
+      <div class="exercise-block">
+        <div class="exercise-header"><div class="exercise-num">1</div> نموذج بسيط بأزرار صحيحة</div>
+        <ol>
+          <li>أنشئ نموذجاً بحقل اسم وحقل بريد إلكتروني</li>
+          <li>أضف زر submit لإرسال النموذج</li>
+          <li>أضف زر reset لمسح الحقول</li>
+          <li>أضف زر button ثالثاً مع onclick يُظهر رسالة</li>
+        </ol>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">▼ عرض الحل</button>
+        <div class="answer-content">
+          <div class="code-block" dir="ltr">
+            <div class="code-header">
+              <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+              <span class="code-lang">الحل</span>
+            </div>
+            <pre><span class="kw">&lt;form&gt;</span>
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"text"</span>  <span class="at">placeholder</span>=<span class="st">"الاسم"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"email"</span> <span class="at">placeholder</span>=<span class="st">"البريد الإلكتروني"</span><span class="kw">&gt;</span>
+
+  <span class="kw">&lt;button</span> <span class="at">type</span>=<span class="st">"submit"</span><span class="kw">&gt;</span>
+    ✅ <span class="tx">إرسال النموذج</span>
+  <span class="tg">&lt;/button&gt;</span>
+
+  <span class="kw">&lt;button</span> <span class="at">type</span>=<span class="st">"reset"</span><span class="kw">&gt;</span>
+    🗑️ <span class="tx">مسح الكل</span>
+  <span class="tg">&lt;/button&gt;</span>
+
+  <span class="kw">&lt;button</span>
+    <span class="at">type</span>=<span class="st">"button"</span>
+    <span class="at">onclick</span>=<span class="st">"alert('تم حفظ المسودة!')"</span>
+  <span class="kw">&gt;</span>
+    💾 <span class="tx">حفظ مسودة</span>
+  <span class="tg">&lt;/button&gt;</span>
+<span class="tg">&lt;/form&gt;</span></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <h3>// ملخص الدرس</h3>
+      <ul class="summary-list">
+        <li>&lt;button&gt; أفضل من input type="submit" لأنه يقبل HTML داخله</li>
+        <li>type="submit" يُرسل النموذج — الافتراضي إذا لم تحدد النوع</li>
+        <li>type="button" زر عادي — لا يفعل شيئاً بدون JS</li>
+        <li>type="reset" يُعيد جميع حقول النموذج لوضعها الأولي</li>
+        <li>disabled يُعطّل الزر ويمنع التفاعل معه</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+</div><!-- end main-wrap -->
+
+<!-- FOOTER -->
+<footer class="course-footer">
+  <div class="footer-nav">
+    <a href="2.html"><button class="footer-badge">← الوحدة الثانية</button></a>
+    <a href="4.html"><button class="next-unit-btn">
+      الوحدة الرابعة — النماذج ←
+    </button>
+    </a>
+  </div>
+  <p>الوحدة 3 من 6 &nbsp;·&nbsp; دورة HTML والـ CSS الكاملة بالعربية &nbsp;·&nbsp; 60 درساً</p>
+</footer>
+
+<script>
+function toggleAnswer(btn) {
+  const content = btn.nextElementSibling;
+  content.classList.toggle('visible');
+  btn.textContent = content.classList.contains('visible') ? '▲ إخفاء الحل' : '▼ عرض الحل';
+}
+
+function scrollToLesson(id, btn) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (btn) {
+    document.querySelectorAll('.idx-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+}
+
+const lessons = ['lesson-12','lesson-13','lesson-14','lesson-15','lesson-16','lesson-17'];
+const buttons = document.querySelectorAll('.idx-btn');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = lessons.indexOf(entry.target.id);
+      if (idx > -1) {
+        buttons.forEach(b => b.classList.remove('active'));
+        buttons[idx].classList.add('active');
+      }
+    }
+  });
+}, { rootMargin: '-25% 0px -65% 0px' });
+
+lessons.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) observer.observe(el);
+});
+</script>
+</body>
+</html>

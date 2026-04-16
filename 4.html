@@ -1,0 +1,2529 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الوحدة الرابعة — النماذج</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange: #F4631E;
+  --orange-soft: rgba(244,99,30,0.12);
+  --orange-border: rgba(244,99,30,0.28);
+  --green: #22C55E;
+  --green-soft: rgba(34,197,94,0.1);
+  --blue: #3B82F6;
+  --blue-soft: rgba(59,130,246,0.1);
+  --yellow: #EAB308;
+  --yellow-soft: rgba(234,179,8,0.1);
+  --red: #EF4444;
+  --red-soft: rgba(239,68,68,0.1);
+  --purple: #A855F7;
+  --purple-soft: rgba(168,85,247,0.1);
+  --teal: #14B8A6;
+  --teal-soft: rgba(20,184,166,0.1);
+  --bg: #F7F5F1;
+  --bg-card: #FFFFFF;
+  --bg-dark: #111111;
+  --text: #1C1A18;
+  --text-soft: #6B6560;
+  --border: #E5E0D8;
+  --code-bg: #1E1E2E;
+  --code-text: #CDD6F4;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Tajawal', sans-serif;
+  line-height: 1.8;
+  font-size: 17px;
+}
+
+/* ===== TOP NAV ===== */
+.topnav {
+  background: var(--bg-dark);
+  padding: 14px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  border-bottom: 2px solid var(--orange);
+}
+
+.nav-logo {
+  color: white;
+  font-weight: 800;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.html5-badge {
+  background: var(--orange);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 5px;
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 0.05em;
+}
+
+.nav-progress { display: flex; align-items: center; gap: 14px; }
+.nav-unit-label { color: rgba(255,255,255,0.45); font-size: 0.82rem; }
+.progress-dots { display: flex; gap: 5px; }
+
+.pdot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+}
+.pdot.done { background: rgba(244,99,30,0.5); }
+.pdot.active { background: var(--orange); box-shadow: 0 0 0 2px rgba(244,99,30,0.35); }
+
+/* ===== UNIT INTRO BANNER ===== */
+.unit-intro-banner {
+  background: linear-gradient(135deg, #0D0D0D 0%, #1A0A03 100%);
+  border-bottom: 1px solid rgba(244,99,30,0.2);
+  padding: 18px 48px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.uib-units { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.uib-unit {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 0.78rem;
+  border: 1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.3);
+  transition: all 0.2s;
+  cursor: default;
+}
+
+.uib-unit.done { color: rgba(244,99,30,0.6); border-color: rgba(244,99,30,0.18); }
+.uib-unit.active { background: var(--orange-soft); border-color: var(--orange-border); color: var(--orange); font-weight: 700; }
+
+.uib-unit-num {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.68rem;
+  background: rgba(255,255,255,0.07);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+.uib-unit.done .uib-unit-num { background: rgba(244,99,30,0.15); }
+.uib-unit.active .uib-unit-num { background: rgba(244,99,30,0.25); color: white; }
+
+.uib-sep { color: rgba(255,255,255,0.15); font-size: 1.1rem; }
+
+/* ===== UNIT HERO ===== */
+.unit-hero {
+  background: var(--bg-dark);
+  color: white;
+  padding: 70px 48px 58px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(244,99,30,0.15);
+}
+
+.unit-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 100% at 100% 50%, rgba(244,99,30,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 60% at 10% 100%, rgba(59,130,246,0.05) 0%, transparent 60%);
+}
+
+.unit-hero::after {
+  content: '04';
+  position: absolute;
+  left: -10px;
+  bottom: -70px;
+  font-size: 24rem;
+  font-weight: 900;
+  color: rgba(244,99,30,0.04);
+  font-family: 'Fira Code', monospace;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.unit-hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 48px;
+  align-items: center;
+}
+
+.unit-tag {
+  display: inline-block;
+  background: var(--orange-soft);
+  border: 1px solid var(--orange-border);
+  color: var(--orange);
+  font-size: 0.75rem;
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 18px;
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 0.04em;
+}
+
+.unit-hero h1 {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+
+.unit-hero h1 span { color: var(--orange); }
+
+.unit-hero p.unit-desc {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.52);
+  max-width: 520px;
+  margin-bottom: 30px;
+}
+
+.unit-meta { display: flex; gap: 20px; flex-wrap: wrap; }
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.42);
+}
+
+.meta-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--orange); flex-shrink: 0; }
+
+.unit-lessons-panel {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  padding: 20px;
+  min-width: 220px;
+}
+
+.ulp-title {
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: 'Fira Code', monospace;
+  margin-bottom: 14px;
+}
+
+.ulp-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  cursor: pointer;
+}
+
+.ulp-item:last-child { border-bottom: none; }
+
+.ulp-num {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.68rem;
+  color: var(--orange);
+  width: 28px;
+  flex-shrink: 0;
+}
+
+.ulp-name { font-size: 0.82rem; color: rgba(255,255,255,0.55); transition: color 0.2s; }
+.ulp-item:hover .ulp-name { color: white; }
+
+/* ===== LESSON INDEX ===== */
+.lesson-index {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 16px 48px;
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 56px;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+.idx-label { font-size: 0.78rem; color: var(--text-soft); margin-left: 6px; }
+
+.idx-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-soft);
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.78rem;
+  padding: 5px 13px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.idx-btn:hover, .idx-btn.active {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: white;
+}
+
+/* ===== MAIN ===== */
+.main-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 24px 120px;
+}
+
+/* ===== LESSON CARD ===== */
+.lesson-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 48px;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.05);
+  scroll-margin-top: 120px;
+  transition: box-shadow 0.3s;
+}
+
+.lesson-card:hover { box-shadow: 0 4px 40px rgba(0,0,0,0.09); }
+
+.lesson-header {
+  background: var(--bg-dark);
+  color: white;
+  padding: 26px 36px;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.lesson-num-badge {
+  background: var(--orange);
+  color: white;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 7px;
+  flex-shrink: 0;
+  margin-top: 4px;
+  letter-spacing: 0.06em;
+}
+
+.lesson-header-text h2 { font-size: 1.35rem; font-weight: 800; margin-bottom: 5px; }
+.lesson-header-text p { font-size: 0.87rem; color: rgba(255,255,255,0.45); }
+.lesson-body { padding: 36px; }
+
+/* ===== SECTIONS ===== */
+.section { margin-bottom: 34px; }
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-icon {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.icon-theory   { background: var(--blue-soft); }
+.icon-code     { background: rgba(30,30,46,0.07); }
+.icon-exercise { background: var(--green-soft); }
+.icon-tip      { background: var(--yellow-soft); }
+.icon-demo     { background: var(--teal-soft); }
+.icon-attrs    { background: var(--purple-soft); }
+.icon-compare  { background: var(--red-soft); }
+
+.prose { color: var(--text); line-height: 1.9; font-size: 1rem; }
+.prose p { margin-bottom: 12px; }
+.prose strong { color: var(--orange); font-weight: 700; }
+
+/* ===== CODE BLOCK ===== */
+.code-block {
+  background: var(--code-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 16px 0;
+  direction: ltr;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.code-header {
+  background: rgba(255,255,255,0.05);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.code-lang {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.7rem;
+  color: var(--orange);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.code-dots { display: flex; gap: 6px; }
+.code-dots span { width: 10px; height: 10px; border-radius: 50%; }
+.dot-red { background: #FF5F57; }
+.dot-yellow { background: #FFBD2E; }
+.dot-green { background: #28CA41; }
+
+pre {
+  padding: 20px 22px;
+  overflow-x: auto;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.87rem;
+  line-height: 1.75;
+  color: var(--code-text);
+}
+
+.kw { color: #CBA6F7; }
+.at { color: #89B4FA; }
+.st { color: #A6E3A1; }
+.cm { color: #6C7086; font-style: italic; }
+.tx { color: #CDD6F4; }
+.tg { color: #F38BA8; }
+
+/* ===== NOTE BOXES ===== */
+.note-box {
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 16px 0;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  font-size: 0.93rem;
+}
+
+.note-box.info      { background: var(--blue-soft);   border-right: 3px solid var(--blue); }
+.note-box.warning   { background: var(--yellow-soft);  border-right: 3px solid var(--yellow); }
+.note-box.tip       { background: var(--green-soft);   border-right: 3px solid var(--green); }
+.note-box.important { background: var(--orange-soft);  border-right: 3px solid var(--orange); }
+.note-box.purple    { background: var(--purple-soft);  border-right: 3px solid var(--purple); }
+
+.note-icon { font-size: 1.15rem; flex-shrink: 0; margin-top: 2px; }
+
+/* ===== EXERCISE BLOCK ===== */
+.exercise-block {
+  background: var(--green-soft);
+  border: 1px solid rgba(34,197,94,0.2);
+  border-radius: 14px;
+  padding: 22px 26px;
+  margin: 16px 0;
+}
+
+.exercise-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-weight: 700;
+  color: #15803D;
+  font-size: 0.98rem;
+}
+
+.exercise-num {
+  background: var(--green);
+  color: white;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem;
+  font-family: 'Fira Code', monospace;
+  flex-shrink: 0;
+}
+
+.exercise-block ol, .exercise-block ul { padding-right: 22px; color: var(--text); }
+.exercise-block li { margin-bottom: 8px; font-size: 0.93rem; }
+
+/* ===== ANSWER TOGGLE ===== */
+.answer-toggle {
+  background: none;
+  border: 1px dashed var(--orange-border);
+  color: var(--orange);
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.88rem;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 14px;
+  transition: all 0.2s;
+  width: 100%;
+  text-align: right;
+}
+
+.answer-toggle:hover { background: var(--orange-soft); }
+.answer-content { display: none; margin-top: 12px; }
+.answer-content.visible { display: block; }
+
+/* ===== DIVIDER ===== */
+.lesson-divider {
+  height: 1px;
+  background: linear-gradient(to left, transparent, var(--border), transparent);
+  margin: 30px 0;
+}
+
+/* ===== SUMMARY BOX ===== */
+.summary-box {
+  background: linear-gradient(135deg, #111111, #1F0D05);
+  border: 1px solid rgba(244,99,30,0.22);
+  border-radius: 16px;
+  padding: 26px 30px;
+  margin: 24px 0 0;
+}
+
+.summary-box h3 {
+  color: var(--orange);
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+  font-family: 'Fira Code', monospace;
+  letter-spacing: 0.04em;
+}
+
+.summary-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+.summary-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.91rem;
+  color: rgba(255,255,255,0.72);
+}
+
+.summary-list li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+
+/* ===== CONCEPT CARDS ===== */
+.concept-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.concept-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+
+.concept-card .cc-icon { font-size: 1.4rem; margin-bottom: 8px; }
+.concept-card .cc-title { font-weight: 700; font-size: 0.92rem; color: var(--text); margin-bottom: 5px; }
+.concept-card .cc-desc { font-size: 0.81rem; color: var(--text-soft); line-height: 1.6; }
+
+/* ===== ATTR TABLE ===== */
+.attr-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 0.88rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.attr-table th {
+  background: var(--bg-dark);
+  color: white;
+  padding: 11px 16px;
+  text-align: right;
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+.attr-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: top;
+}
+
+.attr-table tr:last-child td { border-bottom: none; }
+.attr-table tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
+
+.attr-table code {
+  font-family: 'Fira Code', monospace;
+  background: var(--orange-soft);
+  color: var(--orange);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.82rem;
+}
+
+/* ===== DEMO BOX ===== */
+.demo-box {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 16px 0;
+}
+
+.demo-label {
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 16px;
+  font-size: 0.75rem;
+  color: var(--text-soft);
+  font-family: 'Fira Code', monospace;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.demo-label::before { content: '▶'; color: var(--green); font-size: 0.6rem; }
+.demo-content { padding: 20px 24px; }
+
+/* ===== FORM DEMO STYLES ===== */
+.form-demo {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  margin: 16px 0;
+}
+
+.form-demo label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+  margin-top: 14px;
+}
+
+.form-demo label:first-child { margin-top: 0; }
+
+.form-demo input,
+.form-demo select,
+.form-demo textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.92rem;
+  color: var(--text);
+  background: var(--bg);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+
+.form-demo input:focus,
+.form-demo select:focus,
+.form-demo textarea:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px var(--orange-soft);
+}
+
+.form-demo .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.form-demo .submit-btn {
+  margin-top: 18px;
+  background: var(--orange);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.form-demo .submit-btn:hover { background: #e05510; }
+
+/* ===== INPUT TYPE CHIPS ===== */
+.input-types-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.input-type-chip {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.input-type-chip:hover {
+  border-color: var(--orange);
+  transform: translateY(-2px);
+}
+
+.itc-type {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+  color: var(--orange);
+  font-weight: 600;
+}
+
+.itc-desc { font-size: 0.78rem; color: var(--text-soft); line-height: 1.4; }
+
+/* ===== COMPARE GRID ===== */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 16px 0;
+}
+
+.compare-card {
+  border-radius: 12px;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+}
+
+.compare-card.good { background: var(--green-soft); border-color: rgba(34,197,94,0.25); }
+.compare-card.bad  { background: var(--red-soft);   border-color: rgba(239,68,68,0.2); }
+
+.compare-card .cc-head {
+  font-weight: 800;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.compare-card.good .cc-head { color: #15803D; }
+.compare-card.bad  .cc-head { color: #B91C1C; }
+
+.compare-card ul { padding-right: 18px; }
+.compare-card li { font-size: 0.85rem; color: var(--text); margin-bottom: 6px; }
+
+/* ===== STEPS LIST ===== */
+.steps-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.steps-list li { display: flex; gap: 14px; align-items: flex-start; }
+
+.step-num {
+  background: var(--orange);
+  color: white;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.78rem;
+  font-family: 'Fira Code', monospace;
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.step-text { font-size: 0.93rem; color: var(--text); line-height: 1.7; }
+.step-text strong { color: var(--orange); }
+
+/* ===== RADIO / CHECKBOX DEMO ===== */
+.rc-demo {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 16px 0;
+}
+
+.rc-demo .rc-group { margin-bottom: 16px; }
+.rc-demo .rc-group:last-child { margin-bottom: 0; }
+.rc-demo .rc-group-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-soft);
+  margin-bottom: 10px;
+  font-family: 'Fira Code', monospace;
+}
+
+.rc-demo .rc-options { display: flex; gap: 16px; flex-wrap: wrap; }
+
+.rc-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--text);
+  cursor: pointer;
+  padding: 7px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.rc-option:hover { border-color: var(--orange); background: var(--orange-soft); }
+.rc-option input { accent-color: var(--orange); width: 16px; height: 16px; cursor: pointer; }
+
+/* ===== SELECT DEMO ===== */
+.select-demo {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 16px 0;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.select-demo select {
+  padding: 9px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text);
+  background: var(--bg);
+  cursor: pointer;
+  outline: none;
+  min-width: 180px;
+}
+
+.select-demo select:focus { border-color: var(--orange); }
+
+/* ===== FILE INPUT DEMO ===== */
+.file-demo-area {
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+  margin: 16px 0;
+  background: white;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: pointer;
+}
+
+.file-demo-area:hover {
+  border-color: var(--orange);
+  background: var(--orange-soft);
+}
+
+.file-demo-area .fda-icon { font-size: 2.5rem; margin-bottom: 10px; }
+.file-demo-area .fda-text { font-size: 0.88rem; color: var(--text-soft); }
+.file-demo-area .fda-hint { font-size: 0.75rem; color: rgba(0,0,0,0.3); margin-top: 6px; font-family: 'Fira Code', monospace; }
+
+/* ===== ADVANCED INPUT GRID ===== */
+.adv-input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 16px 0;
+}
+
+.adv-input-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+
+.adv-input-card .aic-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-soft);
+  margin-bottom: 10px;
+  font-family: 'Fira Code', monospace;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.adv-input-card .aic-label span {
+  background: var(--orange-soft);
+  color: var(--orange);
+  padding: 1px 7px;
+  border-radius: 4px;
+}
+
+.adv-input-card input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 7px;
+  font-size: 0.9rem;
+  background: white;
+  outline: none;
+  font-family: 'Tajawal', sans-serif;
+  accent-color: var(--orange);
+}
+
+.adv-input-card input:focus { border-color: var(--orange); }
+
+/* ===== FOOTER ===== */
+.course-footer {
+  text-align: center;
+  padding: 50px 20px;
+  border-top: 1px solid var(--border);
+  color: var(--text-soft);
+  font-size: 0.85rem;
+}
+
+.footer-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.footer-badge {
+  background: var(--bg-dark);
+  color: rgba(255,255,255,0.4);
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border: none;
+  font-family: 'Tajawal', sans-serif;
+}
+
+.footer-badge:hover { background: #222; }
+
+.next-unit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--orange);
+  color: white;
+  padding: 14px 32px;
+  border-radius: 100px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  font-family: 'Tajawal', sans-serif;
+  transition: all 0.2s;
+}
+
+.next-unit-btn:hover {
+  background: #e05510;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(244,99,30,0.3);
+}
+
+@media (max-width: 700px) {
+  .topnav { padding: 12px 20px; }
+  .unit-intro-banner { padding: 14px 20px; }
+  .unit-hero { padding: 50px 24px 42px; }
+  .unit-hero-inner { grid-template-columns: 1fr; }
+  .unit-lessons-panel { display: none; }
+  .lesson-index { padding: 14px 20px; top: 52px; }
+  .lesson-body { padding: 24px 20px; }
+  .lesson-header { padding: 22px 20px; }
+  .main-wrap { padding: 40px 14px 80px; }
+  .compare-grid { grid-template-columns: 1fr; }
+  .adv-input-grid { grid-template-columns: 1fr; }
+  .form-demo .form-row { grid-template-columns: 1fr; }
+  .uib-units { gap: 4px; }
+  .uib-sep { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <div class="nav-logo">
+    <span class="html5-badge">HTML5</span>
+    دورة تعلم HTML و CSS
+  </div>
+  <div class="nav-progress">
+    <span class="nav-unit-label">الوحدة 4 من 6</span>
+    <div class="progress-dots">
+      <div class="pdot done"></div>
+      <div class="pdot done"></div>
+      <div class="pdot done"></div>
+      <div class="pdot active"></div>
+      <div class="pdot"></div>
+      <div class="pdot"></div>
+    </div>
+  </div>
+</nav>
+
+<!-- UNIT INTRO BANNER -->
+<div class="unit-intro-banner">
+  <div class="uib-units">
+    <div class="uib-unit done">
+      <span class="uib-unit-num">01</span>
+      البداية والأساسيات
+    </div>
+    <div class="uib-sep">›</div>
+    <div class="uib-unit done">
+      <span class="uib-unit-num">02</span>
+      العناصر الأساسية
+    </div>
+    <div class="uib-sep">›</div>
+    <div class="uib-unit done">
+      <span class="uib-unit-num">03</span>
+      الوسائط
+    </div>
+    <div class="uib-sep">›</div>
+    <div class="uib-unit active">
+      <span class="uib-unit-num">04</span>
+      النماذج
+    </div>
+    <div class="uib-sep">›</div>
+    <div class="uib-unit">
+      <span class="uib-unit-num">05</span>
+      متقدم
+    </div>
+    <div class="uib-sep">›</div>
+    <div class="uib-unit">
+      <span class="uib-unit-num">06</span>
+      الاحتراف
+    </div>
+  </div>
+</div>
+
+<!-- UNIT HERO -->
+<section class="unit-hero">
+  <div class="unit-hero-inner">
+    <div>
+      <div class="unit-tag">// الوحدة الرابعة — Unit 04</div>
+      <h1>النماذج <span>والمدخلات</span></h1>
+      <p class="unit-desc">
+        input · select · radio · checkbox · file — كل ما تحتاجه لبناء نماذج HTML احترافية وتفاعلية
+      </p>
+      <div class="unit-meta">
+        <div class="meta-item"><div class="meta-dot"></div> 8 دروس (18 → 25)</div>
+        <div class="meta-item"><div class="meta-dot"></div> مستوى متوسط</div>
+        <div class="meta-item"><div class="meta-dot"></div> شرح + كود + تمارين</div>
+      </div>
+    </div>
+
+    <div class="unit-lessons-panel">
+      <div class="ulp-title">// دروس الوحدة</div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-18')">
+        <span class="ulp-num">18</span><span class="ulp-name">Input Types</span>
+      </div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-19')">
+        <span class="ulp-num">19</span><span class="ulp-name">Login Form</span>
+      </div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-20')">
+        <span class="ulp-num">20</span><span class="ulp-name">Select و Option</span>
+      </div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-21')">
+        <span class="ulp-num">21</span><span class="ulp-name">Register Form</span>
+      </div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-22')">
+        <span class="ulp-num">22</span><span class="ulp-name">التعليقات</span>
+      </div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-23')">
+        <span class="ulp-num">23</span><span class="ulp-name">Radio و Checkbox</span>
+      </div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-24')">
+        <span class="ulp-num">24</span><span class="ulp-name">Input File</span>
+      </div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-25')">
+        <span class="ulp-num">25</span><span class="ulp-name">Input متقدم</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSON INDEX -->
+<div class="lesson-index">
+  <span class="idx-label">انتقل إلى:</span>
+  <button class="idx-btn active" onclick="scrollToLesson('lesson-18', this)">18 — Input Types</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-19', this)">19 — Login Form</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-20', this)">20 — Select</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-21', this)">21 — Register Form</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-22', this)">22 — التعليقات</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-23', this)">23 — Radio & Check</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-24', this)">24 — Input File</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-25', this)">25 — Input متقدم</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-wrap">
+
+
+<!-- ══════════════════════ LESSON 18 ══════════════════════ -->
+<div class="lesson-card" id="lesson-18">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">LESSON 18</div>
+    <div class="lesson-header-text">
+      <h2>أنواع Input — Input Types</h2>
+      <p>text · email · password · number · date · tel · url · search — المدخل المناسب في المكان المناسب</p>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-theory">📖</div> ما هو عنصر &lt;input&gt;؟</div>
+      <div class="prose">
+        <p>
+          عنصر <strong>&lt;input&gt;</strong> هو أكثر عناصر النماذج استخداماً في HTML. يُنشئ حقلاً تفاعلياً يتيح للمستخدم إدخال البيانات.
+          وما يميّزه هو خاصية <strong>type</strong> التي تُغيّر شكله وسلوكه كلياً.
+        </p>
+        <p>عنصر &lt;input&gt; وسم ذاتي الإغلاق (self-closing) — لا يحتاج وسم إغلاق.</p>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-attrs">⚙️</div> أنواع type الأساسية</div>
+
+      <div class="input-types-grid">
+        <div class="input-type-chip">
+          <span class="itc-type">type="text"</span>
+          <span class="itc-desc">نص عادي — أي محتوى</span>
+        </div>
+        <div class="input-type-chip">
+          <span class="itc-type">type="email"</span>
+          <span class="itc-desc">بريد إلكتروني — يتحقق من الصيغة</span>
+        </div>
+        <div class="input-type-chip">
+          <span class="itc-type">type="password"</span>
+          <span class="itc-desc">كلمة مرور — يُخفي الأحرف</span>
+        </div>
+        <div class="input-type-chip">
+          <span class="itc-type">type="number"</span>
+          <span class="itc-desc">أرقام فقط مع أسهم للزيادة</span>
+        </div>
+        <div class="input-type-chip">
+          <span class="itc-type">type="date"</span>
+          <span class="itc-desc">منتقي تاريخ (calendar picker)</span>
+        </div>
+        <div class="input-type-chip">
+          <span class="itc-type">type="tel"</span>
+          <span class="itc-desc">رقم هاتف — لوحة أرقام في الجوال</span>
+        </div>
+        <div class="input-type-chip">
+          <span class="itc-type">type="url"</span>
+          <span class="itc-desc">رابط — يتحقق من صيغة https://</span>
+        </div>
+        <div class="input-type-chip">
+          <span class="itc-type">type="search"</span>
+          <span class="itc-desc">بحث — يُضيف زر مسح (×)</span>
+        </div>
+        <div class="input-type-chip">
+          <span class="itc-type">type="time"</span>
+          <span class="itc-desc">منتقي وقت — ساعة ودقيقة</span>
+        </div>
+        <div class="input-type-chip">
+          <span class="itc-type">type="month"</span>
+          <span class="itc-desc">منتقي شهر وسنة</span>
+        </div>
+        <div class="input-type-chip">
+          <span class="itc-type">type="week"</span>
+          <span class="itc-desc">منتقي أسبوع</span>
+        </div>
+        <div class="input-type-chip">
+          <span class="itc-type">type="submit"</span>
+          <span class="itc-desc">زر إرسال النموذج</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-demo">🎨</div> معاينة حية — أنواع Input الأساسية</div>
+
+      <div class="form-demo">
+        <label>نص عادي (text)</label>
+        <input type="text" placeholder="اكتب اسمك هنا...">
+
+        <label>بريد إلكتروني (email)</label>
+        <input type="email" placeholder="example@gmail.com" dir="ltr">
+
+        <label>كلمة المرور (password)</label>
+        <input type="password" placeholder="••••••••" dir="ltr">
+
+        <div class="form-row">
+          <div>
+            <label>رقم (number)</label>
+            <input type="number" placeholder="25" min="1" max="100">
+          </div>
+          <div>
+            <label>تاريخ (date)</label>
+            <input type="date">
+          </div>
+        </div>
+
+        <label>رقم الهاتف (tel)</label>
+        <input type="tel" placeholder="+212 6XX XXX XXX" dir="ltr">
+
+        <label>بحث (search)</label>
+        <input type="search" placeholder="ابحث هنا...">
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-code">💻</div> الخصائص المشتركة لجميع input</div>
+
+      <table class="attr-table">
+        <thead><tr><th>الخاصية</th><th>الوظيفة</th><th>مثال</th></tr></thead>
+        <tbody>
+          <tr><td><code>placeholder</code></td><td>نص تلميحي يظهر قبل الكتابة</td><td><code>placeholder="اكتب هنا..."</code></td></tr>
+          <tr><td><code>required</code></td><td>حقل إلزامي — لا يمكن إرسال النموذج بدونه</td><td><code>required</code></td></tr>
+          <tr><td><code>disabled</code></td><td>يُعطّل الحقل — لا يمكن التفاعل معه</td><td><code>disabled</code></td></tr>
+          <tr><td><code>readonly</code></td><td>للقراءة فقط — يُظهر القيمة دون تعديل</td><td><code>readonly</code></td></tr>
+          <tr><td><code>value</code></td><td>القيمة الافتراضية التي تظهر في الحقل</td><td><code>value="محمد"</code></td></tr>
+          <tr><td><code>name</code></td><td>اسم الحقل الذي يُرسَل مع البيانات</td><td><code>name="username"</code></td></tr>
+          <tr><td><code>id</code></td><td>معرّف فريد لربطه بـ label</td><td><code>id="email"</code></td></tr>
+          <tr><td><code>maxlength</code></td><td>أقصى عدد من الأحرف</td><td><code>maxlength="50"</code></td></tr>
+          <tr><td><code>min / max</code></td><td>أقل وأعلى قيمة (للأرقام والتواريخ)</td><td><code>min="1" max="100"</code></td></tr>
+          <tr><td><code>autocomplete</code></td><td>تفعيل أو تعطيل الإكمال التلقائي</td><td><code>autocomplete="off"</code></td></tr>
+        </tbody>
+      </table>
+
+      <div class="code-block" dir="ltr">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-lang">HTML — Input Types</span>
+        </div>
+        <pre><span class="cm">&lt;!-- نص عادي مع placeholder --&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"text"</span> <span class="at">name</span>=<span class="st">"name"</span> <span class="at">placeholder</span>=<span class="st">"أدخل اسمك"</span> <span class="at">required</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- بريد إلكتروني --&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"email"</span> <span class="at">name</span>=<span class="st">"email"</span> <span class="at">placeholder</span>=<span class="st">"example@gmail.com"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- كلمة مرور --&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"password"</span> <span class="at">name</span>=<span class="st">"pass"</span> <span class="at">minlength</span>=<span class="st">"8"</span> <span class="at">required</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- رقم بين 1 و 100 --&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"number"</span> <span class="at">name</span>=<span class="st">"age"</span> <span class="at">min</span>=<span class="st">"1"</span> <span class="at">max</span>=<span class="st">"100"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- اختيار تاريخ --&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"date"</span> <span class="at">name</span>=<span class="st">"birthday"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- حقل بقيمة افتراضية -- للقراءة فقط --&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"text"</span> <span class="at">value</span>=<span class="st">"المغرب"</span> <span class="at">readonly</span><span class="kw">&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-exercise">✏️</div> تمرين</div>
+      <div class="exercise-block">
+        <div class="exercise-header"><div class="exercise-num">1</div> نموذج تعريف شخصي</div>
+        <ol>
+          <li>أنشئ نموذجاً يحتوي على: الاسم الكامل، البريد الإلكتروني، تاريخ الميلاد، رقم الهاتف، كلمة المرور</li>
+          <li>اجعل جميع الحقول إلزامية (required)</li>
+          <li>أضف placeholder مناسب لكل حقل</li>
+          <li>حدد maxlength="50" لحقل الاسم</li>
+        </ol>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">▼ عرض الحل</button>
+        <div class="answer-content">
+          <div class="code-block" dir="ltr">
+            <div class="code-header">
+              <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+              <span class="code-lang">الحل</span>
+            </div>
+            <pre><span class="kw">&lt;form&gt;</span>
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"text"</span>
+         <span class="at">name</span>=<span class="st">"fullname"</span>
+         <span class="at">placeholder</span>=<span class="st">"الاسم الكامل"</span>
+         <span class="at">maxlength</span>=<span class="st">"50"</span>
+         <span class="at">required</span><span class="kw">&gt;</span>
+
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"email"</span>
+         <span class="at">name</span>=<span class="st">"email"</span>
+         <span class="at">placeholder</span>=<span class="st">"example@gmail.com"</span>
+         <span class="at">required</span><span class="kw">&gt;</span>
+
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"date"</span>
+         <span class="at">name</span>=<span class="st">"birthdate"</span>
+         <span class="at">required</span><span class="kw">&gt;</span>
+
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"tel"</span>
+         <span class="at">name</span>=<span class="st">"phone"</span>
+         <span class="at">placeholder</span>=<span class="st">"+212 6XX XXX XXX"</span>
+         <span class="at">required</span><span class="kw">&gt;</span>
+
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"password"</span>
+         <span class="at">name</span>=<span class="st">"password"</span>
+         <span class="at">placeholder</span>=<span class="st">"كلمة المرور (8 أحرف على الأقل)"</span>
+         <span class="at">minlength</span>=<span class="st">"8"</span>
+         <span class="at">required</span><span class="kw">&gt;</span>
+
+  <span class="kw">&lt;button</span> <span class="at">type</span>=<span class="st">"submit"</span><span class="kw">&gt;</span><span class="tx">إرسال</span><span class="tg">&lt;/button&gt;</span>
+<span class="tg">&lt;/form&gt;</span></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <h3>// ملخص الدرس</h3>
+      <ul class="summary-list">
+        <li>خاصية type تُحدد نوع وسلوك الحقل — اختر النوع الصحيح دائماً</li>
+        <li>type="email" و type="url" تتحقق من صيغة البيانات تلقائياً</li>
+        <li>type="password" يُخفي النص أثناء الكتابة</li>
+        <li>required يجعل الحقل إلزامياً قبل إرسال النموذج</li>
+        <li>placeholder نص مؤقت يختفي عند الكتابة — لا يُرسَل مع البيانات</li>
+        <li>name خاصية أساسية — بدونها لا تُرسَل البيانات</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════ LESSON 19 ══════════════════════ -->
+<div class="lesson-card" id="lesson-19">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">LESSON 19</div>
+    <div class="lesson-header-text">
+      <h2>نموذج تسجيل الدخول — Login Form</h2>
+      <p>form · action · method · label · input — كيف تبني نموذج دخول احترافياً من الصفر</p>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-theory">📖</div> عنصر &lt;form&gt; — الحاوية الأم</div>
+      <div class="prose">
+        <p>
+          كل النماذج تبدأ بعنصر <strong>&lt;form&gt;</strong> الذي يُحدد أين وكيف تُرسَل البيانات.
+          الخاصيتان الأهم هما:
+        </p>
+        <p><strong>action</strong>: عنوان الصفحة التي تستقبل البيانات (URL الخادم).</p>
+        <p><strong>method</strong>: طريقة الإرسال — إما <strong>GET</strong> (تظهر البيانات في URL) أو <strong>POST</strong> (مخفية في جسم الطلب — للبيانات الحساسة).</p>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-theory">📖</div> عنصر &lt;label&gt; — التسمية</div>
+      <div class="prose">
+        <p>
+          <strong>&lt;label&gt;</strong> يُعرّف تسمية لحقل معين. عند ربطه بالحقل عبر <strong>for</strong> و <strong>id</strong>،
+          يصبح النقر على التسمية يُنشّط الحقل مباشرة — وهو ممتاز للوصولية (Accessibility).
+        </p>
+      </div>
+
+      <div class="code-block" dir="ltr">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-lang">HTML — ربط label بـ input</span>
+        </div>
+        <pre><span class="cm">&lt;!-- الطريقة الصحيحة: for="id" --&gt;</span>
+<span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"email"</span><span class="kw">&gt;</span><span class="tx">البريد الإلكتروني</span><span class="tg">&lt;/label&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"email"</span> <span class="at">id</span>=<span class="st">"email"</span> <span class="at">name</span>=<span class="st">"email"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- أو تغليف الحقل داخل label --&gt;</span>
+<span class="kw">&lt;label&gt;</span>
+  <span class="tx">البريد الإلكتروني</span>
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"email"</span> <span class="at">name</span>=<span class="st">"email"</span><span class="kw">&gt;</span>
+<span class="tg">&lt;/label&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-demo">🎨</div> نموذج تسجيل الدخول — معاينة</div>
+
+      <div class="demo-box">
+        <div class="demo-label">LIVE PREVIEW — Login Form</div>
+        <div class="demo-content">
+          <form style="max-width:380px;margin:0 auto;" onsubmit="event.preventDefault(); alert('تم تسجيل الدخول!')">
+            <div style="text-align:center;margin-bottom:24px;">
+              <div style="font-size:2rem;margin-bottom:8px;">🔐</div>
+              <div style="font-size:1.2rem;font-weight:800;color:#1C1A18;">تسجيل الدخول</div>
+              <div style="font-size:0.83rem;color:#6B6560;">أدخل بياناتك للمتابعة</div>
+            </div>
+            <div style="margin-bottom:14px;">
+              <label style="display:block;font-size:0.85rem;font-weight:700;margin-bottom:6px;color:#1C1A18;" for="demo-email">البريد الإلكتروني</label>
+              <input type="email" id="demo-email" placeholder="example@gmail.com" style="width:100%;padding:10px 14px;border:1.5px solid #E5E0D8;border-radius:8px;font-family:Tajawal,sans-serif;font-size:0.92rem;outline:none;direction:ltr;" dir="ltr">
+            </div>
+            <div style="margin-bottom:20px;">
+              <label style="display:block;font-size:0.85rem;font-weight:700;margin-bottom:6px;color:#1C1A18;" for="demo-pass">كلمة المرور</label>
+              <input type="password" id="demo-pass" placeholder="••••••••" style="width:100%;padding:10px 14px;border:1.5px solid #E5E0D8;border-radius:8px;font-family:Tajawal,sans-serif;font-size:0.92rem;outline:none;direction:ltr;" dir="ltr">
+            </div>
+            <button type="submit" style="width:100%;background:#F4631E;color:white;border:none;padding:13px;border-radius:8px;font-family:Tajawal,sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;">دخول →</button>
+            <p style="text-align:center;font-size:0.82rem;color:#6B6560;margin-top:14px;">ليس لديك حساب؟ <a href="#" style="color:#F4631E;text-decoration:none;font-weight:700;">سجّل الآن</a></p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-code">💻</div> الكود الكامل لنموذج الدخول</div>
+
+      <div class="code-block" dir="ltr">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-lang">HTML — Login Form</span>
+        </div>
+        <pre><span class="kw">&lt;form</span> <span class="at">action</span>=<span class="st">"/login"</span> <span class="at">method</span>=<span class="st">"POST"</span><span class="kw">&gt;</span>
+
+  <span class="cm">&lt;!-- البريد الإلكتروني --&gt;</span>
+  <span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"email"</span><span class="kw">&gt;</span><span class="tx">البريد الإلكتروني</span><span class="tg">&lt;/label&gt;</span>
+  <span class="kw">&lt;input</span>
+    <span class="at">type</span>=<span class="st">"email"</span>
+    <span class="at">id</span>=<span class="st">"email"</span>
+    <span class="at">name</span>=<span class="st">"email"</span>
+    <span class="at">placeholder</span>=<span class="st">"example@gmail.com"</span>
+    <span class="at">required</span>
+    <span class="at">autocomplete</span>=<span class="st">"email"</span>
+  <span class="kw">&gt;</span>
+
+  <span class="cm">&lt;!-- كلمة المرور --&gt;</span>
+  <span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"password"</span><span class="kw">&gt;</span><span class="tx">كلمة المرور</span><span class="tg">&lt;/label&gt;</span>
+  <span class="kw">&lt;input</span>
+    <span class="at">type</span>=<span class="st">"password"</span>
+    <span class="at">id</span>=<span class="st">"password"</span>
+    <span class="at">name</span>=<span class="st">"password"</span>
+    <span class="at">minlength</span>=<span class="st">"8"</span>
+    <span class="at">required</span>
+    <span class="at">autocomplete</span>=<span class="st">"current-password"</span>
+  <span class="kw">&gt;</span>
+
+  <span class="cm">&lt;!-- زر الإرسال --&gt;</span>
+  <span class="kw">&lt;button</span> <span class="at">type</span>=<span class="st">"submit"</span><span class="kw">&gt;</span><span class="tx">دخول</span><span class="tg">&lt;/button&gt;</span>
+
+<span class="tg">&lt;/form&gt;</span></pre>
+      </div>
+
+      <div class="note-box important">
+        <div class="note-icon">🔒</div>
+        <div>
+          <strong>GET vs POST:</strong> استخدم دائماً <code style="font-family:'Fira Code',monospace">method="POST"</code> مع بيانات حساسة ككلمات المرور. GET يضع البيانات في URL ويمكن رؤيتها في سجل المتصفح.
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-exercise">✏️</div> تمرين</div>
+      <div class="exercise-block">
+        <div class="exercise-header"><div class="exercise-num">1</div> بنِ نموذج دخول كامل</div>
+        <ol>
+          <li>أنشئ &lt;form&gt; مع action="/login" و method="POST"</li>
+          <li>أضف label لكل حقل مرتبط بـ for و id</li>
+          <li>أضف حقل email و password كلاهما required</li>
+          <li>أضف زر submit بنص "تسجيل الدخول"</li>
+          <li>أضف رابط &lt;a&gt; أسفل النموذج "نسيت كلمة المرور؟"</li>
+        </ol>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">▼ عرض الحل</button>
+        <div class="answer-content">
+          <div class="code-block" dir="ltr">
+            <div class="code-header">
+              <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+              <span class="code-lang">الحل</span>
+            </div>
+            <pre><span class="kw">&lt;form</span> <span class="at">action</span>=<span class="st">"/login"</span> <span class="at">method</span>=<span class="st">"POST"</span><span class="kw">&gt;</span>
+
+  <span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"email"</span><span class="kw">&gt;</span><span class="tx">البريد الإلكتروني</span><span class="tg">&lt;/label&gt;</span>
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"email"</span> <span class="at">id</span>=<span class="st">"email"</span>
+         <span class="at">name</span>=<span class="st">"email"</span> <span class="at">required</span><span class="kw">&gt;</span>
+
+  <span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"pass"</span><span class="kw">&gt;</span><span class="tx">كلمة المرور</span><span class="tg">&lt;/label&gt;</span>
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"password"</span> <span class="at">id</span>=<span class="st">"pass"</span>
+         <span class="at">name</span>=<span class="st">"password"</span> <span class="at">required</span><span class="kw">&gt;</span>
+
+  <span class="kw">&lt;button</span> <span class="at">type</span>=<span class="st">"submit"</span><span class="kw">&gt;</span><span class="tx">تسجيل الدخول</span><span class="tg">&lt;/button&gt;</span>
+
+<span class="tg">&lt;/form&gt;</span>
+
+<span class="kw">&lt;a</span> <span class="at">href</span>=<span class="st">"/forgot-password"</span><span class="kw">&gt;</span><span class="tx">نسيت كلمة المرور؟</span><span class="tg">&lt;/a&gt;</span></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <h3>// ملخص الدرس</h3>
+      <ul class="summary-list">
+        <li>&lt;form&gt; هي الحاوية الأم لجميع عناصر النموذج</li>
+        <li>action تُحدد عنوان الخادم الذي يستقبل البيانات</li>
+        <li>method="POST" للبيانات الحساسة — method="GET" للبحث والفلترة</li>
+        <li>&lt;label for="id"&gt; يُحسّن تجربة المستخدم والوصولية</li>
+        <li>name خاصية إلزامية — بدونها لا تُرسَل قيمة الحقل</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════ LESSON 20 ══════════════════════ -->
+<div class="lesson-card" id="lesson-20">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">LESSON 20</div>
+    <div class="lesson-header-text">
+      <h2>القائمة المنسدلة — Select و Option</h2>
+      <p>select · option · optgroup · multiple · size — اختيار واحد أو متعدد من قائمة</p>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-theory">📖</div> ما هو &lt;select&gt;؟</div>
+      <div class="prose">
+        <p>
+          عنصر <strong>&lt;select&gt;</strong> يُنشئ قائمة منسدلة (dropdown) يختار منها المستخدم خياراً واحداً أو أكثر.
+          داخله تضع عناصر <strong>&lt;option&gt;</strong> تمثّل الخيارات المتاحة.
+        </p>
+        <p>الخاصية <strong>value</strong> في كل option هي القيمة التي تُرسَل إلى الخادم، بينما النص بين الوسمين هو ما يراه المستخدم.</p>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-demo">🎨</div> معاينة — أنواع Select</div>
+
+      <div class="select-demo">
+        <div>
+          <div style="font-size:0.78rem;font-weight:700;color:#6B6560;margin-bottom:8px;font-family:'Fira Code',monospace;">اختيار بسيط</div>
+          <select>
+            <option value="">-- اختر بلداً --</option>
+            <option value="ma">🇲🇦 المغرب</option>
+            <option value="eg">🇪🇬 مصر</option>
+            <option value="sa">🇸🇦 السعودية</option>
+            <option value="ae">🇦🇪 الإمارات</option>
+            <option value="tn">🇹🇳 تونس</option>
+          </select>
+        </div>
+
+        <div>
+          <div style="font-size:0.78rem;font-weight:700;color:#6B6560;margin-bottom:8px;font-family:'Fira Code',monospace;">اختيار متعدد (multiple)</div>
+          <select multiple size="4" style="padding:6px;border:1.5px solid #E5E0D8;border-radius:8px;font-family:Tajawal,sans-serif;font-size:0.88rem;min-width:180px;accent-color:#F4631E;">
+            <option value="html">HTML</option>
+            <option value="css">CSS</option>
+            <option value="js">JavaScript</option>
+            <option value="react">React</option>
+          </select>
+          <div style="font-size:0.73rem;color:#6B6560;margin-top:5px;">Ctrl + النقر لاختيار أكثر من خيار</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-code">💻</div> الكود — Select مع Optgroup</div>
+
+      <div class="code-block" dir="ltr">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-lang">HTML — Select & Option</span>
+        </div>
+        <pre><span class="cm">&lt;!-- قائمة بسيطة --&gt;</span>
+<span class="kw">&lt;select</span> <span class="at">name</span>=<span class="st">"country"</span> <span class="at">id</span>=<span class="st">"country"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">""</span><span class="kw">&gt;</span><span class="tx">-- اختر بلداً --</span><span class="tg">&lt;/option&gt;</span>
+  <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"ma"</span><span class="kw">&gt;</span><span class="tx">المغرب</span><span class="tg">&lt;/option&gt;</span>
+  <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"eg"</span> <span class="at">selected</span><span class="kw">&gt;</span><span class="tx">مصر</span><span class="tg">&lt;/option&gt;</span>
+  <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"sa"</span> <span class="at">disabled</span><span class="kw">&gt;</span><span class="tx">السعودية (غير متاح)</span><span class="tg">&lt;/option&gt;</span>
+<span class="tg">&lt;/select&gt;</span>
+
+<span class="cm">&lt;!-- مع مجموعات optgroup --&gt;</span>
+<span class="kw">&lt;select</span> <span class="at">name</span>=<span class="st">"city"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;optgroup</span> <span class="at">label</span>=<span class="st">"المغرب"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"cas"</span><span class="kw">&gt;</span><span class="tx">الدار البيضاء</span><span class="tg">&lt;/option&gt;</span>
+    <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"rab"</span><span class="kw">&gt;</span><span class="tx">الرباط</span><span class="tg">&lt;/option&gt;</span>
+  <span class="tg">&lt;/optgroup&gt;</span>
+  <span class="kw">&lt;optgroup</span> <span class="at">label</span>=<span class="st">"مصر"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"cai"</span><span class="kw">&gt;</span><span class="tx">القاهرة</span><span class="tg">&lt;/option&gt;</span>
+    <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"alx"</span><span class="kw">&gt;</span><span class="tx">الإسكندرية</span><span class="tg">&lt;/option&gt;</span>
+  <span class="tg">&lt;/optgroup&gt;</span>
+<span class="tg">&lt;/select&gt;</span>
+
+<span class="cm">&lt;!-- اختيار متعدد --&gt;</span>
+<span class="kw">&lt;select</span> <span class="at">name</span>=<span class="st">"skills[]"</span> <span class="at">multiple</span> <span class="at">size</span>=<span class="st">"4"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"html"</span><span class="kw">&gt;</span><span class="tx">HTML</span><span class="tg">&lt;/option&gt;</span>
+  <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"css"</span><span class="kw">&gt;</span><span class="tx">CSS</span><span class="tg">&lt;/option&gt;</span>
+  <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"js"</span><span class="kw">&gt;</span><span class="tx">JavaScript</span><span class="tg">&lt;/option&gt;</span>
+<span class="tg">&lt;/select&gt;</span></pre>
+      </div>
+
+      <table class="attr-table">
+        <thead><tr><th>الخاصية</th><th>تُوضع على</th><th>الوظيفة</th></tr></thead>
+        <tbody>
+          <tr><td><code>selected</code></td><td>option</td><td>يجعله الخيار الافتراضي المحدد</td></tr>
+          <tr><td><code>disabled</code></td><td>option / select</td><td>يُعطّل الخيار أو كامل القائمة</td></tr>
+          <tr><td><code>multiple</code></td><td>select</td><td>يسمح بتحديد أكثر من خيار</td></tr>
+          <tr><td><code>size</code></td><td>select</td><td>عدد الخيارات المرئية بدون تمرير</td></tr>
+          <tr><td><code>value</code></td><td>option</td><td>القيمة المُرسَلة — مختلفة عن النص المعروض</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-exercise">✏️</div> تمرين</div>
+      <div class="exercise-block">
+        <div class="exercise-header"><div class="exercise-num">1</div> نموذج بيانات شخصية مع Select</div>
+        <ol>
+          <li>أضف قائمة "الجنس" مع خيارين: ذكر / أنثى</li>
+          <li>أضف قائمة "المستوى التعليمي" مع 4 خيارات مقسمة بـ optgroup (مدرسة / جامعة)</li>
+          <li>أضف الخيار الأول فارغاً "-- اختر --" بدون value</li>
+        </ol>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">▼ عرض الحل</button>
+        <div class="answer-content">
+          <div class="code-block" dir="ltr">
+            <div class="code-header">
+              <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+              <span class="code-lang">الحل</span>
+            </div>
+            <pre><span class="cm">&lt;!-- قائمة الجنس --&gt;</span>
+<span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"gender"</span><span class="kw">&gt;</span><span class="tx">الجنس</span><span class="tg">&lt;/label&gt;</span>
+<span class="kw">&lt;select</span> <span class="at">id</span>=<span class="st">"gender"</span> <span class="at">name</span>=<span class="st">"gender"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">""</span><span class="kw">&gt;</span><span class="tx">-- اختر --</span><span class="tg">&lt;/option&gt;</span>
+  <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"m"</span><span class="kw">&gt;</span><span class="tx">ذكر</span><span class="tg">&lt;/option&gt;</span>
+  <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"f"</span><span class="kw">&gt;</span><span class="tx">أنثى</span><span class="tg">&lt;/option&gt;</span>
+<span class="tg">&lt;/select&gt;</span>
+
+<span class="cm">&lt;!-- المستوى التعليمي مع optgroup --&gt;</span>
+<span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"edu"</span><span class="kw">&gt;</span><span class="tx">المستوى التعليمي</span><span class="tg">&lt;/label&gt;</span>
+<span class="kw">&lt;select</span> <span class="at">id</span>=<span class="st">"edu"</span> <span class="at">name</span>=<span class="st">"education"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">""</span><span class="kw">&gt;</span><span class="tx">-- اختر --</span><span class="tg">&lt;/option&gt;</span>
+  <span class="kw">&lt;optgroup</span> <span class="at">label</span>=<span class="st">"المدرسة"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"primary"</span><span class="kw">&gt;</span><span class="tx">ابتدائي</span><span class="tg">&lt;/option&gt;</span>
+    <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"secondary"</span><span class="kw">&gt;</span><span class="tx">ثانوي</span><span class="tg">&lt;/option&gt;</span>
+  <span class="tg">&lt;/optgroup&gt;</span>
+  <span class="kw">&lt;optgroup</span> <span class="at">label</span>=<span class="st">"الجامعة"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"bachelor"</span><span class="kw">&gt;</span><span class="tx">بكالوريوس</span><span class="tg">&lt;/option&gt;</span>
+    <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"master"</span><span class="kw">&gt;</span><span class="tx">ماجستير</span><span class="tg">&lt;/option&gt;</span>
+  <span class="tg">&lt;/optgroup&gt;</span>
+<span class="tg">&lt;/select&gt;</span></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <h3>// ملخص الدرس</h3>
+      <ul class="summary-list">
+        <li>&lt;select&gt; ينشئ قائمة منسدلة — &lt;option&gt; يُمثّل كل خيار</li>
+        <li>value في option هو ما يُرسَل إلى الخادم — النص هو ما يراه المستخدم</li>
+        <li>selected يجعل الخيار محدداً افتراضياً</li>
+        <li>optgroup يُجمّع الخيارات تحت عنوان دون أن يكون قابلاً للاختيار</li>
+        <li>multiple يسمح بتحديد أكثر من خيار عبر Ctrl + النقر</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════ LESSON 21 ══════════════════════ -->
+<div class="lesson-card" id="lesson-21">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">LESSON 21</div>
+    <div class="lesson-header-text">
+      <h2>نموذج التسجيل — Register Form</h2>
+      <p>تجميع كل ما تعلمناه — نموذج تسجيل كامل ومتعدد الحقول</p>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-theory">📖</div> النموذج الشامل</div>
+      <div class="prose">
+        <p>
+          هذا الدرس تطبيقي بامتياز — سنجمع كل ما تعلمناه حتى الآن في نموذج تسجيل حساب جديد
+          كامل يحتوي على أنواع مختلفة من الحقول.
+        </p>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-demo">🎨</div> معاينة — نموذج التسجيل</div>
+
+      <div class="demo-box">
+        <div class="demo-label">LIVE PREVIEW — Register Form</div>
+        <div class="demo-content">
+          <form style="max-width:440px;margin:0 auto;" onsubmit="event.preventDefault(); alert('تم إنشاء الحساب بنجاح! 🎉')">
+            <div style="font-size:1.1rem;font-weight:800;color:#1C1A18;margin-bottom:6px;">إنشاء حساب جديد</div>
+            <div style="font-size:0.82rem;color:#6B6560;margin-bottom:22px;">انضم إلى آلاف المتعلمين اليوم</div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+              <div>
+                <label style="display:block;font-size:0.82rem;font-weight:700;margin-bottom:5px;">الاسم الأول</label>
+                <input type="text" placeholder="محمد" style="width:100%;padding:9px 12px;border:1.5px solid #E5E0D8;border-radius:7px;font-family:Tajawal,sans-serif;font-size:0.88rem;outline:none;">
+              </div>
+              <div>
+                <label style="display:block;font-size:0.82rem;font-weight:700;margin-bottom:5px;">اسم العائلة</label>
+                <input type="text" placeholder="العلوي" style="width:100%;padding:9px 12px;border:1.5px solid #E5E0D8;border-radius:7px;font-family:Tajawal,sans-serif;font-size:0.88rem;outline:none;">
+              </div>
+            </div>
+
+            <div style="margin-bottom:12px;">
+              <label style="display:block;font-size:0.82rem;font-weight:700;margin-bottom:5px;">البريد الإلكتروني</label>
+              <input type="email" placeholder="example@gmail.com" style="width:100%;padding:9px 12px;border:1.5px solid #E5E0D8;border-radius:7px;font-family:Tajawal,sans-serif;font-size:0.88rem;outline:none;" dir="ltr">
+            </div>
+
+            <div style="margin-bottom:12px;">
+              <label style="display:block;font-size:0.82rem;font-weight:700;margin-bottom:5px;">رقم الهاتف</label>
+              <input type="tel" placeholder="+212 6XX XXX XXX" style="width:100%;padding:9px 12px;border:1.5px solid #E5E0D8;border-radius:7px;font-family:Tajawal,sans-serif;font-size:0.88rem;outline:none;" dir="ltr">
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+              <div>
+                <label style="display:block;font-size:0.82rem;font-weight:700;margin-bottom:5px;">كلمة المرور</label>
+                <input type="password" placeholder="••••••••" style="width:100%;padding:9px 12px;border:1.5px solid #E5E0D8;border-radius:7px;font-family:Tajawal,sans-serif;font-size:0.88rem;outline:none;">
+              </div>
+              <div>
+                <label style="display:block;font-size:0.82rem;font-weight:700;margin-bottom:5px;">تأكيد المرور</label>
+                <input type="password" placeholder="••••••••" style="width:100%;padding:9px 12px;border:1.5px solid #E5E0D8;border-radius:7px;font-family:Tajawal,sans-serif;font-size:0.88rem;outline:none;">
+              </div>
+            </div>
+
+            <div style="margin-bottom:12px;">
+              <label style="display:block;font-size:0.82rem;font-weight:700;margin-bottom:5px;">البلد</label>
+              <select style="width:100%;padding:9px 12px;border:1.5px solid #E5E0D8;border-radius:7px;font-family:Tajawal,sans-serif;font-size:0.88rem;outline:none;background:#F7F5F1;">
+                <option value="">-- اختر بلدك --</option>
+                <option value="ma">🇲🇦 المغرب</option>
+                <option value="eg">🇪🇬 مصر</option>
+                <option value="sa">🇸🇦 السعودية</option>
+                <option value="ae">🇦🇪 الإمارات</option>
+              </select>
+            </div>
+
+            <div style="margin-bottom:12px;">
+              <label style="display:block;font-size:0.82rem;font-weight:700;margin-bottom:5px;">تاريخ الميلاد</label>
+              <input type="date" style="width:100%;padding:9px 12px;border:1.5px solid #E5E0D8;border-radius:7px;font-family:Tajawal,sans-serif;font-size:0.88rem;outline:none;background:#F7F5F1;">
+            </div>
+
+            <button type="submit" style="width:100%;background:#F4631E;color:white;border:none;padding:13px;border-radius:8px;font-family:Tajawal,sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;margin-top:6px;">إنشاء الحساب 🚀</button>
+            <p style="text-align:center;font-size:0.8rem;color:#6B6560;margin-top:12px;">لديك حساب؟ <a href="#" style="color:#F4631E;text-decoration:none;font-weight:700;">سجّل دخولك</a></p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-code">💻</div> الكود الكامل</div>
+
+      <div class="code-block" dir="ltr">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-lang">HTML — Register Form</span>
+        </div>
+        <pre><span class="kw">&lt;form</span> <span class="at">action</span>=<span class="st">"/register"</span> <span class="at">method</span>=<span class="st">"POST"</span><span class="kw">&gt;</span>
+
+  <span class="cm">&lt;!-- الاسم --&gt;</span>
+  <span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"fname"</span><span class="kw">&gt;</span><span class="tx">الاسم الأول</span><span class="tg">&lt;/label&gt;</span>
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"text"</span> <span class="at">id</span>=<span class="st">"fname"</span>
+         <span class="at">name</span>=<span class="st">"first_name"</span> <span class="at">required</span><span class="kw">&gt;</span>
+
+  <span class="cm">&lt;!-- البريد --&gt;</span>
+  <span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"email"</span><span class="kw">&gt;</span><span class="tx">البريد الإلكتروني</span><span class="tg">&lt;/label&gt;</span>
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"email"</span> <span class="at">id</span>=<span class="st">"email"</span>
+         <span class="at">name</span>=<span class="st">"email"</span> <span class="at">required</span><span class="kw">&gt;</span>
+
+  <span class="cm">&lt;!-- الهاتف --&gt;</span>
+  <span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"tel"</span><span class="kw">&gt;</span><span class="tx">رقم الهاتف</span><span class="tg">&lt;/label&gt;</span>
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"tel"</span> <span class="at">id</span>=<span class="st">"tel"</span>
+         <span class="at">name</span>=<span class="st">"phone"</span><span class="kw">&gt;</span>
+
+  <span class="cm">&lt;!-- كلمة المرور --&gt;</span>
+  <span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"pass"</span><span class="kw">&gt;</span><span class="tx">كلمة المرور</span><span class="tg">&lt;/label&gt;</span>
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"password"</span> <span class="at">id</span>=<span class="st">"pass"</span>
+         <span class="at">name</span>=<span class="st">"password"</span> <span class="at">minlength</span>=<span class="st">"8"</span> <span class="at">required</span><span class="kw">&gt;</span>
+
+  <span class="cm">&lt;!-- البلد --&gt;</span>
+  <span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"country"</span><span class="kw">&gt;</span><span class="tx">البلد</span><span class="tg">&lt;/label&gt;</span>
+  <span class="kw">&lt;select</span> <span class="at">id</span>=<span class="st">"country"</span> <span class="at">name</span>=<span class="st">"country"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">""</span><span class="kw">&gt;</span><span class="tx">-- اختر --</span><span class="tg">&lt;/option&gt;</span>
+    <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"ma"</span><span class="kw">&gt;</span><span class="tx">المغرب</span><span class="tg">&lt;/option&gt;</span>
+    <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"eg"</span><span class="kw">&gt;</span><span class="tx">مصر</span><span class="tg">&lt;/option&gt;</span>
+  <span class="tg">&lt;/select&gt;</span>
+
+  <span class="cm">&lt;!-- تاريخ الميلاد --&gt;</span>
+  <span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"bday"</span><span class="kw">&gt;</span><span class="tx">تاريخ الميلاد</span><span class="tg">&lt;/label&gt;</span>
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"date"</span> <span class="at">id</span>=<span class="st">"bday"</span>
+         <span class="at">name</span>=<span class="st">"birthday"</span><span class="kw">&gt;</span>
+
+  <span class="kw">&lt;button</span> <span class="at">type</span>=<span class="st">"submit"</span><span class="kw">&gt;</span><span class="tx">إنشاء الحساب</span><span class="tg">&lt;/button&gt;</span>
+
+<span class="tg">&lt;/form&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <h3>// ملخص الدرس</h3>
+      <ul class="summary-list">
+        <li>نموذج التسجيل يجمع: text, email, tel, password, date, select</li>
+        <li>كل حقل يحتاج name لإرسال بياناته، و id لربطه بـ label</li>
+        <li>تأكيد كلمة المرور يتم التحقق منه في الغالب عبر JavaScript وليس HTML فقط</li>
+        <li>method="POST" إلزامي مع البيانات الحساسة</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════ LESSON 22 ══════════════════════ -->
+<div class="lesson-card" id="lesson-22">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">LESSON 22</div>
+    <div class="lesson-header-text">
+      <h2>التعليقات في HTML</h2>
+      <p>&lt;!-- تعليق --&gt; — كيف توثّق كودك وتُخفي عناصر مؤقتاً</p>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-theory">📖</div> ما هو التعليق؟</div>
+      <div class="prose">
+        <p>
+          التعليق في HTML هو نص يكتبه المطوّر داخل الكود لأغراض التوثيق والشرح.
+          <strong>لا يظهر في المتصفح ولا يؤثر على تصميم الصفحة</strong> — لكنه يُرى بوضوح في أدوات المطوّر (DevTools).
+        </p>
+        <p>التعليق يبدأ بـ <strong>&lt;!--</strong> وينتهي بـ <strong>--&gt;</strong> ويمكن أن يمتد على عدة أسطر.</p>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-code">💻</div> أنواع التعليقات واستخداماتها</div>
+
+      <div class="code-block" dir="ltr">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-lang">HTML — Comments</span>
+        </div>
+        <pre><span class="cm">&lt;!-- تعليق في سطر واحد --&gt;</span>
+
+<span class="cm">&lt;!--
+  تعليق يمتد
+  على عدة أسطر
+  لشرح قسم كامل
+--&gt;</span>
+
+<span class="cm">&lt;!-- === HEADER SECTION === --&gt;</span>
+<span class="kw">&lt;header&gt;</span>
+  <span class="kw">&lt;nav&gt;</span><span class="tx">...</span><span class="tg">&lt;/nav&gt;</span>
+<span class="tg">&lt;/header&gt;</span>
+
+<span class="cm">&lt;!-- TODO: إضافة زر البحث هنا لاحقاً --&gt;</span>
+
+<span class="cm">&lt;!-- تعطيل عنصر مؤقتاً بدون حذفه --&gt;</span>
+<span class="cm">&lt;!--
+&lt;div class="banner"&gt;
+  عرض خاص ينتهي قريباً!
+&lt;/div&gt;
+--&gt;</span>
+
+<span class="cm">&lt;!-- ===========================
+     النموذج الرئيسي
+     المطوّر: محمد
+     آخر تعديل: 2024-01-15
+     =========================== --&gt;</span>
+<span class="kw">&lt;form</span> <span class="at">action</span>=<span class="st">"/login"</span><span class="kw">&gt;</span>
+  <span class="tx">...</span>
+<span class="tg">&lt;/form&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-tip">💡</div> متى تستخدم التعليقات؟</div>
+
+      <div class="concept-grid">
+        <div class="concept-card">
+          <div class="cc-icon">📌</div>
+          <div class="cc-title">تقسيم الأقسام</div>
+          <div class="cc-desc">أضف تعليقاً قبل كل قسم رئيسي: header, main, footer, form...</div>
+        </div>
+        <div class="concept-card">
+          <div class="cc-icon">🚧</div>
+          <div class="cc-title">TODO و FIXME</div>
+          <div class="cc-desc">وثّق المهام المعلقة: <code style="font-size:0.75rem">TODO: إضافة تحقق</code></div>
+        </div>
+        <div class="concept-card">
+          <div class="cc-icon">🔇</div>
+          <div class="cc-title">تعطيل مؤقت</div>
+          <div class="cc-desc">أخفِ عنصراً دون حذفه — مفيد أثناء التطوير والاختبار</div>
+        </div>
+        <div class="concept-card">
+          <div class="cc-icon">📚</div>
+          <div class="cc-title">توثيق الكود</div>
+          <div class="cc-desc">اشرح الأجزاء المعقدة لأي مطوّر آخر أو لنفسك مستقبلاً</div>
+        </div>
+      </div>
+
+      <div class="note-box warning">
+        <div class="note-icon">⚠️</div>
+        <div>
+          <strong>تنبيه:</strong> التعليقات مرئية في كود المصدر (View Source) — لا تضع بداخلها معلومات حساسة كالكلمات السرية أو مفاتيح API.
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <h3>// ملخص الدرس</h3>
+      <ul class="summary-list">
+        <li>التعليق يبدأ بـ &lt;!-- وينتهي بـ --&gt; ولا يظهر في المتصفح</li>
+        <li>يمتد على سطر واحد أو عدة أسطر</li>
+        <li>استخدمه لتقسيم الأقسام، توثيق الكود، وتعطيل عناصر مؤقتاً</li>
+        <li>لا تضع معلومات حساسة في التعليقات — يمكن لأي شخص رؤيتها</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════ LESSON 23 ══════════════════════ -->
+<div class="lesson-card" id="lesson-23">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">LESSON 23</div>
+    <div class="lesson-header-text">
+      <h2>Radio و Checkbox</h2>
+      <p>type="radio" · type="checkbox" — الاختيار الأحادي والمتعدد في النماذج</p>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-theory">📖</div> الفرق بين Radio و Checkbox</div>
+
+      <div class="compare-grid">
+        <div class="compare-card good">
+          <div class="cc-head">🔘 Radio — اختيار واحد</div>
+          <ul>
+            <li>يُحدد خياراً واحداً فقط من المجموعة</li>
+            <li>يُجمَّع بـ name متطابق</li>
+            <li>اختيار أحدهم يُلغي الآخر</li>
+            <li>مثال: الجنس، النوع، حالة الاشتراك</li>
+          </ul>
+        </div>
+        <div class="compare-card bad" style="background:var(--blue-soft);border-color:rgba(59,130,246,0.25);">
+          <div class="cc-head" style="color:#1D4ED8;">☑️ Checkbox — اختيار متعدد</div>
+          <ul>
+            <li>يُحدد صفراً أو أكثر من الخيارات</li>
+            <li>كل صندوق مستقل — بـ name خاص به</li>
+            <li>لا يؤثر تحديد أحدها على الباقين</li>
+            <li>مثال: الاهتمامات، الموافقة على الشروط</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-demo">🎨</div> معاينة حية</div>
+
+      <div class="rc-demo">
+        <div class="rc-group">
+          <div class="rc-group-label">الجنس (radio — اختيار واحد):</div>
+          <div class="rc-options">
+            <label class="rc-option">
+              <input type="radio" name="gender" value="m"> ذكر
+            </label>
+            <label class="rc-option">
+              <input type="radio" name="gender" value="f"> أنثى
+            </label>
+            <label class="rc-option">
+              <input type="radio" name="gender" value="other"> أفضّل عدم الإفصاح
+            </label>
+          </div>
+        </div>
+
+        <div class="rc-group">
+          <div class="rc-group-label">اهتماماتك (checkbox — اختيار متعدد):</div>
+          <div class="rc-options" style="flex-wrap:wrap;">
+            <label class="rc-option"><input type="checkbox" name="int" value="html"> HTML</label>
+            <label class="rc-option"><input type="checkbox" name="int" value="css"> CSS</label>
+            <label class="rc-option"><input type="checkbox" name="int" value="js"> JavaScript</label>
+            <label class="rc-option"><input type="checkbox" name="int" value="design"> Design</label>
+            <label class="rc-option"><input type="checkbox" name="int" value="seo"> SEO</label>
+          </div>
+        </div>
+
+        <div class="rc-group" style="margin-bottom:0;">
+          <div class="rc-group-label">الموافقة على الشروط:</div>
+          <label class="rc-option">
+            <input type="checkbox" name="terms" required> أوافق على <a href="#" style="color:#F4631E;">شروط الاستخدام</a> وسياسة الخصوصية
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-code">💻</div> الكود</div>
+
+      <div class="code-block" dir="ltr">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-lang">HTML — Radio & Checkbox</span>
+        </div>
+        <pre><span class="cm">&lt;!-- RADIO — نفس الـ name يجمعهم --&gt;</span>
+<span class="kw">&lt;label&gt;</span>
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"radio"</span> <span class="at">name</span>=<span class="st">"gender"</span> <span class="at">value</span>=<span class="st">"m"</span> <span class="at">checked</span><span class="kw">&gt;</span>
+  <span class="tx">ذكر</span>
+<span class="tg">&lt;/label&gt;</span>
+<span class="kw">&lt;label&gt;</span>
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"radio"</span> <span class="at">name</span>=<span class="st">"gender"</span> <span class="at">value</span>=<span class="st">"f"</span><span class="kw">&gt;</span>
+  <span class="tx">أنثى</span>
+<span class="tg">&lt;/label&gt;</span>
+
+<span class="cm">&lt;!-- CHECKBOX — كل واحد مستقل --&gt;</span>
+<span class="kw">&lt;label&gt;</span>
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"checkbox"</span> <span class="at">name</span>=<span class="st">"html"</span> <span class="at">value</span>=<span class="st">"1"</span><span class="kw">&gt;</span>
+  <span class="tx">أتقن HTML</span>
+<span class="tg">&lt;/label&gt;</span>
+<span class="kw">&lt;label&gt;</span>
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"checkbox"</span> <span class="at">name</span>=<span class="st">"css"</span> <span class="at">value</span>=<span class="st">"1"</span> <span class="at">checked</span><span class="kw">&gt;</span>
+  <span class="tx">أتقن CSS</span>
+<span class="tg">&lt;/label&gt;</span>
+
+<span class="cm">&lt;!-- checkbox إلزامي --&gt;</span>
+<span class="kw">&lt;label&gt;</span>
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"checkbox"</span> <span class="at">name</span>=<span class="st">"terms"</span> <span class="at">required</span><span class="kw">&gt;</span>
+  <span class="tx">أوافق على الشروط والأحكام</span>
+<span class="tg">&lt;/label&gt;</span></pre>
+      </div>
+
+      <table class="attr-table">
+        <thead><tr><th>الخاصية</th><th>تعمل مع</th><th>الوظيفة</th></tr></thead>
+        <tbody>
+          <tr><td><code>checked</code></td><td>radio, checkbox</td><td>يجعله محدداً افتراضياً عند تحميل الصفحة</td></tr>
+          <tr><td><code>name</code></td><td>radio</td><td>يربط radio buttons في مجموعة واحدة</td></tr>
+          <tr><td><code>value</code></td><td>radio, checkbox</td><td>القيمة المُرسَلة عند تحديده</td></tr>
+          <tr><td><code>required</code></td><td>checkbox</td><td>يُجبر المستخدم على تحديده قبل الإرسال</td></tr>
+          <tr><td><code>disabled</code></td><td>radio, checkbox</td><td>يُعطّله — لا يمكن التفاعل معه</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-exercise">✏️</div> تمرين</div>
+      <div class="exercise-block">
+        <div class="exercise-header"><div class="exercise-num">1</div> استبيان بسيط</div>
+        <ol>
+          <li>أنشئ مجموعة radio لاختيار مستوى الخبرة: مبتدئ / متوسط / محترف</li>
+          <li>اجعل "مبتدئ" محدداً افتراضياً (checked)</li>
+          <li>أضف مجموعة checkboxes: الأدوات التي تستخدمها (VS Code, Chrome, Figma, Git)</li>
+          <li>أضف checkbox للموافقة على الشروط required</li>
+        </ol>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">▼ عرض الحل</button>
+        <div class="answer-content">
+          <div class="code-block" dir="ltr">
+            <div class="code-header">
+              <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+              <span class="code-lang">الحل</span>
+            </div>
+            <pre><span class="cm">&lt;!-- مستوى الخبرة (radio) --&gt;</span>
+<span class="kw">&lt;p&gt;</span><span class="tx">مستوى الخبرة:</span><span class="tg">&lt;/p&gt;</span>
+<span class="kw">&lt;label&gt;</span><span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"radio"</span> <span class="at">name</span>=<span class="st">"level"</span> <span class="at">value</span>=<span class="st">"beginner"</span> <span class="at">checked</span><span class="kw">&gt;</span> <span class="tx">مبتدئ</span><span class="tg">&lt;/label&gt;</span>
+<span class="kw">&lt;label&gt;</span><span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"radio"</span> <span class="at">name</span>=<span class="st">"level"</span> <span class="at">value</span>=<span class="st">"mid"</span><span class="kw">&gt;</span> <span class="tx">متوسط</span><span class="tg">&lt;/label&gt;</span>
+<span class="kw">&lt;label&gt;</span><span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"radio"</span> <span class="at">name</span>=<span class="st">"level"</span> <span class="at">value</span>=<span class="st">"pro"</span><span class="kw">&gt;</span> <span class="tx">محترف</span><span class="tg">&lt;/label&gt;</span>
+
+<span class="cm">&lt;!-- الأدوات (checkbox) --&gt;</span>
+<span class="kw">&lt;p&gt;</span><span class="tx">الأدوات التي تستخدمها:</span><span class="tg">&lt;/p&gt;</span>
+<span class="kw">&lt;label&gt;</span><span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"checkbox"</span> <span class="at">name</span>=<span class="st">"vscode"</span> <span class="at">value</span>=<span class="st">"1"</span><span class="kw">&gt;</span> <span class="tx">VS Code</span><span class="tg">&lt;/label&gt;</span>
+<span class="kw">&lt;label&gt;</span><span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"checkbox"</span> <span class="at">name</span>=<span class="st">"chrome"</span> <span class="at">value</span>=<span class="st">"1"</span><span class="kw">&gt;</span> <span class="tx">Chrome</span><span class="tg">&lt;/label&gt;</span>
+<span class="kw">&lt;label&gt;</span><span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"checkbox"</span> <span class="at">name</span>=<span class="st">"figma"</span> <span class="at">value</span>=<span class="st">"1"</span><span class="kw">&gt;</span> <span class="tx">Figma</span><span class="tg">&lt;/label&gt;</span>
+<span class="kw">&lt;label&gt;</span><span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"checkbox"</span> <span class="at">name</span>=<span class="st">"git"</span>    <span class="at">value</span>=<span class="st">"1"</span><span class="kw">&gt;</span> <span class="tx">Git</span><span class="tg">&lt;/label&gt;</span>
+
+<span class="cm">&lt;!-- الموافقة على الشروط --&gt;</span>
+<span class="kw">&lt;label&gt;</span>
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"checkbox"</span> <span class="at">name</span>=<span class="st">"terms"</span> <span class="at">required</span><span class="kw">&gt;</span>
+  <span class="tx">أوافق على الشروط والأحكام</span>
+<span class="tg">&lt;/label&gt;</span></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <h3>// ملخص الدرس</h3>
+      <ul class="summary-list">
+        <li>radio لاختيار واحد من المجموعة — يُجمَّع بنفس name</li>
+        <li>checkbox لاختيار صفر أو أكثر — كل واحد له name مستقل</li>
+        <li>checked يحدد الخيار الافتراضي عند تحميل الصفحة</li>
+        <li>value هو ما يُرسَل إلى الخادم — غير checked لا يُرسَل شيء</li>
+        <li>required على checkbox يُجبر المستخدم على تحديده (مفيد لقبول الشروط)</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════ LESSON 24 ══════════════════════ -->
+<div class="lesson-card" id="lesson-24">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">LESSON 24</div>
+    <div class="lesson-header-text">
+      <h2>رفع الملفات — Input File</h2>
+      <p>type="file" · accept · multiple — بناء حقل رفع الملفات والصور</p>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-theory">📖</div> حقل رفع الملف</div>
+      <div class="prose">
+        <p>
+          <strong>type="file"</strong> يُنشئ حقل رفع ملف يفتح متصفح الملفات عند النقر عليه.
+          يمكن تقييده بأنواع محددة من الملفات عبر خاصية <strong>accept</strong>، وتفعيل رفع أكثر من ملف بخاصية <strong>multiple</strong>.
+        </p>
+        <p>ولإرسال الملفات يجب استخدام <strong>enctype="multipart/form-data"</strong> في عنصر &lt;form&gt;.</p>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-demo">🎨</div> معاينة — مناطق رفع الملفات</div>
+
+      <div class="file-demo-area" onclick="document.getElementById('file1').click()">
+        <div class="fda-icon">📁</div>
+        <input type="file" id="file1" style="display:none" onchange="document.querySelector('.fda-text').textContent = this.files[0]?.name || 'اسحب الملف هنا أو انقر للاختيار'">
+        <div class="fda-text">اسحب الملف هنا أو انقر للاختيار</div>
+        <div class="fda-hint">accept="*" — أي نوع ملف</div>
+      </div>
+
+      <div class="file-demo-area" onclick="document.getElementById('file2').click()" style="border-color:rgba(59,130,246,0.4);background:var(--blue-soft);">
+        <div class="fda-icon">🖼️</div>
+        <input type="file" id="file2" accept="image/*" multiple style="display:none">
+        <div class="fda-text" style="color:var(--blue);">رفع صور متعددة</div>
+        <div class="fda-hint">accept="image/*" · multiple</div>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-code">💻</div> الكود — أنواع accept</div>
+
+      <div class="code-block" dir="ltr">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-lang">HTML — Input File</span>
+        </div>
+        <pre><span class="cm">&lt;!-- ملف واحد — أي نوع --&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"file"</span> <span class="at">name</span>=<span class="st">"document"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- صور فقط --&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"file"</span> <span class="at">name</span>=<span class="st">"photo"</span>
+       <span class="at">accept</span>=<span class="st">"image/*"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- صور JPEG و PNG فقط --&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"file"</span> <span class="at">name</span>=<span class="st">"avatar"</span>
+       <span class="at">accept</span>=<span class="st">"image/jpeg, image/png"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- ملفات PDF فقط --&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"file"</span> <span class="at">name</span>=<span class="st">"cv"</span>
+       <span class="at">accept</span>=<span class="st">"application/pdf"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- فيديو فقط --&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"file"</span> <span class="at">name</span>=<span class="st">"video"</span>
+       <span class="at">accept</span>=<span class="st">"video/*"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- ملفات متعددة --&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"file"</span> <span class="at">name</span>=<span class="st">"photos[]"</span>
+       <span class="at">accept</span>=<span class="st">"image/*"</span> <span class="at">multiple</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- النموذج يجب أن يحوي enctype --&gt;</span>
+<span class="kw">&lt;form</span>
+  <span class="at">action</span>=<span class="st">"/upload"</span>
+  <span class="at">method</span>=<span class="st">"POST"</span>
+  <span class="at">enctype</span>=<span class="st">"multipart/form-data"</span>
+<span class="kw">&gt;</span>
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"file"</span> <span class="at">name</span>=<span class="st">"file"</span> <span class="at">required</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;button</span> <span class="at">type</span>=<span class="st">"submit"</span><span class="kw">&gt;</span><span class="tx">رفع</span><span class="tg">&lt;/button&gt;</span>
+<span class="tg">&lt;/form&gt;</span></pre>
+      </div>
+
+      <table class="attr-table">
+        <thead><tr><th>قيمة accept</th><th>ما يقبله</th></tr></thead>
+        <tbody>
+          <tr><td><code>image/*</code></td><td>جميع تنسيقات الصور (jpg, png, gif, webp...)</td></tr>
+          <tr><td><code>video/*</code></td><td>جميع تنسيقات الفيديو</td></tr>
+          <tr><td><code>audio/*</code></td><td>جميع تنسيقات الصوت</td></tr>
+          <tr><td><code>application/pdf</code></td><td>ملفات PDF فقط</td></tr>
+          <tr><td><code>.docx,.pdf</code></td><td>امتدادات محددة</td></tr>
+          <tr><td><code>image/jpeg,image/png</code></td><td>JPEG و PNG فقط</td></tr>
+        </tbody>
+      </table>
+
+      <div class="note-box important">
+        <div class="note-icon">🔐</div>
+        <div>
+          <strong>enctype إلزامي لرفع الملفات:</strong> بدون <code style="font-family:'Fira Code',monospace">enctype="multipart/form-data"</code> على عنصر &lt;form&gt;، لن تُرسَل الملفات إلى الخادم — فقط اسمها.
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-exercise">✏️</div> تمرين</div>
+      <div class="exercise-block">
+        <div class="exercise-header"><div class="exercise-num">1</div> نموذج رفع ملف السيرة الذاتية</div>
+        <ol>
+          <li>أنشئ &lt;form&gt; مع method="POST" و enctype="multipart/form-data"</li>
+          <li>أضف حقل نص للاسم (required)</li>
+          <li>أضف حقل file يقبل PDF فقط (required)</li>
+          <li>أضف حقل file آخر لصورة الملف الشخصي — يقبل صور فقط</li>
+          <li>زر submit بنص "إرسال الطلب"</li>
+        </ol>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">▼ عرض الحل</button>
+        <div class="answer-content">
+          <div class="code-block" dir="ltr">
+            <div class="code-header">
+              <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+              <span class="code-lang">الحل</span>
+            </div>
+            <pre><span class="kw">&lt;form</span>
+  <span class="at">action</span>=<span class="st">"/apply"</span>
+  <span class="at">method</span>=<span class="st">"POST"</span>
+  <span class="at">enctype</span>=<span class="st">"multipart/form-data"</span>
+<span class="kw">&gt;</span>
+  <span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"name"</span><span class="kw">&gt;</span><span class="tx">الاسم الكامل</span><span class="tg">&lt;/label&gt;</span>
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"text"</span> <span class="at">id</span>=<span class="st">"name"</span>
+         <span class="at">name</span>=<span class="st">"name"</span> <span class="at">required</span><span class="kw">&gt;</span>
+
+  <span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"cv"</span><span class="kw">&gt;</span><span class="tx">السيرة الذاتية (PDF)</span><span class="tg">&lt;/label&gt;</span>
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"file"</span> <span class="at">id</span>=<span class="st">"cv"</span>
+         <span class="at">name</span>=<span class="st">"cv"</span>
+         <span class="at">accept</span>=<span class="st">"application/pdf"</span>
+         <span class="at">required</span><span class="kw">&gt;</span>
+
+  <span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"photo"</span><span class="kw">&gt;</span><span class="tx">الصورة الشخصية</span><span class="tg">&lt;/label&gt;</span>
+  <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"file"</span> <span class="at">id</span>=<span class="st">"photo"</span>
+         <span class="at">name</span>=<span class="st">"photo"</span>
+         <span class="at">accept</span>=<span class="st">"image/*"</span><span class="kw">&gt;</span>
+
+  <span class="kw">&lt;button</span> <span class="at">type</span>=<span class="st">"submit"</span><span class="kw">&gt;</span><span class="tx">إرسال الطلب</span><span class="tg">&lt;/button&gt;</span>
+<span class="tg">&lt;/form&gt;</span></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <h3>// ملخص الدرس</h3>
+      <ul class="summary-list">
+        <li>type="file" يُنشئ حقل رفع ملفات يفتح متصفح الملفات</li>
+        <li>accept يُقيّد أنواع الملفات المسموح بها — الحماية الكاملة تكون في الخادم</li>
+        <li>multiple يسمح برفع أكثر من ملف في آنٍ واحد</li>
+        <li>enctype="multipart/form-data" إلزامي على &lt;form&gt; لإرسال الملفات فعلياً</li>
+        <li>name="files[]" مع القوسين عند رفع ملفات متعددة لاستقبالها كمصفوفة</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════ LESSON 25 ══════════════════════ -->
+<div class="lesson-card" id="lesson-25">
+  <div class="lesson-header">
+    <div class="lesson-num-badge">LESSON 25</div>
+    <div class="lesson-header-text">
+      <h2>Input متقدم — color · range · hidden</h2>
+      <p>color · range · hidden · datetime-local · number step — الحقول المتخصصة والمتقدمة</p>
+    </div>
+  </div>
+  <div class="lesson-body">
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-theory">📖</div> حقول Input المتخصصة</div>
+      <div class="prose">
+        <p>
+          إلى جانب الأنواع الأساسية التي تعلمناها في الدرس 18، يوفر HTML أنواعاً متقدمة وممتعة
+          لحالات استخدام محددة: منتقي الألوان، شريط التمرير، الحقول المخفية، وغيرها.
+        </p>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-demo">🎨</div> معاينة حية — Input المتقدم</div>
+
+      <div class="adv-input-grid">
+        <div class="adv-input-card">
+          <div class="aic-label"><span>type="color"</span> منتقي الألوان</div>
+          <input type="color" value="#F4631E" style="height:44px;cursor:pointer;">
+        </div>
+
+        <div class="adv-input-card">
+          <div class="aic-label"><span>type="range"</span> شريط التمرير</div>
+          <input type="range" min="0" max="100" value="60" oninput="this.nextElementSibling.textContent = this.value + '%'">
+          <div style="font-size:0.82rem;color:var(--orange);font-family:'Fira Code',monospace;margin-top:6px;">60%</div>
+        </div>
+
+        <div class="adv-input-card">
+          <div class="aic-label"><span>type="number" + step</span></div>
+          <input type="number" min="0" max="100" step="5" value="25" placeholder="0">
+          <div style="font-size:0.75rem;color:var(--text-soft);margin-top:5px;">يزيد بمقدار 5 في كل ضغطة</div>
+        </div>
+
+        <div class="adv-input-card">
+          <div class="aic-label"><span>type="datetime-local"</span></div>
+          <input type="datetime-local">
+        </div>
+
+        <div class="adv-input-card">
+          <div class="aic-label"><span>type="week"</span> اختيار أسبوع</div>
+          <input type="week">
+        </div>
+
+        <div class="adv-input-card">
+          <div class="aic-label"><span>type="month"</span> اختيار شهر</div>
+          <input type="month">
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-code">💻</div> الكود الكامل</div>
+
+      <div class="code-block" dir="ltr">
+        <div class="code-header">
+          <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+          <span class="code-lang">HTML — Advanced Input Types</span>
+        </div>
+        <pre><span class="cm">&lt;!-- منتقي الألوان --&gt;</span>
+<span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"bg-color"</span><span class="kw">&gt;</span><span class="tx">لون الخلفية</span><span class="tg">&lt;/label&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"color"</span> <span class="at">id</span>=<span class="st">"bg-color"</span>
+       <span class="at">name</span>=<span class="st">"bg_color"</span> <span class="at">value</span>=<span class="st">"#F4631E"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- شريط التمرير --&gt;</span>
+<span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"vol"</span><span class="kw">&gt;</span><span class="tx">مستوى الصوت</span><span class="tg">&lt;/label&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"range"</span> <span class="at">id</span>=<span class="st">"vol"</span>
+       <span class="at">name</span>=<span class="st">"volume"</span>
+       <span class="at">min</span>=<span class="st">"0"</span> <span class="at">max</span>=<span class="st">"100"</span> <span class="at">value</span>=<span class="st">"50"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- رقم بخطوة محددة --&gt;</span>
+<span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"price"</span><span class="kw">&gt;</span><span class="tx">السعر (بالخمسينات)</span><span class="tg">&lt;/label&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"number"</span> <span class="at">id</span>=<span class="st">"price"</span>
+       <span class="at">name</span>=<span class="st">"price"</span>
+       <span class="at">min</span>=<span class="st">"0"</span> <span class="at">max</span>=<span class="st">"1000"</span> <span class="at">step</span>=<span class="st">"50"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- تاريخ ووقت معاً --&gt;</span>
+<span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"appt"</span><span class="kw">&gt;</span><span class="tx">موعد الاجتماع</span><span class="tg">&lt;/label&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"datetime-local"</span> <span class="at">id</span>=<span class="st">"appt"</span>
+       <span class="at">name</span>=<span class="st">"appointment"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- حقل مخفي — لا يراه المستخدم --&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"hidden"</span>
+       <span class="at">name</span>=<span class="st">"user_id"</span>
+       <span class="at">value</span>=<span class="st">"42"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- datalist — اقتراحات مع حرية الكتابة --&gt;</span>
+<span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"browser"</span><span class="kw">&gt;</span><span class="tx">متصفحك المفضل</span><span class="tg">&lt;/label&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"text"</span> <span class="at">id</span>=<span class="st">"browser"</span>
+       <span class="at">name</span>=<span class="st">"browser"</span>
+       <span class="at">list</span>=<span class="st">"browsers"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;datalist</span> <span class="at">id</span>=<span class="st">"browsers"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"Chrome"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"Firefox"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"Safari"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"Edge"</span><span class="kw">&gt;</span>
+<span class="tg">&lt;/datalist&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-attrs">⚙️</div> type="hidden" — الحقل المخفي</div>
+
+      <div class="prose">
+        <p>
+          <strong>type="hidden"</strong> حقل لا يظهر للمستخدم لكنه يُرسَل مع باقي بيانات النموذج.
+          يُستخدم لتمرير بيانات ثابتة يحتاجها الخادم مثل: معرف المستخدم، رمز CSRF للحماية، أو اسم الصفحة المصدر.
+        </p>
+      </div>
+
+      <div class="note-box info">
+        <div class="note-icon">💡</div>
+        <div>
+          <strong>datalist:</strong> يُضيف قائمة اقتراحات لحقل نص — المستخدم يمكنه اختيار من القائمة أو كتابة نصه الخاص. يختلف عن select الذي يُجبر على اختيار قيمة محددة.
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-divider"></div>
+
+    <div class="section">
+      <div class="section-title"><div class="section-icon icon-exercise">✏️</div> تمرين</div>
+      <div class="exercise-block">
+        <div class="exercise-header"><div class="exercise-num">1</div> نموذج تخصيص الملف الشخصي</div>
+        <ol>
+          <li>أضف منتقي لون لتخصيص لون ثيم الملف الشخصي</li>
+          <li>أضف range لتحديد مستوى الخصوصية (0 إلى 100)</li>
+          <li>أضف حقل datetime-local لتحديد موعد التفعيل</li>
+          <li>أضف hidden field يحمل اسم الصفحة = "profile-settings"</li>
+          <li>أضف datalist لحقل "المدينة" مع 5 مدن مغربية</li>
+        </ol>
+        <button class="answer-toggle" onclick="toggleAnswer(this)">▼ عرض الحل</button>
+        <div class="answer-content">
+          <div class="code-block" dir="ltr">
+            <div class="code-header">
+              <div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div>
+              <span class="code-lang">الحل</span>
+            </div>
+            <pre><span class="cm">&lt;!-- لون الثيم --&gt;</span>
+<span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"theme"</span><span class="kw">&gt;</span><span class="tx">لون الثيم</span><span class="tg">&lt;/label&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"color"</span> <span class="at">id</span>=<span class="st">"theme"</span>
+       <span class="at">name</span>=<span class="st">"theme_color"</span> <span class="at">value</span>=<span class="st">"#3B82F6"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- مستوى الخصوصية --&gt;</span>
+<span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"priv"</span><span class="kw">&gt;</span><span class="tx">مستوى الخصوصية</span><span class="tg">&lt;/label&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"range"</span> <span class="at">id</span>=<span class="st">"priv"</span>
+       <span class="at">name</span>=<span class="st">"privacy"</span>
+       <span class="at">min</span>=<span class="st">"0"</span> <span class="at">max</span>=<span class="st">"100"</span> <span class="at">value</span>=<span class="st">"50"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- موعد التفعيل --&gt;</span>
+<span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"activate"</span><span class="kw">&gt;</span><span class="tx">موعد التفعيل</span><span class="tg">&lt;/label&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"datetime-local"</span> <span class="at">id</span>=<span class="st">"activate"</span>
+       <span class="at">name</span>=<span class="st">"activation_date"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- حقل مخفي --&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"hidden"</span>
+       <span class="at">name</span>=<span class="st">"page"</span>
+       <span class="at">value</span>=<span class="st">"profile-settings"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- مدينة مع datalist --&gt;</span>
+<span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"city"</span><span class="kw">&gt;</span><span class="tx">المدينة</span><span class="tg">&lt;/label&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"text"</span> <span class="at">id</span>=<span class="st">"city"</span>
+       <span class="at">name</span>=<span class="st">"city"</span> <span class="at">list</span>=<span class="st">"cities"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;datalist</span> <span class="at">id</span>=<span class="st">"cities"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"الدار البيضاء"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"الرباط"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"فاس"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"مراكش"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;option</span> <span class="at">value</span>=<span class="st">"الراشيدية"</span><span class="kw">&gt;</span>
+<span class="tg">&lt;/datalist&gt;</span></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <h3>// ملخص الدرس</h3>
+      <ul class="summary-list">
+        <li>type="color" ينشئ منتقي ألوان يعيد قيمة hex مثل #FF5500</li>
+        <li>type="range" ينشئ شريط تمرير — استخدم min و max و step</li>
+        <li>type="hidden" يُرسَل مع النموذج لكن لا يراه المستخدم</li>
+        <li>type="datetime-local" يجمع التاريخ والوقت في منتقٍ واحد</li>
+        <li>datalist يُضيف اقتراحات لحقل نص مع بقاء حرية الكتابة</li>
+        <li>step يُحدد وحدة الزيادة في الأرقام وشريط التمرير</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+</div><!-- end main-wrap -->
+
+<!-- FOOTER -->
+<footer class="course-footer">
+  <div class="footer-nav">
+    <a href="3.html"><button class="footer-badge">← الوحدة الثالثة</button></a>
+    <a href="5.html"><button class="next-unit-btn">
+      الوحدة الخامسة — متقدم ←
+    </button>
+    </a>
+  </div>
+  <p>الوحدة 4 من 6 &nbsp;·&nbsp; دورة HTML والـ CSS الكاملة بالعربية &nbsp;·&nbsp; 60 درساً</p>
+</footer>
+
+<script>
+function toggleAnswer(btn) {
+  const content = btn.nextElementSibling;
+  content.classList.toggle('visible');
+  btn.textContent = content.classList.contains('visible') ? '▲ إخفاء الحل' : '▼ عرض الحل';
+}
+
+function scrollToLesson(id, btn) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (btn) {
+    document.querySelectorAll('.idx-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+}
+
+const lessons = ['lesson-18','lesson-19','lesson-20','lesson-21','lesson-22','lesson-23','lesson-24','lesson-25'];
+const buttons = document.querySelectorAll('.idx-btn');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = lessons.indexOf(entry.target.id);
+      if (idx > -1) {
+        buttons.forEach(b => b.classList.remove('active'));
+        if (buttons[idx]) buttons[idx].classList.add('active');
+      }
+    }
+  });
+}, { rootMargin: '-25% 0px -65% 0px' });
+
+lessons.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) observer.observe(el);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الوحدة السادسة — الاحتراف</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange:#F4631E; --orange-soft:rgba(244,99,30,0.12); --orange-border:rgba(244,99,30,0.28);
+  --green:#22C55E;  --green-soft:rgba(34,197,94,0.1);
+  --blue:#3B82F6;   --blue-soft:rgba(59,130,246,0.1);
+  --yellow:#EAB308; --yellow-soft:rgba(234,179,8,0.1);
+  --red:#EF4444;    --red-soft:rgba(239,68,68,0.1);
+  --purple:#A855F7; --purple-soft:rgba(168,85,247,0.1);
+  --teal:#14B8A6;   --teal-soft:rgba(20,184,166,0.1);
+  --bg:#F7F5F1; --bg-card:#FFFFFF; --bg-dark:#111111;
+  --text:#1C1A18; --text-soft:#6B6560; --border:#E5E0D8;
+  --code-bg:#1E1E2E; --code-text:#CDD6F4;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Tajawal',sans-serif;line-height:1.8;font-size:17px;}
+
+/* NAV */
+.topnav{background:var(--bg-dark);padding:14px 48px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;border-bottom:2px solid var(--orange);}
+.nav-logo{color:white;font-weight:800;font-size:1.05rem;display:flex;align-items:center;gap:12px;}
+.html5-badge{background:var(--orange);color:white;font-size:0.65rem;font-weight:700;padding:4px 9px;border-radius:5px;font-family:'Fira Code',monospace;letter-spacing:0.05em;}
+.nav-progress{display:flex;align-items:center;gap:14px;}
+.nav-unit-label{color:rgba(255,255,255,0.45);font-size:0.82rem;}
+.progress-dots{display:flex;gap:5px;}
+.pdot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.15);}
+.pdot.done{background:rgba(244,99,30,0.5);}
+.pdot.active{background:var(--orange);box-shadow:0 0 0 2px rgba(244,99,30,0.35);}
+
+/* UNIT INTRO BANNER */
+.unit-intro-banner{background:linear-gradient(135deg,#0D0D0D 0%,#1A0A03 100%);border-bottom:1px solid rgba(244,99,30,0.2);padding:18px 48px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.uib-units{display:flex;gap:6px;flex-wrap:wrap;}
+.uib-unit{display:flex;align-items:center;gap:7px;padding:6px 14px;border-radius:100px;font-size:0.78rem;border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.3);}
+.uib-unit.done{color:rgba(244,99,30,0.6);border-color:rgba(244,99,30,0.18);}
+.uib-unit.active{background:var(--orange-soft);border-color:var(--orange-border);color:var(--orange);font-weight:700;}
+.uib-unit-num{font-family:'Fira Code',monospace;font-size:0.68rem;background:rgba(255,255,255,0.07);padding:1px 6px;border-radius:4px;}
+.uib-unit.done .uib-unit-num{background:rgba(244,99,30,0.15);}
+.uib-unit.active .uib-unit-num{background:rgba(244,99,30,0.25);color:white;}
+.uib-sep{color:rgba(255,255,255,0.15);font-size:1.1rem;}
+
+/* HERO */
+.unit-hero{background:var(--bg-dark);color:white;padding:70px 48px 58px;position:relative;overflow:hidden;border-bottom:1px solid rgba(244,99,30,0.15);}
+.unit-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 100% at 100% 50%,rgba(244,99,30,0.08) 0%,transparent 70%),radial-gradient(ellipse 30% 60% at 10% 100%,rgba(168,85,247,0.05) 0%,transparent 60%);}
+.unit-hero::after{content:'06';position:absolute;left:-10px;bottom:-70px;font-size:24rem;font-weight:900;color:rgba(244,99,30,0.04);font-family:'Fira Code',monospace;pointer-events:none;line-height:1;}
+.unit-hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;}
+.unit-tag{display:inline-block;background:var(--orange-soft);border:1px solid var(--orange-border);color:var(--orange);font-size:0.75rem;padding:5px 14px;border-radius:100px;margin-bottom:18px;font-family:'Fira Code',monospace;letter-spacing:0.04em;}
+.unit-hero h1{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:900;line-height:1.15;margin-bottom:14px;}
+.unit-hero h1 span{color:var(--orange);}
+.unit-hero p.unit-desc{font-size:1rem;color:rgba(255,255,255,0.52);max-width:520px;margin-bottom:30px;}
+.unit-meta{display:flex;gap:20px;flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:8px;font-size:0.85rem;color:rgba(255,255,255,0.42);}
+.meta-dot{width:7px;height:7px;border-radius:50%;background:var(--orange);flex-shrink:0;}
+.unit-lessons-panel{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:20px;min-width:220px;max-height:420px;overflow-y:auto;}
+.unit-lessons-panel::-webkit-scrollbar{width:3px;}
+.unit-lessons-panel::-webkit-scrollbar-thumb{background:rgba(244,99,30,0.4);border-radius:2px;}
+.ulp-title{font-size:0.68rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.1em;font-family:'Fira Code',monospace;margin-bottom:14px;}
+.ulp-item{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);cursor:pointer;}
+.ulp-item:last-child{border-bottom:none;}
+.ulp-num{font-family:'Fira Code',monospace;font-size:0.68rem;color:var(--orange);width:28px;flex-shrink:0;}
+.ulp-name{font-size:0.82rem;color:rgba(255,255,255,0.55);transition:color 0.2s;}
+.ulp-item:hover .ulp-name{color:white;}
+
+/* LESSON INDEX */
+.lesson-index{background:white;border-bottom:1px solid var(--border);padding:12px 32px;display:flex;gap:6px;flex-wrap:wrap;align-items:center;justify-content:center;position:sticky;top:56px;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.04);}
+.idx-label{font-size:0.78rem;color:var(--text-soft);margin-left:6px;}
+.idx-btn{background:none;border:1px solid var(--border);color:var(--text-soft);font-family:'Tajawal',sans-serif;font-size:0.74rem;padding:4px 10px;border-radius:100px;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.idx-btn:hover,.idx-btn.active{background:var(--orange);border-color:var(--orange);color:white;}
+
+/* MAIN */
+.main-wrap{max-width:900px;margin:0 auto;padding:60px 24px 120px;}
+
+/* LESSON CARD */
+.lesson-card{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-bottom:48px;box-shadow:0 2px 24px rgba(0,0,0,0.05);scroll-margin-top:120px;transition:box-shadow 0.3s;}
+.lesson-card:hover{box-shadow:0 4px 40px rgba(0,0,0,0.09);}
+.lesson-header{background:var(--bg-dark);color:white;padding:26px 36px;display:flex;align-items:flex-start;gap:18px;}
+.lesson-num-badge{background:var(--orange);color:white;font-family:'Fira Code',monospace;font-size:0.7rem;font-weight:600;padding:6px 12px;border-radius:7px;flex-shrink:0;margin-top:4px;letter-spacing:0.06em;}
+.lesson-header-text h2{font-size:1.35rem;font-weight:800;margin-bottom:5px;}
+.lesson-header-text p{font-size:0.87rem;color:rgba(255,255,255,0.45);}
+.lesson-body{padding:36px;}
+
+/* SECTIONS */
+.section{margin-bottom:34px;}
+.section-title{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.section-icon{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.85rem;flex-shrink:0;}
+.icon-theory{background:var(--blue-soft);} .icon-code{background:rgba(30,30,46,0.07);} .icon-exercise{background:var(--green-soft);} .icon-tip{background:var(--yellow-soft);} .icon-demo{background:var(--teal-soft);} .icon-attrs{background:var(--purple-soft);} .icon-compare{background:var(--red-soft);}
+.prose{color:var(--text);line-height:1.9;font-size:1rem;}
+.prose p{margin-bottom:12px;}
+.prose strong{color:var(--orange);font-weight:700;}
+
+/* CODE BLOCK */
+.code-block{background:var(--code-bg);border-radius:12px;overflow:hidden;margin:16px 0;direction:ltr;border:1px solid rgba(255,255,255,0.05);}
+.code-header{background:rgba(255,255,255,0.05);padding:10px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.06);}
+.code-lang{font-family:'Fira Code',monospace;font-size:0.7rem;color:var(--orange);text-transform:uppercase;letter-spacing:0.1em;}
+.code-dots{display:flex;gap:6px;}
+.code-dots span{width:10px;height:10px;border-radius:50%;}
+.dot-red{background:#FF5F57;} .dot-yellow{background:#FFBD2E;} .dot-green{background:#28CA41;}
+pre{padding:20px 22px;overflow-x:auto;font-family:'Fira Code',monospace;font-size:0.87rem;line-height:1.75;color:var(--code-text);}
+.kw{color:#CBA6F7;} .at{color:#89B4FA;} .st{color:#A6E3A1;} .cm{color:#6C7086;font-style:italic;} .tx{color:#CDD6F4;} .tg{color:#F38BA8;}
+
+/* NOTE BOXES */
+.note-box{border-radius:12px;padding:16px 20px;margin:16px 0;display:flex;gap:14px;align-items:flex-start;font-size:0.93rem;}
+.note-box.info{background:var(--blue-soft);border-right:3px solid var(--blue);}
+.note-box.warning{background:var(--yellow-soft);border-right:3px solid var(--yellow);}
+.note-box.tip{background:var(--green-soft);border-right:3px solid var(--green);}
+.note-box.important{background:var(--orange-soft);border-right:3px solid var(--orange);}
+.note-box.purple{background:var(--purple-soft);border-right:3px solid var(--purple);}
+.note-icon{font-size:1.15rem;flex-shrink:0;margin-top:2px;}
+
+/* EXERCISE */
+.exercise-block{background:var(--green-soft);border:1px solid rgba(34,197,94,0.2);border-radius:14px;padding:22px 26px;margin:16px 0;}
+.exercise-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-weight:700;color:#15803D;font-size:0.98rem;}
+.exercise-num{background:var(--green);color:white;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-family:'Fira Code',monospace;flex-shrink:0;}
+.exercise-block ol,.exercise-block ul{padding-right:22px;color:var(--text);}
+.exercise-block li{margin-bottom:8px;font-size:0.93rem;}
+.answer-toggle{background:none;border:1px dashed var(--orange-border);color:var(--orange);font-family:'Tajawal',sans-serif;font-size:0.88rem;padding:10px 20px;border-radius:8px;cursor:pointer;margin-top:14px;transition:all 0.2s;width:100%;text-align:right;}
+.answer-toggle:hover{background:var(--orange-soft);}
+.answer-content{display:none;margin-top:12px;}
+.answer-content.visible{display:block;}
+
+/* DIVIDER + SUMMARY */
+.lesson-divider{height:1px;background:linear-gradient(to left,transparent,var(--border),transparent);margin:30px 0;}
+.summary-box{background:linear-gradient(135deg,#111111,#1F0D05);border:1px solid rgba(244,99,30,0.22);border-radius:16px;padding:26px 30px;margin:24px 0 0;}
+.summary-box h3{color:var(--orange);font-size:0.9rem;margin-bottom:16px;font-family:'Fira Code',monospace;letter-spacing:0.04em;}
+.summary-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.summary-list li{display:flex;align-items:flex-start;gap:10px;font-size:0.91rem;color:rgba(255,255,255,0.72);}
+.summary-list li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:2px;}
+
+/* CONCEPT CARDS */
+.concept-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;margin:16px 0;}
+.concept-card{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+.concept-card .cc-icon{font-size:1.4rem;margin-bottom:8px;}
+.concept-card .cc-title{font-weight:700;font-size:0.92rem;color:var(--text);margin-bottom:5px;}
+.concept-card .cc-desc{font-size:0.81rem;color:var(--text-soft);line-height:1.6;}
+
+/* ATTR TABLE */
+.attr-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:0.88rem;border-radius:10px;overflow:hidden;}
+.attr-table th{background:var(--bg-dark);color:white;padding:11px 16px;text-align:right;font-weight:700;font-size:0.82rem;}
+.attr-table td{padding:10px 16px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top;}
+.attr-table tr:last-child td{border-bottom:none;}
+.attr-table tr:nth-child(even) td{background:rgba(0,0,0,0.02);}
+.attr-table code{font-family:'Fira Code',monospace;background:var(--orange-soft);color:var(--orange);padding:2px 6px;border-radius:4px;font-size:0.82rem;}
+
+/* COMPARE GRID */
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0;}
+.compare-card{border-radius:12px;padding:18px 20px;border:1px solid var(--border);}
+.compare-card.good{background:var(--green-soft);border-color:rgba(34,197,94,0.25);}
+.compare-card.bad{background:var(--red-soft);border-color:rgba(239,68,68,0.2);}
+.compare-card .cc-head{font-weight:800;font-size:0.85rem;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.compare-card.good .cc-head{color:#15803D;}
+.compare-card.bad .cc-head{color:#B91C1C;}
+.compare-card ul{padding-right:18px;}
+.compare-card li{font-size:0.85rem;color:var(--text);margin-bottom:6px;}
+
+/* DEMO BOX */
+.demo-box{background:white;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:16px 0;}
+.demo-label{background:var(--bg);border-bottom:1px solid var(--border);padding:8px 16px;font-size:0.75rem;color:var(--text-soft);font-family:'Fira Code',monospace;display:flex;align-items:center;gap:8px;}
+.demo-label::before{content:'▶';color:var(--green);font-size:0.6rem;}
+.demo-content{padding:20px 24px;}
+
+/* SEMANTIC DEMO */
+.semantic-demo{border:2px dashed var(--border);border-radius:12px;padding:16px;margin:16px 0;font-family:'Fira Code',monospace;font-size:0.78rem;}
+.sem-block{border-radius:7px;padding:10px 14px;margin-bottom:8px;position:relative;}
+.sem-block:last-child{margin-bottom:0;}
+.sem-label{position:absolute;top:-9px;right:10px;font-size:0.62rem;padding:1px 8px;border-radius:4px;color:white;font-weight:700;}
+.sem-header{background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.25);}
+.sem-header .sem-label{background:var(--blue);}
+.sem-nav{background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.25);}
+.sem-nav .sem-label{background:var(--purple);}
+.sem-main{background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);}
+.sem-main .sem-label{background:var(--green);}
+.sem-article{background:rgba(20,184,166,0.08);border:1px solid rgba(20,184,166,0.2);margin:6px;}
+.sem-article .sem-label{background:var(--teal);}
+.sem-aside{background:rgba(234,179,8,0.08);border:1px solid rgba(234,179,8,0.2);}
+.sem-aside .sem-label{background:var(--yellow);color:#1C1A18;}
+.sem-footer{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);}
+.sem-footer .sem-label{background:var(--red);}
+.sem-text{font-size:0.75rem;color:var(--text-soft);padding-top:6px;}
+
+/* INLINE CHIPS */
+.chip-grid{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;}
+.chip{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:7px 14px;font-family:'Fira Code',monospace;font-size:0.78rem;color:var(--text);transition:all 0.2s;}
+.chip:hover{border-color:var(--orange);color:var(--orange);}
+.chip.orange{background:var(--orange-soft);border-color:var(--orange-border);color:var(--orange);}
+.chip.blue{background:var(--blue-soft);border-color:rgba(59,130,246,0.3);color:var(--blue);}
+.chip.green{background:var(--green-soft);border-color:rgba(34,197,94,0.3);color:#15803D;}
+.chip.purple{background:var(--purple-soft);border-color:rgba(168,85,247,0.3);color:var(--purple);}
+
+/* STEPS */
+.steps-list{list-style:none;display:flex;flex-direction:column;gap:12px;}
+.steps-list li{display:flex;gap:14px;align-items:flex-start;}
+.step-num{background:var(--orange);color:white;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.78rem;font-family:'Fira Code',monospace;font-weight:600;flex-shrink:0;margin-top:2px;}
+.step-text{font-size:0.93rem;color:var(--text);line-height:1.7;}
+.step-text strong{color:var(--orange);}
+
+/* DIALOG DEMO */
+.dialog-demo-btn{background:var(--orange);color:white;border:none;padding:11px 24px;border-radius:8px;font-family:'Tajawal',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;transition:background 0.2s;}
+.dialog-demo-btn:hover{background:#e05510;}
+dialog{border:none;border-radius:14px;padding:0;box-shadow:0 20px 60px rgba(0,0,0,0.25);max-width:380px;width:90%;}
+dialog::backdrop{background:rgba(0,0,0,0.5);}
+.dialog-inner{padding:28px 32px;}
+.dialog-inner h3{font-size:1.1rem;font-weight:800;margin-bottom:10px;}
+.dialog-inner p{font-size:0.9rem;color:var(--text-soft);margin-bottom:20px;}
+.dialog-inner button{background:var(--orange);color:white;border:none;padding:10px 22px;border-radius:7px;font-family:'Tajawal',sans-serif;font-size:0.9rem;font-weight:700;cursor:pointer;}
+
+/* OG CARD PREVIEW */
+.og-card{background:white;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:16px 0;max-width:420px;}
+.og-img{height:120px;background:linear-gradient(135deg,var(--orange),#8B3A0F);display:flex;align-items:center;justify-content:center;font-size:2rem;}
+.og-body{padding:14px 16px;border-top:1px solid var(--border);}
+.og-site{font-size:0.72rem;color:var(--text-soft);text-transform:uppercase;font-family:'Fira Code',monospace;margin-bottom:4px;}
+.og-title{font-size:0.95rem;font-weight:800;color:var(--text);margin-bottom:4px;}
+.og-desc{font-size:0.8rem;color:var(--text-soft);}
+
+/* EMOJI / SYMBOLS TABLE */
+.emoji-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;margin:16px 0;}
+.emoji-cell{background:white;border:1px solid var(--border);border-radius:8px;padding:10px 8px;text-align:center;}
+.emoji-cell .ec-sym{font-size:1.3rem;display:block;margin-bottom:4px;}
+.emoji-cell .ec-code{font-family:'Fira Code',monospace;font-size:0.62rem;color:var(--text-soft);word-break:break-all;}
+
+/* MARQUEE DEMO */
+.marquee-demo{background:var(--bg-dark);color:var(--orange);padding:12px 0;border-radius:8px;overflow:hidden;margin:16px 0;}
+
+/* CERT BANNER */
+.cert-banner{background:linear-gradient(135deg,#111111,#1A0A03);border:1px solid rgba(244,99,30,0.3);border-radius:16px;padding:32px;text-align:center;margin:16px 0;}
+.cert-icon{font-size:3rem;margin-bottom:12px;}
+.cert-title{font-size:1.3rem;font-weight:800;color:white;margin-bottom:8px;}
+.cert-desc{font-size:0.9rem;color:rgba(255,255,255,0.5);margin-bottom:20px;}
+.cert-btn{background:var(--orange);color:white;border:none;padding:12px 32px;border-radius:8px;font-family:'Tajawal',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;}
+
+/* FOOTER */
+.course-footer{text-align:center;padding:50px 20px;border-top:1px solid var(--border);color:var(--text-soft);font-size:0.85rem;}
+.footer-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:24px;flex-wrap:wrap;}
+.footer-badge{background:var(--bg-dark);color:rgba(255,255,255,0.4);padding:10px 20px;border-radius:100px;font-size:0.85rem;cursor:pointer;border:none;font-family:'Tajawal',sans-serif;}
+.footer-badge:hover{background:#222;}
+.complete-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--orange),#8B3A0F);color:white;padding:16px 40px;border-radius:100px;font-size:1.05rem;font-weight:900;cursor:pointer;border:none;font-family:'Tajawal',sans-serif;transition:all 0.2s;box-shadow:0 8px 32px rgba(244,99,30,0.3);}
+.complete-btn:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(244,99,30,0.45);}
+
+@media(max-width:700px){
+  .topnav{padding:12px 20px;} .unit-intro-banner{padding:14px 20px;}
+  .unit-hero{padding:50px 24px 42px;} .unit-hero-inner{grid-template-columns:1fr;}
+  .unit-lessons-panel{display:none;} .lesson-index{padding:10px 14px;top:52px;}
+  .lesson-body{padding:24px 20px;} .lesson-header{padding:22px 20px;}
+  .main-wrap{padding:40px 14px 80px;} .compare-grid{grid-template-columns:1fr;}
+  .uib-sep{display:none;}
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-logo"><span class="html5-badge">HTML5</span>دورة تعلم HTML و CSS</div>
+  <div class="nav-progress">
+    <span class="nav-unit-label">الوحدة 6 من 6</span>
+    <div class="progress-dots">
+      <div class="pdot done"></div><div class="pdot done"></div><div class="pdot done"></div>
+      <div class="pdot done"></div><div class="pdot done"></div><div class="pdot active"></div>
+    </div>
+  </div>
+</nav>
+
+<div class="unit-intro-banner">
+  <div class="uib-units">
+    <div class="uib-unit done"><span class="uib-unit-num">01</span>البداية</div><div class="uib-sep">›</div>
+    <div class="uib-unit done"><span class="uib-unit-num">02</span>العناصر</div><div class="uib-sep">›</div>
+    <div class="uib-unit done"><span class="uib-unit-num">03</span>الوسائط</div><div class="uib-sep">›</div>
+    <div class="uib-unit done"><span class="uib-unit-num">04</span>النماذج</div><div class="uib-sep">›</div>
+    <div class="uib-unit done"><span class="uib-unit-num">05</span>متقدم</div><div class="uib-sep">›</div>
+    <div class="uib-unit active"><span class="uib-unit-num">06</span>الاحتراف</div>
+  </div>
+</div>
+
+<section class="unit-hero">
+  <div class="unit-hero-inner">
+    <div>
+      <div class="unit-tag">// الوحدة السادسة والأخيرة — Unit 06</div>
+      <h1>الاحتراف <span>الكامل</span></h1>
+      <p class="unit-desc">BDI · Semantic · CSS · Sup/Sub · Fieldset · id/Class · Favicon · SEO · Open Graph · Dialog · Hosting وأكثر</p>
+      <div class="unit-meta">
+        <div class="meta-item"><div class="meta-dot"></div>27 درساً (36 → 62)</div>
+        <div class="meta-item"><div class="meta-dot"></div>مستوى احترافي</div>
+        <div class="meta-item"><div class="meta-dot"></div>الوحدة الختامية 🏆</div>
+      </div>
+    </div>
+    <div class="unit-lessons-panel">
+      <div class="ulp-title">// دروس الوحدة</div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-36')"><span class="ulp-num">36</span><span class="ulp-name">BDI — الكتابة المختلطة</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-37')"><span class="ulp-num">37</span><span class="ulp-name">HTML Semantic</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-38')"><span class="ulp-num">38</span><span class="ulp-name">ربط HTML مع CSS</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-39')"><span class="ulp-num">39</span><span class="ulp-name">Sup و Sub</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-40')"><span class="ulp-num">40</span><span class="ulp-name">Fieldset و Legend</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-41')"><span class="ulp-num">41</span><span class="ulp-name">id و Class</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-42')"><span class="ulp-num">42</span><span class="ulp-name">Favicon</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-43')"><span class="ulp-num">43</span><span class="ulp-name">Meta SEO</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-44')"><span class="ulp-num">44</span><span class="ulp-name">Code, Abbr, Dfn</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-45')"><span class="ulp-num">45</span><span class="ulp-name">Open Graph</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-46')"><span class="ulp-num">46</span><span class="ulp-name">رابط Download</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-47')"><span class="ulp-num">47</span><span class="ulp-name">Blockquote و Center</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-48')"><span class="ulp-num">48</span><span class="ulp-name">Contenteditable و Script</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-49')"><span class="ulp-num">49</span><span class="ulp-name">عنصر Dialog</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-50')"><span class="ulp-num">50</span><span class="ulp-name">Twitter Meta</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-51')"><span class="ulp-num">51</span><span class="ulp-name">عنصر Marquee</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-52')"><span class="ulp-num">52</span><span class="ulp-name">رسائل الخطأ</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-53')"><span class="ulp-num">53</span><span class="ulp-name">Hosting مجاني</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-54')"><span class="ulp-num">54</span><span class="ulp-name">خاصية title</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-55')"><span class="ulp-num">55</span><span class="ulp-name">نقاط مهمة</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-56')"><span class="ulp-num">56</span><span class="ulp-name">عنصر NoScript</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-57')"><span class="ulp-num">57</span><span class="ulp-name">Meta Theme-Color</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-58')"><span class="ulp-num">58</span><span class="ulp-name">Meta UTF-8 تعمق</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-59')"><span class="ulp-num">59</span><span class="ulp-name">HTML Emojis</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-60')"><span class="ulp-num">60</span><span class="ulp-name">HTML Symbols</span></div>
+      <div class="ulp-item" onclick="scrollToLesson('lesson-61')"><span class="ulp-num">61</span><span class="ulp-name">طلب الشهادة</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="lesson-index">
+  <span class="idx-label">درس:</span>
+  <button class="idx-btn active" onclick="scrollToLesson('lesson-36',this)">36·BDI</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-37',this)">37·Semantic</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-38',this)">38·CSS</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-39',this)">39·Sup/Sub</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-40',this)">40·Fieldset</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-41',this)">41·id/Class</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-42',this)">42·Favicon</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-43',this)">43·SEO</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-44',this)">44·Code/Abbr</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-45',this)">45·OpenGraph</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-46',this)">46·Download</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-47',this)">47·Blockquote</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-48',this)">48·Contenteditable</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-49',this)">49·Dialog</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-50',this)">50·Twitter</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-51',this)">51·Marquee</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-52',this)">52·Validation</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-53',this)">53·Hosting</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-54',this)">54·title</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-55',this)">55·نقاط مهمة</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-56',this)">56·NoScript</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-57',this)">57·ThemeColor</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-58',this)">58·UTF-8</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-59',this)">59·Emojis</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-60',this)">60·Symbols</button>
+  <button class="idx-btn" onclick="scrollToLesson('lesson-61',this)">نهاية دورة </button>
+</div>
+
+<div class="main-wrap">
+
+<!-- ══ LESSON 36 ══ -->
+<div class="lesson-card" id="lesson-36">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 36</div><div class="lesson-header-text"><h2>BDI — مشكلة الكتابة المختلطة</h2><p>Bi-Directional Isolation — عزل النص ذي الاتجاه المختلف داخل نص عربي</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-theory">📖</div>المشكلة</div>
+      <div class="prose"><p>عند كتابة كلمات إنجليزية أو أرقام داخل جملة عربية، يحاول المتصفح تخمين اتجاه كل كلمة — وأحياناً يخطئ ويعكس الترتيب. عنصر <strong>&lt;bdi&gt;</strong> يعزل النص ويمنع هذا الخطأ.</p></div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-demo">🎨</div>مقارنة — مع وبدون &lt;bdi&gt;</div>
+      <div class="demo-box"><div class="demo-label">LIVE PREVIEW</div><div class="demo-content">
+        <p style="margin-bottom:12px;font-size:0.95rem;">بدون bdi: المستخدم <span style="color:var(--red)">أحمد Al-Rashidi</span> حصل على 95 نقطة</p>
+        <p style="font-size:0.95rem;">مع bdi: المستخدم <bdi style="color:var(--green)">أحمد Al-Rashidi</bdi> حصل على 95 نقطة</p>
+      </div></div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-code">💻</div>الكود</div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML — BDI</span></div>
+<pre><span class="cm">&lt;!-- مشكلة: اسم أجنبي قد ينعكس --&gt;</span>
+<span class="kw">&lt;p&gt;</span><span class="tx">المتصبق: </span><span class="kw">&lt;bdi&gt;</span><span class="tx">Ahmed Al-Rashidi</span><span class="tg">&lt;/bdi&gt;</span><span class="tx"> — 95 نقطة</span><span class="tg">&lt;/p&gt;</span>
+
+<span class="cm">&lt;!-- قائمة مستخدمين بأسماء متعددة اللغات --&gt;</span>
+<span class="kw">&lt;ul&gt;</span>
+  <span class="kw">&lt;li&gt;</span><span class="tx">المرتبة 1: </span><span class="kw">&lt;bdi&gt;</span><span class="tx">محمد</span><span class="tg">&lt;/bdi&gt;</span><span class="tg">&lt;/li&gt;</span>
+  <span class="kw">&lt;li&gt;</span><span class="tx">المرتبة 2: </span><span class="kw">&lt;bdi&gt;</span><span class="tx">John Smith</span><span class="tg">&lt;/bdi&gt;</span><span class="tg">&lt;/li&gt;</span>
+  <span class="kw">&lt;li&gt;</span><span class="tx">المرتبة 3: </span><span class="kw">&lt;bdi&gt;</span><span class="tx">李明</span><span class="tg">&lt;/bdi&gt;</span><span class="tg">&lt;/li&gt;</span>
+<span class="tg">&lt;/ul&gt;</span></pre></div>
+      <div class="note-box info"><div class="note-icon">💡</div><div>هناك أيضاً <code style="font-family:'Fira Code',monospace">&lt;bdo dir="ltr"&gt;</code> الذي يُجبر اتجاهاً محدداً. أما &lt;bdi&gt; فيكتشف الاتجاه تلقائياً ويعزله.</div></div>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>&lt;bdi&gt; يعزل النص ويمنع تشويه الاتجاه في النصوص المختلطة</li><li>ضروري عند عرض أسماء مستخدمين أو محتوى ديناميكي متعدد اللغات</li><li>&lt;bdo dir="ltr/rtl"&gt; يُجبر اتجاهاً صريحاً</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 37 ══ -->
+<div class="lesson-card" id="lesson-37">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 37</div><div class="lesson-header-text"><h2>HTML Semantic — الوسوم الدلالية</h2><p>header · nav · main · article · section · aside · footer — بنية صفحة احترافية</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-theory">📖</div>ما هي الوسوم الدلالية؟</div>
+      <div class="prose"><p>الوسوم الدلالية (Semantic HTML) هي عناصر تصف <strong>معنى</strong> المحتوى لا مجرد شكله. &lt;header&gt; يخبر المتصفح ومحركات البحث أن هذا ترويسة — وليس مجرد div. نتيجة: SEO أفضل، وصولية أفضل، كود أكثر قابلية للفهم.</p></div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-demo">🎨</div>هيكل صفحة دلالية كاملة</div>
+      <div class="semantic-demo">
+        <div class="sem-block sem-header"><div class="sem-label">&lt;header&gt;</div><div class="sem-text">الشعار · عنوان الموقع · شعار</div></div>
+        <div class="sem-block sem-nav"><div class="sem-label">&lt;nav&gt;</div><div class="sem-text">روابط التنقل الرئيسية</div></div>
+        <div class="sem-block sem-main"><div class="sem-label">&lt;main&gt;</div>
+          <div class="sem-block sem-article" style="margin-top:8px;"><div class="sem-label">&lt;article&gt;</div><div class="sem-text">مقالة · منشور مدونة</div></div>
+          <div class="sem-block sem-article"><div class="sem-label">&lt;section&gt;</div><div class="sem-text">قسم موضوعي ضمن المقالة</div></div>
+        </div>
+        <div class="sem-block sem-aside"><div class="sem-label">&lt;aside&gt;</div><div class="sem-text">شريط جانبي · إعلانات · وصلات ذات صلة</div></div>
+        <div class="sem-block sem-footer"><div class="sem-label">&lt;footer&gt;</div><div class="sem-text">حقوق الملكية · روابط قانونية · تواصل</div></div>
+      </div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-code">💻</div>الكود الكامل</div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML — Semantic Structure</span></div>
+<pre><span class="kw">&lt;header&gt;</span>
+  <span class="kw">&lt;h1&gt;</span><span class="tx">اسم الموقع</span><span class="tg">&lt;/h1&gt;</span>
+  <span class="kw">&lt;nav&gt;</span>
+    <span class="kw">&lt;a</span> <span class="at">href</span>=<span class="st">"/"</span><span class="kw">&gt;</span><span class="tx">الرئيسية</span><span class="tg">&lt;/a&gt;</span>
+    <span class="kw">&lt;a</span> <span class="at">href</span>=<span class="st">"/about"</span><span class="kw">&gt;</span><span class="tx">من نحن</span><span class="tg">&lt;/a&gt;</span>
+  <span class="tg">&lt;/nav&gt;</span>
+<span class="tg">&lt;/header&gt;</span>
+
+<span class="kw">&lt;main&gt;</span>
+  <span class="kw">&lt;article&gt;</span>
+    <span class="kw">&lt;h2&gt;</span><span class="tx">عنوان المقالة</span><span class="tg">&lt;/h2&gt;</span>
+    <span class="kw">&lt;section&gt;</span>
+      <span class="kw">&lt;h3&gt;</span><span class="tx">القسم الأول</span><span class="tg">&lt;/h3&gt;</span>
+      <span class="kw">&lt;p&gt;</span><span class="tx">محتوى...</span><span class="tg">&lt;/p&gt;</span>
+    <span class="tg">&lt;/section&gt;</span>
+  <span class="tg">&lt;/article&gt;</span>
+  <span class="kw">&lt;aside&gt;</span>
+    <span class="kw">&lt;h3&gt;</span><span class="tx">مقالات ذات صلة</span><span class="tg">&lt;/h3&gt;</span>
+  <span class="tg">&lt;/aside&gt;</span>
+<span class="tg">&lt;/main&gt;</span>
+
+<span class="kw">&lt;footer&gt;</span>
+  <span class="kw">&lt;p&gt;</span><span class="tx">© 2025 جميع الحقوق محفوظة</span><span class="tg">&lt;/p&gt;</span>
+<span class="tg">&lt;/footer&gt;</span></pre></div>
+      <table class="attr-table"><thead><tr><th>الوسم</th><th>يُستخدم لـ</th></tr></thead><tbody>
+        <tr><td><code>&lt;header&gt;</code></td><td>ترويسة الصفحة أو القسم — الشعار والعنوان</td></tr>
+        <tr><td><code>&lt;nav&gt;</code></td><td>روابط التنقل الرئيسية</td></tr>
+        <tr><td><code>&lt;main&gt;</code></td><td>المحتوى الرئيسي — مرة واحدة فقط في الصفحة</td></tr>
+        <tr><td><code>&lt;article&gt;</code></td><td>محتوى مستقل بذاته (مقالة، منشور، تعليق)</td></tr>
+        <tr><td><code>&lt;section&gt;</code></td><td>قسم موضوعي ضمن المحتوى</td></tr>
+        <tr><td><code>&lt;aside&gt;</code></td><td>محتوى جانبي — شريط جانبي أو ملاحظة</td></tr>
+        <tr><td><code>&lt;footer&gt;</code></td><td>تذييل الصفحة أو القسم</td></tr>
+        <tr><td><code>&lt;figure&gt; / &lt;figcaption&gt;</code></td><td>صورة مع وصف</td></tr>
+        <tr><td><code>&lt;time&gt;</code></td><td>تاريخ أو وقت</td></tr>
+        <tr><td><code>&lt;mark&gt;</code></td><td>نص مُظلَّل / مميَّز</td></tr>
+      </tbody></table>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>الوسوم الدلالية تُحسّن SEO لأن محركات البحث تفهم هيكل الصفحة</li><li>تُحسّن الوصولية لقارئات الشاشة للمكفوفين</li><li>تجعل الكود أسهل قراءةً وصيانةً من div soup</li><li>استخدم &lt;main&gt; مرة واحدة فقط في كل صفحة</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 38 ══ -->
+<div class="lesson-card" id="lesson-38">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 38</div><div class="lesson-header-text"><h2>ربط HTML مع CSS — الطرق الثلاث</h2><p>External · Internal · Inline — أيها تختار ومتى؟</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-theory">📖</div>الطرق الثلاث لإضافة CSS</div>
+      <div class="concept-grid">
+        <div class="concept-card"><div class="cc-icon">📄</div><div class="cc-title">External — ملف خارجي</div><div class="cc-desc">ملف .css منفصل مربوط بـ &lt;link&gt; — الأفضل دائماً للمشاريع الحقيقية</div></div>
+        <div class="concept-card"><div class="cc-icon">📝</div><div class="cc-title">Internal — داخل الصفحة</div><div class="cc-desc">داخل &lt;style&gt; في &lt;head&gt; — مقبول لصفحة واحدة أو نماذج أولية</div></div>
+        <div class="concept-card"><div class="cc-icon">🖊️</div><div class="cc-title">Inline — داخل العنصر</div><div class="cc-desc">خاصية style= مباشرة — تجنبه في الإنتاج — صعب الصيانة</div></div>
+      </div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-code">💻</div>الكود — الطرق الثلاث</div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML — CSS الثلاث طرق</span></div>
+<pre><span class="kw">&lt;head&gt;</span>
+  <span class="cm">&lt;!-- 1. External: الأفضل ✅ --&gt;</span>
+  <span class="kw">&lt;link</span> <span class="at">rel</span>=<span class="st">"stylesheet"</span> <span class="at">href</span>=<span class="st">"style.css"</span><span class="kw">&gt;</span>
+
+  <span class="cm">&lt;!-- 2. Internal: مقبول أحياناً ⚠️ --&gt;</span>
+  <span class="kw">&lt;style&gt;</span>
+    <span class="at">body</span> { <span class="at">background</span>: <span class="st">#F7F5F1</span>; }
+    <span class="at">h1</span>   { <span class="at">color</span>: <span class="st">#F4631E</span>; }
+  <span class="kw">&lt;/style&gt;</span>
+<span class="tg">&lt;/head&gt;</span>
+<span class="kw">&lt;body&gt;</span>
+  <span class="cm">&lt;!-- 3. Inline: تجنبه ❌ --&gt;</span>
+  <span class="kw">&lt;h1</span> <span class="at">style</span>=<span class="st">"color: orange; font-size: 2rem;"</span><span class="kw">&gt;</span>
+    <span class="tx">عنوان</span>
+  <span class="tg">&lt;/h1&gt;</span>
+<span class="tg">&lt;/body&gt;</span></pre></div>
+      <div class="note-box important"><div class="note-icon">🎯</div><div><strong>الأولوية (Specificity):</strong> Inline &gt; Internal &gt; External — الـ Inline يتغلب على الجميع. لذلك تجنبه لأنه يصعّب تعديل التصميم لاحقاً.</div></div>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>External CSS: الأفضل — ملف منفصل يُشارَك بين صفحات متعددة</li><li>Internal CSS: مقبول للنماذج والصفحات المستقلة</li><li>Inline CSS: تجنبه في المشاريع الحقيقية — يُعقّد الصيانة</li><li>الأولوية: Inline تفوز على الجميع</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 39 ══ -->
+<div class="lesson-card" id="lesson-39">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 39</div><div class="lesson-header-text"><h2>Sup و Sub — الأسي والمنخفض</h2><p>superscript · subscript — للصيغ الرياضية والكيميائية</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-demo">🎨</div>معاينة حية</div>
+      <div class="demo-box"><div class="demo-label">LIVE PREVIEW</div><div class="demo-content" style="font-size:1.1rem;line-height:2.5;">
+        <p>الماء: H<sub>2</sub>O &nbsp;&nbsp; ثاني أكسيد الكربون: CO<sub>2</sub></p>
+        <p>x² + y² = r² &nbsp;&nbsp; E = mc²</p>
+        <p>الحاصل: 5<sup>3</sup> = 125</p>
+        <p>ملاحظة<sup>[1]</sup> مرجع قابل للنقر</p>
+        <p>درجة الحرارة: 37°<sub>C</sub></p>
+      </div></div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-code">💻</div>الكود</div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML — Sup & Sub</span></div>
+<pre><span class="cm">&lt;!-- sup: نص مرتفع (superscript) --&gt;</span>
+<span class="kw">&lt;p&gt;</span><span class="tx">x</span><span class="kw">&lt;sup&gt;</span><span class="tx">2</span><span class="tg">&lt;/sup&gt;</span><span class="tx"> + y</span><span class="kw">&lt;sup&gt;</span><span class="tx">2</span><span class="tg">&lt;/sup&gt;</span><span class="tx"> = r</span><span class="kw">&lt;sup&gt;</span><span class="tx">2</span><span class="tg">&lt;/sup&gt;</span><span class="tg">&lt;/p&gt;</span>
+<span class="kw">&lt;p&gt;</span><span class="tx">هامش</span><span class="kw">&lt;sup&gt;</span><span class="tx">[1]</span><span class="tg">&lt;/sup&gt;&lt;/p&gt;</span>
+
+<span class="cm">&lt;!-- sub: نص منخفض (subscript) --&gt;</span>
+<span class="kw">&lt;p&gt;</span><span class="tx">H</span><span class="kw">&lt;sub&gt;</span><span class="tx">2</span><span class="tg">&lt;/sub&gt;</span><span class="tx">O</span><span class="tg">&lt;/p&gt;</span>
+<span class="kw">&lt;p&gt;</span><span class="tx">CO</span><span class="kw">&lt;sub&gt;</span><span class="tx">2</span><span class="tg">&lt;/sub&gt;&lt;/p&gt;</span></pre></div>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>&lt;sup&gt; نص مرتفع — للأسس والملاحظات المرجعية</li><li>&lt;sub&gt; نص منخفض — للصيغ الكيميائية ورموز العناصر</li><li>كلاهما inline — يقع داخل النص بدون سطر جديد</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 40 ══ -->
+<div class="lesson-card" id="lesson-40">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 40</div><div class="lesson-header-text"><h2>Fieldset و Legend</h2><p>تجميع حقول النموذج في مجموعات مصنّفة بصرياً</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-theory">📖</div>ما هما؟</div>
+      <div class="prose"><p><strong>&lt;fieldset&gt;</strong> يُجمّع حقولاً ذات صلة في إطار. <strong>&lt;legend&gt;</strong> يُضيف عنواناً لهذا الإطار يظهر في حدوده العلوية.</p></div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-demo">🎨</div>معاينة حية</div>
+      <div class="demo-box"><div class="demo-label">LIVE PREVIEW</div><div class="demo-content">
+        <fieldset style="border:2px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:14px;">
+          <legend style="font-weight:800;font-size:0.9rem;padding:0 10px;color:var(--orange);">📋 البيانات الشخصية</legend>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div><label style="font-size:0.82rem;font-weight:700;display:block;margin-bottom:5px;">الاسم</label><input type="text" placeholder="محمد" style="width:100%;padding:8px 12px;border:1.5px solid var(--border);border-radius:7px;font-family:'Tajawal',sans-serif;font-size:0.88rem;outline:none;"></div>
+            <div><label style="font-size:0.82rem;font-weight:700;display:block;margin-bottom:5px;">العمر</label><input type="number" placeholder="25" style="width:100%;padding:8px 12px;border:1.5px solid var(--border);border-radius:7px;font-family:'Tajawal',sans-serif;font-size:0.88rem;outline:none;"></div>
+          </div>
+        </fieldset>
+        <fieldset style="border:2px solid var(--border);border-radius:10px;padding:18px 22px;">
+          <legend style="font-weight:800;font-size:0.9rem;padding:0 10px;color:var(--blue);">📧 بيانات التواصل</legend>
+          <label style="font-size:0.82rem;font-weight:700;display:block;margin-bottom:5px;">البريد الإلكتروني</label>
+          <input type="email" placeholder="example@gmail.com" style="width:100%;padding:8px 12px;border:1.5px solid var(--border);border-radius:7px;font-family:'Tajawal',sans-serif;font-size:0.88rem;outline:none;" dir="ltr">
+        </fieldset>
+      </div></div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-code">💻</div>الكود</div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML — Fieldset & Legend</span></div>
+<pre><span class="kw">&lt;form&gt;</span>
+  <span class="kw">&lt;fieldset&gt;</span>
+    <span class="kw">&lt;legend&gt;</span><span class="tx">📋 البيانات الشخصية</span><span class="tg">&lt;/legend&gt;</span>
+    <span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"name"</span><span class="kw">&gt;</span><span class="tx">الاسم</span><span class="tg">&lt;/label&gt;</span>
+    <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"text"</span> <span class="at">id</span>=<span class="st">"name"</span> <span class="at">name</span>=<span class="st">"name"</span><span class="kw">&gt;</span>
+  <span class="tg">&lt;/fieldset&gt;</span>
+
+  <span class="kw">&lt;fieldset&gt;</span>
+    <span class="kw">&lt;legend&gt;</span><span class="tx">📧 بيانات التواصل</span><span class="tg">&lt;/legend&gt;</span>
+    <span class="kw">&lt;label</span> <span class="at">for</span>=<span class="st">"email"</span><span class="kw">&gt;</span><span class="tx">البريد</span><span class="tg">&lt;/label&gt;</span>
+    <span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"email"</span> <span class="at">id</span>=<span class="st">"email"</span> <span class="at">name</span>=<span class="st">"email"</span><span class="kw">&gt;</span>
+  <span class="tg">&lt;/fieldset&gt;</span>
+
+  <span class="kw">&lt;button</span> <span class="at">type</span>=<span class="st">"submit"</span><span class="kw">&gt;</span><span class="tx">إرسال</span><span class="tg">&lt;/button&gt;</span>
+<span class="tg">&lt;/form&gt;</span></pre></div>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>&lt;fieldset&gt; يُجمّع حقول ذات صلة في إطار بصري</li><li>&lt;legend&gt; يُضيف عنواناً يظهر في الحد العلوي للإطار</li><li>يُحسّن الوصولية — قارئات الشاشة تُعلن اسم المجموعة قبل كل حقل</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 41 ══ -->
+<div class="lesson-card" id="lesson-41">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 41</div><div class="lesson-header-text"><h2>id و Class — تحديد العناصر</h2><p>الفرق بين المعرّف الفريد والصنف القابل للتكرار</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-theory">📖</div>id vs class</div>
+      <div class="compare-grid">
+        <div class="compare-card" style="background:var(--orange-soft);border-color:var(--orange-border);">
+          <div class="cc-head" style="color:var(--orange);">🔑 id — معرّف فريد</div>
+          <ul><li>فريد لكل صفحة — لا يتكرر</li><li>في CSS: <code style="font-size:0.8rem">#id-name</code></li><li>للـ JavaScript والـ anchor links</li><li>أولوية أعلى من class في CSS</li></ul>
+        </div>
+        <div class="compare-card" style="background:var(--blue-soft);border-color:rgba(59,130,246,0.3);">
+          <div class="cc-head" style="color:var(--blue);">🏷️ class — صنف متكرر</div>
+          <ul><li>يمكن تطبيقه على عناصر متعددة</li><li>في CSS: <code style="font-size:0.8rem">.class-name</code></li><li>عنصر واحد يمكنه حمل أكثر من class</li><li>الأكثر استخداماً في المشاريع</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-code">💻</div>الكود</div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML + CSS — id & class</span></div>
+<pre><span class="cm">&lt;!-- HTML --&gt;</span>
+<span class="kw">&lt;div</span> <span class="at">id</span>=<span class="st">"main-header"</span> <span class="at">class</span>=<span class="st">"card featured"</span><span class="kw">&gt;</span>
+  <span class="tx">ترويسة رئيسية</span>
+<span class="tg">&lt;/div&gt;</span>
+<span class="kw">&lt;div</span> <span class="at">class</span>=<span class="st">"card"</span><span class="kw">&gt;</span><span class="tx">بطاقة عادية</span><span class="tg">&lt;/div&gt;</span>
+<span class="kw">&lt;div</span> <span class="at">class</span>=<span class="st">"card"</span><span class="kw">&gt;</span><span class="tx">بطاقة عادية</span><span class="tg">&lt;/div&gt;</span>
+
+<span class="cm">/* CSS */</span>
+<span class="cm">/* id — مرة واحدة فقط */</span>
+<span class="at">#main-header</span> { <span class="at">background</span>: <span class="st">#111</span>; <span class="at">color</span>: <span class="st">white</span>; }
+
+<span class="cm">/* class — يطبّق على الجميع */</span>
+<span class="at">.card</span>     { <span class="at">border</span>: <span class="st">1px solid #ddd</span>; <span class="at">padding</span>: <span class="st">16px</span>; }
+<span class="at">.featured</span> { <span class="at">border-color</span>: <span class="st">#F4631E</span>; }
+
+<span class="cm">/* anchor link بـ id */</span></pre></div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">Anchor Links بـ id</span></div>
+<pre><span class="cm">&lt;!-- رابط للقفز لقسم معين --&gt;</span>
+<span class="kw">&lt;a</span> <span class="at">href</span>=<span class="st">"#contact"</span><span class="kw">&gt;</span><span class="tx">تواصل معنا</span><span class="tg">&lt;/a&gt;</span>
+
+<span class="cm">&lt;!-- القسم المستهدف --&gt;</span>
+<span class="kw">&lt;section</span> <span class="at">id</span>=<span class="st">"contact"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;h2&gt;</span><span class="tx">تواصل معنا</span><span class="tg">&lt;/h2&gt;</span>
+<span class="tg">&lt;/section&gt;</span></pre></div>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>id فريد لكل صفحة — class قابل للتكرار على عناصر متعددة</li><li>عنصر يمكنه حمل عدة classes مفصولة بمسافة</li><li>id في CSS يبدأ بـ # وclass بـ .</li><li>id مفيد للـ anchor links وJavaScript — class للتصميم</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 42 ══ -->
+<div class="lesson-card" id="lesson-42">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 42</div><div class="lesson-header-text"><h2>Favicon — أيقونة الموقع</h2><p>الأيقونة الصغيرة في تبويب المتصفح ونتائج البحث</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-theory">📖</div>ما هو Favicon؟</div>
+      <div class="prose"><p>Favicon هي الأيقونة الصغيرة التي تظهر في تبويب المتصفح، نتائج بحث Google، وقائمة المفضلة. تُضاف داخل &lt;head&gt; بوسم &lt;link&gt;.</p></div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-code">💻</div>الكود الكامل</div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML — Favicon</span></div>
+<pre><span class="kw">&lt;head&gt;</span>
+  <span class="cm">&lt;!-- .ico — الأساسي، يعمل في كل المتصفحات --&gt;</span>
+  <span class="kw">&lt;link</span> <span class="at">rel</span>=<span class="st">"icon"</span> <span class="at">href</span>=<span class="st">"favicon.ico"</span><span class="kw">&gt;</span>
+
+  <span class="cm">&lt;!-- PNG — أفضل جودة --&gt;</span>
+  <span class="kw">&lt;link</span> <span class="at">rel</span>=<span class="st">"icon"</span>
+        <span class="at">type</span>=<span class="st">"image/png"</span>
+        <span class="at">href</span>=<span class="st">"favicon-32x32.png"</span>
+        <span class="at">sizes</span>=<span class="st">"32x32"</span><span class="kw">&gt;</span>
+
+  <span class="cm">&lt;!-- لأجهزة Apple --&gt;</span>
+  <span class="kw">&lt;link</span> <span class="at">rel</span>=<span class="st">"apple-touch-icon"</span>
+        <span class="at">href</span>=<span class="st">"apple-touch-icon.png"</span>
+        <span class="at">sizes</span>=<span class="st">"180x180"</span><span class="kw">&gt;</span>
+
+  <span class="cm">&lt;!-- SVG — قابل للتكبير بلا جودة --&gt;</span>
+  <span class="kw">&lt;link</span> <span class="at">rel</span>=<span class="st">"icon"</span>
+        <span class="at">type</span>=<span class="st">"image/svg+xml"</span>
+        <span class="at">href</span>=<span class="st">"favicon.svg"</span><span class="kw">&gt;</span>
+<span class="tg">&lt;/head&gt;</span></pre></div>
+      <div class="note-box tip"><div class="note-icon">💡</div><div>لإنشاء favicon من أي صورة مجاناً: استخدم <strong>favicon.io</strong> أو <strong>realfavicongenerator.net</strong> — يولّدان جميع الأحجام تلقائياً.</div></div>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>Favicon تظهر في التبويب والمفضلة ونتائج البحث</li><li>ico. الأكثر توافقاً — PNG وSVG للأجهزة الحديثة</li><li>apple-touch-icon لأجهزة iOS عند إضافة الموقع للشاشة الرئيسية</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 43 ══ -->
+<div class="lesson-card" id="lesson-43">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 43</div><div class="lesson-header-text"><h2>Meta SEO — تحسين محركات البحث</h2><p>description · keywords · robots · author — كيف تظهر صفحتك في Google</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-theory">📖</div>Meta SEO الأساسية</div>
+      <div class="prose"><p>هذه الوسوم تُخبر محركات البحث بمحتوى الصفحة وكيفية فهرستها. <strong>description</strong> يظهر مباشرة تحت العنوان في نتائج Google.</p></div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-code">💻</div>الكود الكامل</div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML — Meta SEO</span></div>
+<pre><span class="kw">&lt;head&gt;</span>
+  <span class="cm">&lt;!-- العنوان — 50-60 حرف مثالي --&gt;</span>
+  <span class="kw">&lt;title&gt;</span><span class="tx">دورة HTML وCSS بالعربية | ISPITS</span><span class="tg">&lt;/title&gt;</span>
+
+  <span class="cm">&lt;!-- الوصف — 150-160 حرف، يظهر في Google --&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="at">name</span>=<span class="st">"description"</span>
+        <span class="at">content</span>=<span class="st">"تعلّم HTML وCSS من الصفر حتى
+        الاحتراف — 60 درساً مجاناً بالعربية"</span><span class="kw">&gt;</span>
+
+  <span class="cm">&lt;!-- الكلمات المفتاحية (أقل أهمية اليوم) --&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="at">name</span>=<span class="st">"keywords"</span>
+        <span class="at">content</span>=<span class="st">"HTML, CSS, تعلم البرمجة, عربي"</span><span class="kw">&gt;</span>
+
+  <span class="cm">&lt;!-- المؤلف --&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="at">name</span>=<span class="st">"author"</span> <span class="at">content</span>=<span class="st">"زكرياء"</span><span class="kw">&gt;</span>
+
+  <span class="cm">&lt;!-- توجيهات لمحركات البحث --&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="at">name</span>=<span class="st">"robots"</span>
+        <span class="at">content</span>=<span class="st">"index, follow"</span><span class="kw">&gt;</span>
+
+  <span class="cm">&lt;!-- الرابط الأساسي للصفحة --&gt;</span>
+  <span class="kw">&lt;link</span> <span class="at">rel</span>=<span class="st">"canonical"</span>
+        <span class="at">href</span>=<span class="st">"https://mysite.com/html-course"</span><span class="kw">&gt;</span>
+<span class="tg">&lt;/head&gt;</span></pre></div>
+      <table class="attr-table"><thead><tr><th>الوسم</th><th>الوظيفة</th><th>الأهمية</th></tr></thead><tbody>
+        <tr><td><code>&lt;title&gt;</code></td><td>عنوان الصفحة في Google والتبويب</td><td>🔥 حاسم</td></tr>
+        <tr><td><code>description</code></td><td>الوصف الذي يظهر تحت العنوان في Google</td><td>🔥 مهم جداً</td></tr>
+        <tr><td><code>robots</code></td><td>index/noindex — هل تُفهرسها محركات البحث؟</td><td>⚠️ مهم</td></tr>
+        <tr><td><code>canonical</code></td><td>يمنع تكرار المحتوى في محركات البحث</td><td>⚠️ مهم</td></tr>
+        <tr><td><code>keywords</code></td><td>كلمات مفتاحية — تجاهلها Google اليوم</td><td>💤 ضعيف</td></tr>
+      </tbody></table>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>&lt;title&gt; أهم عنصر SEO — يظهر في Google وفي التبويب</li><li>description يظهر تحت العنوان في نتائج البحث — اجعله مقنعاً</li><li>robots="index, follow" يسمح لـ Google بالفهرسة والمتابعة</li><li>canonical يمنع تكرار المحتوى بين صفحات متعددة</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 44 ══ -->
+<div class="lesson-card" id="lesson-44">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 44</div><div class="lesson-header-text"><h2>Code · Abbr · Dfn</h2><p>وسوم النصوص التقنية والاختصارات والتعريفات</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-demo">🎨</div>معاينة حية</div>
+      <div class="demo-box"><div class="demo-label">LIVE PREVIEW</div><div class="demo-content" style="line-height:2.2;">
+        <p>استخدم وسم <code style="background:var(--code-bg);color:#A6E3A1;padding:2px 7px;border-radius:4px;font-family:'Fira Code',monospace;font-size:0.88rem;">&lt;p&gt;</code> للفقرات.</p>
+        <p>منظمة <abbr title="World Wide Web Consortium">W3C</abbr> هي من تضع معايير الويب.</p>
+        <p><dfn>HTML</dfn> هي لغة ترميز النص التشعبي المستخدمة لبناء صفحات الويب.</p>
+        <p>اضغط <kbd style="background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:2px 7px;font-family:'Fira Code',monospace;font-size:0.85rem;">Ctrl+S</kbd> للحفظ.</p>
+      </div></div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-code">💻</div>الكود</div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML — Code, Abbr, Dfn, Kbd</span></div>
+<pre><span class="cm">&lt;!-- code: كود برمجي مضمّن --&gt;</span>
+<span class="kw">&lt;p&gt;</span><span class="tx">استخدم </span><span class="kw">&lt;code&gt;</span><span class="tx">console.log()</span><span class="tg">&lt;/code&gt;</span><span class="tx"> لطباعة النتائج.</span><span class="tg">&lt;/p&gt;</span>
+
+<span class="cm">&lt;!-- abbr: اختصار مع tooltip --&gt;</span>
+<span class="kw">&lt;p&gt;</span>
+  <span class="kw">&lt;abbr</span> <span class="at">title</span>=<span class="st">"HyperText Markup Language"</span><span class="kw">&gt;</span>
+    <span class="tx">HTML</span>
+  <span class="tg">&lt;/abbr&gt;</span>
+  <span class="tx"> لغة ترميز صفحات الويب.</span>
+<span class="tg">&lt;/p&gt;</span>
+
+<span class="cm">&lt;!-- dfn: تعريف مصطلح --&gt;</span>
+<span class="kw">&lt;p&gt;</span>
+  <span class="kw">&lt;dfn&gt;</span><span class="tx">CSS</span><span class="tg">&lt;/dfn&gt;</span>
+  <span class="tx"> هي لغة تصميم صفحات الويب.</span>
+<span class="tg">&lt;/p&gt;</span>
+
+<span class="cm">&lt;!-- kbd: مفاتيح لوحة المفاتيح --&gt;</span>
+<span class="kw">&lt;p&gt;</span><span class="tx">للحفظ: </span><span class="kw">&lt;kbd&gt;</span><span class="tx">Ctrl</span><span class="tg">&lt;/kbd&gt;</span><span class="tx"> + </span><span class="kw">&lt;kbd&gt;</span><span class="tx">S</span><span class="tg">&lt;/kbd&gt;&lt;/p&gt;</span>
+
+<span class="cm">&lt;!-- samp: ناتج برنامج --&gt;</span>
+<span class="kw">&lt;p&gt;</span><span class="tx">الناتج: </span><span class="kw">&lt;samp&gt;</span><span class="tx">Hello, World!</span><span class="tg">&lt;/samp&gt;&lt;/p&gt;</span></pre></div>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>&lt;code&gt; لكود برمجي مضمّن داخل جملة — مع &lt;pre&gt; للكتل</li><li>&lt;abbr title="..."&gt; اختصار مع tooltip عند التمرير</li><li>&lt;dfn&gt; أول تعريف لمصطلح في النص</li><li>&lt;kbd&gt; لمفاتيح لوحة المفاتيح — &lt;samp&gt; لناتج البرنامج</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 45 ══ -->
+<div class="lesson-card" id="lesson-45">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 45</div><div class="lesson-header-text"><h2>Open Graph — مشاركة فيسبوك</h2><p>og:title · og:description · og:image — كيف تظهر صفحتك عند مشاركتها</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-theory">📖</div>ما هو Open Graph؟</div>
+      <div class="prose"><p>عند مشاركة رابط موقعك على Facebook أو LinkedIn أو WhatsApp، تظهر بطاقة مع صورة وعنوان ووصف. هذه البطاقة تُبنى من وسوم <strong>Open Graph</strong> التي تضعها في &lt;head&gt;.</p></div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-demo">🎨</div>معاينة بطاقة المشاركة</div>
+      <div class="og-card">
+        <div class="og-img">🌐</div>
+        <div class="og-body">
+          <div class="og-site">mysite.com</div>
+          <div class="og-title">دورة HTML وCSS بالعربية | ISPITS</div>
+          <div class="og-desc">تعلّم HTML وCSS من الصفر حتى الاحتراف — 60 درساً مجاناً بالعربية مع المحاضر زكرياء</div>
+        </div>
+      </div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-code">💻</div>الكود الكامل</div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML — Open Graph Tags</span></div>
+<pre><span class="kw">&lt;head&gt;</span>
+  <span class="cm">&lt;!-- Open Graph الأساسية --&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="at">property</span>=<span class="st">"og:type"</span>
+        <span class="at">content</span>=<span class="st">"website"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="at">property</span>=<span class="st">"og:url"</span>
+        <span class="at">content</span>=<span class="st">"https://mysite.com/html-course"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="at">property</span>=<span class="st">"og:title"</span>
+        <span class="at">content</span>=<span class="st">"دورة HTML وCSS بالعربية"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="at">property</span>=<span class="st">"og:description"</span>
+        <span class="at">content</span>=<span class="st">"60 درساً من الصفر للاحتراف"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="at">property</span>=<span class="st">"og:image"</span>
+        <span class="at">content</span>=<span class="st">"https://mysite.com/og-image.jpg"</span><span class="kw">&gt;</span>
+
+  <span class="cm">&lt;!-- أبعاد الصورة الموصى بها: 1200×630 --&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="at">property</span>=<span class="st">"og:image:width"</span>  <span class="at">content</span>=<span class="st">"1200"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="at">property</span>=<span class="st">"og:image:height"</span> <span class="at">content</span>=<span class="st">"630"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="at">property</span>=<span class="st">"og:locale"</span>       <span class="at">content</span>=<span class="st">"ar_MA"</span><span class="kw">&gt;</span>
+<span class="tg">&lt;/head&gt;</span></pre></div>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>Open Graph يتحكم بشكل الرابط عند مشاركته على التواصل الاجتماعي</li><li>og:image الأبعاد المثلى: 1200×630 بيكسل</li><li>بدون og:image قد يختار Facebook صورة عشوائية من الصفحة</li><li>استخدم og:validators.opengraph.me لاختبار البطاقة</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 46 ══ -->
+<div class="lesson-card" id="lesson-46">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 46</div><div class="lesson-header-text"><h2>رابط التحميل — download</h2><p>خاصية download في &lt;a&gt; — تحميل ملف بدلاً من فتحه</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-code">💻</div>الكود</div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML — Download Link</span></div>
+<pre><span class="cm">&lt;!-- تحميل مع اسم ملف مخصص --&gt;</span>
+<span class="kw">&lt;a</span> <span class="at">href</span>=<span class="st">"files/report.pdf"</span>
+   <span class="at">download</span>=<span class="st">"التقرير-السنوي-2025.pdf"</span><span class="kw">&gt;</span>
+  <span class="tx">⬇️ تحميل التقرير</span>
+<span class="tg">&lt;/a&gt;</span>
+
+<span class="cm">&lt;!-- تحميل بالاسم الأصلي للملف --&gt;</span>
+<span class="kw">&lt;a</span> <span class="at">href</span>=<span class="st">"cv.pdf"</span> <span class="at">download</span><span class="kw">&gt;</span>
+  <span class="tx">📄 تحميل السيرة الذاتية</span>
+<span class="tg">&lt;/a&gt;</span>
+
+<span class="cm">&lt;!-- فتح في تبويب جديد (بدون تحميل) --&gt;</span>
+<span class="kw">&lt;a</span> <span class="at">href</span>=<span class="st">"cv.pdf"</span> <span class="at">target</span>=<span class="st">"_blank"</span><span class="kw">&gt;</span>
+  <span class="tx">👁️ معاينة السيرة الذاتية</span>
+<span class="tg">&lt;/a&gt;</span>
+
+<span class="cm">&lt;!-- تحميل صورة --&gt;</span>
+<span class="kw">&lt;a</span> <span class="at">href</span>=<span class="st">"photo.jpg"</span>
+   <span class="at">download</span>=<span class="st">"صورتي.jpg"</span><span class="kw">&gt;</span>
+  <span class="tx">🖼️ تحميل الصورة</span>
+<span class="tg">&lt;/a&gt;</span></pre></div>
+      <div class="note-box warning"><div class="note-icon">⚠️</div><div>خاصية <code style="font-family:'Fira Code',monospace">download</code> تعمل فقط مع ملفات من نفس النطاق (same-origin). لن تعمل مع روابط لمواقع خارجية.</div></div>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>download بدون قيمة يحمّل الملف باسمه الأصلي</li><li>download="اسم.pdf" يُغيّر اسم الملف المحمّل</li><li>تعمل فقط مع same-origin — لا مع روابط خارجية</li><li>target="_blank" لفتح بتبويب جديد بدون تحميل</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 47 ══ -->
+<div class="lesson-card" id="lesson-47">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 47</div><div class="lesson-header-text"><h2>Blockquote و Center</h2><p>اقتباسات نصية وتوسيط المحتوى</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-demo">🎨</div>معاينة</div>
+      <div class="demo-box"><div class="demo-label">LIVE PREVIEW</div><div class="demo-content">
+        <blockquote style="border-right:4px solid var(--orange);padding:14px 20px;margin:0 0 16px;background:var(--orange-soft);border-radius:0 10px 10px 0;font-style:italic;color:var(--text);">
+          "البرمجة ليست عن ما تعرفه — بل عن ما يمكنك معرفته"
+          <footer style="margin-top:8px;font-size:0.82rem;color:var(--text-soft);font-style:normal;">— مجهول</footer>
+        </blockquote>
+        <p style="text-align:center;color:var(--text-soft);font-size:0.88rem;">نص في المنتصف باستخدام CSS text-align: center</p>
+      </div></div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-code">💻</div>الكود</div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML — Blockquote & Center</span></div>
+<pre><span class="cm">&lt;!-- اقتباس مع مصدر --&gt;</span>
+<span class="kw">&lt;blockquote</span> <span class="at">cite</span>=<span class="st">"https://source.com"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;p&gt;</span><span class="tx">البرمجة فن حل المشكلات.</span><span class="tg">&lt;/p&gt;</span>
+  <span class="kw">&lt;footer&gt;</span>
+    <span class="tx">— </span><span class="kw">&lt;cite&gt;</span><span class="tx">كتاب البرمجة الاحترافية</span><span class="tg">&lt;/cite&gt;</span>
+  <span class="tg">&lt;/footer&gt;</span>
+<span class="tg">&lt;/blockquote&gt;</span>
+
+<span class="cm">&lt;!-- اقتباس داخل سطر (inline) --&gt;</span>
+<span class="kw">&lt;p&gt;</span>
+  <span class="tx">كما قال ستيف جوبز </span>
+  <span class="kw">&lt;q&gt;</span><span class="tx">Stay hungry, stay foolish</span><span class="tg">&lt;/q&gt;</span>
+<span class="tg">&lt;/p&gt;</span>
+
+<span class="cm">&lt;!-- توسيط بـ CSS (لا تستخدم &lt;center&gt; القديمة) --&gt;</span>
+<span class="kw">&lt;div</span> <span class="at">style</span>=<span class="st">"text-align: center;"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;img</span> <span class="at">src</span>=<span class="st">"logo.png"</span> <span class="at">alt</span>=<span class="st">"الشعار"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;p&gt;</span><span class="tx">نص في المنتصف</span><span class="tg">&lt;/p&gt;</span>
+<span class="tg">&lt;/div&gt;</span></pre></div>
+      <div class="note-box warning"><div class="note-icon">⚠️</div><div>وسم <code style="font-family:'Fira Code',monospace">&lt;center&gt;</code> قديم ومهجور في HTML5 — استخدم <code style="font-family:'Fira Code',monospace">text-align: center</code> في CSS.</div></div>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>&lt;blockquote&gt; للاقتباسات الطويلة — &lt;q&gt; للاقتباسات القصيرة inline</li><li>cite= يُشير لمصدر الاقتباس — &lt;cite&gt; يُسمّي المصدر بصرياً</li><li>&lt;center&gt; مهجور — استخدم CSS text-align: center</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 48 ══ -->
+<div class="lesson-card" id="lesson-48">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 48</div><div class="lesson-header-text"><h2>Contenteditable و Script</h2><p>جعل أي عنصر قابلاً للتعديل — وإضافة JavaScript مضمّن</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-demo">🎨</div>جرّب بنفسك — contenteditable</div>
+      <div class="demo-box"><div class="demo-label">LIVE — انقر على النص وعدّله!</div><div class="demo-content">
+        <div contenteditable="true" style="border:2px dashed var(--orange-border);border-radius:10px;padding:16px 20px;font-size:0.95rem;min-height:60px;outline:none;background:var(--orange-soft);color:var(--text);cursor:text;" title="انقر هنا وعدّل النص">
+          ✏️ انقر هنا وابدأ الكتابة — هذا النص قابل للتعديل مباشرةً!
+        </div>
+      </div></div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-code">💻</div>الكود</div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML — Contenteditable & Script</span></div>
+<pre><span class="cm">&lt;!-- أي عنصر قابل للتعديل --&gt;</span>
+<span class="kw">&lt;div</span> <span class="at">contenteditable</span>=<span class="st">"true"</span><span class="kw">&gt;</span>
+  <span class="tx">انقر هنا وعدّل النص!</span>
+<span class="tg">&lt;/div&gt;</span>
+
+<span class="kw">&lt;p</span> <span class="at">contenteditable</span>=<span class="st">"true"</span><span class="kw">&gt;</span><span class="tx">فقرة قابلة للتعديل</span><span class="tg">&lt;/p&gt;</span>
+
+<span class="cm">&lt;!-- منع التعديل على عنصر فرعي --&gt;</span>
+<span class="kw">&lt;div</span> <span class="at">contenteditable</span>=<span class="st">"true"</span><span class="kw">&gt;</span>
+  <span class="tx">قابل للتعديل</span>
+  <span class="kw">&lt;span</span> <span class="at">contenteditable</span>=<span class="st">"false"</span><span class="kw">&gt;</span>
+    <span class="tx">غير قابل للتعديل</span>
+  <span class="tg">&lt;/span&gt;</span>
+<span class="tg">&lt;/div&gt;</span>
+
+<span class="cm">&lt;!-- script مضمّن --&gt;</span>
+<span class="kw">&lt;button</span> <span class="at">onclick</span>=<span class="st">"showMsg()"</span><span class="kw">&gt;</span><span class="tx">اضغط</span><span class="tg">&lt;/button&gt;</span>
+
+<span class="kw">&lt;script&gt;</span>
+  <span class="at">function</span> <span class="tx">showMsg</span>() {
+    <span class="tx">alert</span>(<span class="st">'مرحباً من JavaScript!'</span>);
+  }
+<span class="kw">&lt;/script&gt;</span></pre></div>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>contenteditable="true" يجعل أي عنصر HTML قابلاً للتعديل من المتصفح</li><li>contenteditable="false" داخل عنصر قابل يمنع تعديل جزء منه</li><li>&lt;script&gt; يُضيف JavaScript — الأفضل ملف خارجي .js</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 49 ══ -->
+<div class="lesson-card" id="lesson-49">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 49</div><div class="lesson-header-text"><h2>عنصر Dialog — النافذة المنبثقة</h2><p>النافذة المنبثقة HTML5 الأصيلة بدون JavaScript خارجي</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-demo">🎨</div>جرّب الـ Dialog</div>
+      <div class="demo-box"><div class="demo-label">LIVE DEMO</div><div class="demo-content" style="text-align:center;">
+        <button class="dialog-demo-btn" onclick="document.getElementById('myDialog').showModal()">🎯 افتح النافذة المنبثقة</button>
+        <dialog id="myDialog">
+          <div class="dialog-inner">
+            <h3>✅ عنصر &lt;dialog&gt;</h3>
+            <p>هذه نافذة منبثقة HTML5 حقيقية — بدون مكتبات خارجية!</p>
+            <button onclick="document.getElementById('myDialog').close()">إغلاق ×</button>
+          </div>
+        </dialog>
+      </div></div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-code">💻</div>الكود</div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML — Dialog Element</span></div>
+<pre><span class="cm">&lt;!-- تعريف الـ dialog --&gt;</span>
+<span class="kw">&lt;dialog</span> <span class="at">id</span>=<span class="st">"confirm-dialog"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;h2&gt;</span><span class="tx">تأكيد الحذف</span><span class="tg">&lt;/h2&gt;</span>
+  <span class="kw">&lt;p&gt;</span><span class="tx">هل أنت متأكد من حذف هذا العنصر؟</span><span class="tg">&lt;/p&gt;</span>
+  <span class="kw">&lt;button</span> <span class="at">onclick</span>=<span class="st">"document.getElementById(
+    'confirm-dialog').close()"</span><span class="kw">&gt;</span>
+    <span class="tx">إلغاء</span>
+  <span class="tg">&lt;/button&gt;</span>
+  <span class="kw">&lt;button&gt;</span><span class="tx">تأكيد الحذف</span><span class="tg">&lt;/button&gt;</span>
+<span class="tg">&lt;/dialog&gt;</span>
+
+<span class="cm">&lt;!-- فتح كـ modal (مع backdrop) --&gt;</span>
+<span class="kw">&lt;button</span>
+  <span class="at">onclick</span>=<span class="st">"document.getElementById(
+    'confirm-dialog').showModal()"</span><span class="kw">&gt;</span>
+  <span class="tx">حذف</span>
+<span class="tg">&lt;/button&gt;</span>
+
+<span class="cm">&lt;!-- فتح بدون backdrop --&gt;</span>
+<span class="kw">&lt;button</span>
+  <span class="at">onclick</span>=<span class="st">"document.getElementById(
+    'confirm-dialog').show()"</span><span class="kw">&gt;</span>
+  <span class="tx">فتح</span>
+<span class="tg">&lt;/button&gt;</span></pre></div>
+      <table class="attr-table"><thead><tr><th>الدالة</th><th>الوظيفة</th></tr></thead><tbody>
+        <tr><td><code>.showModal()</code></td><td>يفتح كـ modal مع خلفية داكنة (backdrop)</td></tr>
+        <tr><td><code>.show()</code></td><td>يفتح بدون backdrop — بسيط</td></tr>
+        <tr><td><code>.close()</code></td><td>يغلق النافذة</td></tr>
+        <tr><td><code>open</code> (attribute)</td><td>يفتح النافذة مباشرة بدون JS</td></tr>
+      </tbody></table>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>&lt;dialog&gt; نافذة منبثقة HTML5 أصيلة بدون مكتبات</li><li>showModal() يفتح مع backdrop داكن ويمنع النقر خارجها</li><li>العنصر يدعم ::backdrop لتخصيص الخلفية بالـ CSS</li><li>يمكن إغلاقها بـ Esc تلقائياً عند استخدام showModal</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 50 ══ -->
+<div class="lesson-card" id="lesson-50">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 50</div><div class="lesson-header-text"><h2>Twitter / X Meta Cards</h2><p>twitter:card · twitter:title · twitter:image — بطاقة المشاركة على تويتر</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-code">💻</div>الكود الكامل</div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML — Twitter Card Meta</span></div>
+<pre><span class="kw">&lt;head&gt;</span>
+  <span class="cm">&lt;!-- نوع البطاقة --&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="at">name</span>=<span class="st">"twitter:card"</span>
+        <span class="at">content</span>=<span class="st">"summary_large_image"</span><span class="kw">&gt;</span>
+
+  <span class="cm">&lt;!-- حساب التويتر (اختياري) --&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="at">name</span>=<span class="st">"twitter:site"</span>
+        <span class="at">content</span>=<span class="st">"@youraccount"</span><span class="kw">&gt;</span>
+
+  <span class="cm">&lt;!-- عنوان البطاقة --&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="at">name</span>=<span class="st">"twitter:title"</span>
+        <span class="at">content</span>=<span class="st">"دورة HTML وCSS بالعربية"</span><span class="kw">&gt;</span>
+
+  <span class="cm">&lt;!-- وصف البطاقة --&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="at">name</span>=<span class="st">"twitter:description"</span>
+        <span class="at">content</span>=<span class="st">"60 درساً مجاناً بالعربية"</span><span class="kw">&gt;</span>
+
+  <span class="cm">&lt;!-- صورة البطاقة --&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="at">name</span>=<span class="st">"twitter:image"</span>
+        <span class="at">content</span>=<span class="st">"https://mysite.com/card.jpg"</span><span class="kw">&gt;</span>
+<span class="tg">&lt;/head&gt;</span></pre></div>
+      <div class="note-box info"><div class="note-icon">💡</div><div><strong>summary vs summary_large_image:</strong> <code style="font-family:'Fira Code',monospace">summary</code> صورة صغيرة على اليسار. <code style="font-family:'Fira Code',monospace">summary_large_image</code> صورة كبيرة في الأعلى — أكثر جاذبيةً.</div></div>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>Twitter Cards تتحكم في شكل الرابط عند مشاركته على X</li><li>summary_large_image الأفضل للمواقع التي تريد جذب الانتباه</li><li>إذا وُجدت og: tags فـ Twitter يستخدمها كبديل تلقائياً</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 51 ══ -->
+<div class="lesson-card" id="lesson-51">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 51</div><div class="lesson-header-text"><h2>عنصر Marquee</h2><p>النص المتحرك — تاريخه وبديله الحديث</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-demo">🎨</div>معاينة</div>
+      <div class="marquee-demo">
+        <marquee>🌟 مرحباً بكم في دورة HTML و CSS الاحترافية بالعربية — 60 درساً مجاناً مع المحاضر زكرياء 🌟</marquee>
+      </div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-code">💻</div>الكود والبديل الحديث</div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML — Marquee + CSS Alternative</span></div>
+<pre><span class="cm">&lt;!-- الطريقة القديمة (مهجورة) ❌ --&gt;</span>
+<span class="kw">&lt;marquee</span>
+  <span class="at">behavior</span>=<span class="st">"scroll"</span>
+  <span class="at">direction</span>=<span class="st">"right"</span>
+  <span class="at">scrollamount</span>=<span class="st">"5"</span>
+<span class="kw">&gt;</span>
+  <span class="tx">نص متحرك قديم</span>
+<span class="tg">&lt;/marquee&gt;</span>
+
+<span class="cm">/* البديل الحديث بـ CSS ✅ */</span>
+<span class="kw">&lt;div</span> <span class="at">class</span>=<span class="st">"ticker"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;span&gt;</span><span class="tx">🌟 نص متحرك احترافي بـ CSS Animation</span><span class="tg">&lt;/span&gt;</span>
+<span class="tg">&lt;/div&gt;</span>
+
+<span class="kw">&lt;style&gt;</span>
+<span class="at">.ticker</span>     { <span class="at">overflow</span>: <span class="st">hidden</span>; <span class="at">white-space</span>: <span class="st">nowrap</span>; }
+<span class="at">.ticker span</span> { <span class="at">display</span>: <span class="st">inline-block</span>;
+               <span class="at">animation</span>: <span class="st">scroll 12s linear infinite</span>; }
+<span class="at">@keyframes scroll</span> {
+  <span class="at">from</span> { <span class="at">transform</span>: <span class="st">translateX(100%)</span>; }
+  <span class="at">to</span>   { <span class="at">transform</span>: <span class="st">translateX(-100%)</span>; }
+}
+<span class="kw">&lt;/style&gt;</span></pre></div>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>&lt;marquee&gt; مهجور في HTML5 — لكن لا يزال يعمل في المتصفحات</li><li>البديل الاحترافي: CSS animation مع @keyframes</li><li>لا تستخدم marquee في مشاريع حقيقية — استخدم CSS أو JavaScript</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 52 ══ -->
+<div class="lesson-card" id="lesson-52">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 52</div><div class="lesson-header-text"><h2>رسائل الخطأ في النماذج</h2><p>HTML5 Form Validation — التحقق المدمج بدون JavaScript</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-theory">📖</div>التحقق المدمج في HTML5</div>
+      <div class="prose"><p>HTML5 يوفّر تحققاً أصيلاً من البيانات بدون JavaScript — فقط بإضافة خصائص على حقول النموذج. المتصفح يعرض رسائل خطأ تلقائية عند محاولة إرسال النموذج بيانات غير صحيحة.</p></div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-demo">🎨</div>جرّب — اضغط إرسال بدون تعبئة</div>
+      <div class="demo-box"><div class="demo-label">LIVE FORM VALIDATION</div><div class="demo-content">
+        <form onsubmit="event.preventDefault();alert('✅ النموذج صحيح — تم الإرسال!')" style="display:flex;flex-direction:column;gap:12px;max-width:380px;">
+          <div><label style="display:block;font-size:0.82rem;font-weight:700;margin-bottom:5px;">الاسم (3-50 حرفاً) *</label><input type="text" required minlength="3" maxlength="50" placeholder="أدخل اسمك" style="width:100%;padding:9px 13px;border:1.5px solid var(--border);border-radius:8px;font-family:'Tajawal',sans-serif;font-size:0.9rem;outline:none;"></div>
+          <div><label style="display:block;font-size:0.82rem;font-weight:700;margin-bottom:5px;">البريد الإلكتروني *</label><input type="email" required placeholder="example@gmail.com" style="width:100%;padding:9px 13px;border:1.5px solid var(--border);border-radius:8px;font-family:'Tajawal',sans-serif;font-size:0.9rem;outline:none;" dir="ltr"></div>
+          <div><label style="display:block;font-size:0.82rem;font-weight:700;margin-bottom:5px;">العمر (18-99) *</label><input type="number" required min="18" max="99" placeholder="25" style="width:100%;padding:9px 13px;border:1.5px solid var(--border);border-radius:8px;font-family:'Tajawal',sans-serif;font-size:0.9rem;outline:none;"></div>
+          <button type="submit" style="background:var(--orange);color:white;border:none;padding:12px;border-radius:8px;font-family:'Tajawal',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;">إرسال النموذج</button>
+        </form>
+      </div></div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-code">💻</div>خصائص التحقق</div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML — Form Validation</span></div>
+<pre><span class="cm">&lt;!-- حقل إلزامي --&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"text"</span> <span class="at">required</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- طول النص --&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"text"</span> <span class="at">minlength</span>=<span class="st">"3"</span> <span class="at">maxlength</span>=<span class="st">"50"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- نطاق الأرقام --&gt;</span>
+<span class="kw">&lt;input</span> <span class="at">type</span>=<span class="st">"number"</span> <span class="at">min</span>=<span class="st">"18"</span> <span class="at">max</span>=<span class="st">"99"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- نمط regex --&gt;</span>
+<span class="kw">&lt;input</span>
+  <span class="at">type</span>=<span class="st">"text"</span>
+  <span class="at">pattern</span>=<span class="st">"[0-9]{6}"</span>
+  <span class="at">title</span>=<span class="st">"أدخل 6 أرقام فقط"</span>
+<span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- رسالة خطأ مخصصة عبر JS --&gt;</span>
+<span class="kw">&lt;input</span>
+  <span class="at">type</span>=<span class="st">"email"</span>
+  <span class="at">oninvalid</span>=<span class="st">"this.setCustomValidity(
+    'الرجاء إدخال بريد إلكتروني صحيح')"</span>
+  <span class="at">oninput</span>=<span class="st">"this.setCustomValidity('')"</span>
+<span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- تعطيل التحقق لكامل النموذج --&gt;</span>
+<span class="kw">&lt;form</span> <span class="at">novalidate</span><span class="kw">&gt;</span>...<span class="tg">&lt;/form&gt;</span></pre></div>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>required يمنع إرسال النموذج إذا كان الحقل فارغاً</li><li>pattern يقبل regex للتحقق من صيغة محددة</li><li>title يُظهر رسالة خطأ مخصصة عند عدم مطابقة pattern</li><li>novalidate على &lt;form&gt; يُعطّل التحقق التلقائي كاملاً</li><li>setCustomValidity() من JS لرسائل خطأ عربية مخصصة</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 53 ══ -->
+<div class="lesson-card" id="lesson-53">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 53</div><div class="lesson-header-text"><h2>رفع الموقع — Hosting مجاني</h2><p>نشر موقعك على الإنترنت مجاناً في دقائق</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-theory">📖</div>أفضل منصات Hosting المجانية</div>
+      <div class="concept-grid">
+        <div class="concept-card"><div class="cc-icon">🔺</div><div class="cc-title">Vercel</div><div class="cc-desc">الأسرع والأسهل — اربطه بـ GitHub وانشر تلقائياً عند كل push</div></div>
+        <div class="concept-card"><div class="cc-icon">🌐</div><div class="cc-title">Netlify</div><div class="cc-desc">مميزات رائعة — Forms مجانية، Functions، CDN عالمي</div></div>
+        <div class="concept-card"><div class="cc-icon">🐙</div><div class="cc-title">GitHub Pages</div><div class="cc-desc">مباشرة من GitHub repo — مثالي لمشاريع HTML/CSS بسيطة</div></div>
+        <div class="concept-card"><div class="cc-icon">🔥</div><div class="cc-title">Cloudflare Pages</div><div class="cc-desc">CDN الأسرع عالمياً — مجاني بالكامل للمواقع الثابتة</div></div>
+      </div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-tip">💡</div>خطوات النشر على GitHub Pages</div>
+      <ul class="steps-list">
+        <li><span class="step-num">1</span><span class="step-text">أنشئ حساباً على <strong>github.com</strong> وثبّت Git</span></li>
+        <li><span class="step-num">2</span><span class="step-text">أنشئ Repository جديد وارفع ملفاتك (index.html إلزامي)</span></li>
+        <li><span class="step-num">3</span><span class="step-text">اذهب إلى <strong>Settings → Pages</strong> في الـ Repository</span></li>
+        <li><span class="step-num">4</span><span class="step-text">اختر Branch: <strong>main</strong> ثم اضغط Save</span></li>
+        <li><span class="step-num">5</span><span class="step-text">موقعك يعمل على: <strong>username.github.io/repo-name</strong></span></li>
+      </ul>
+      <div class="note-box tip"><div class="note-icon">🚀</div><div><strong>نصيحة:</strong> لنشر أسرع، اسحب مجلد مشروعك مباشرةً على <strong>netlify.com/drop</strong> — موقعك يعمل في ثوانٍ بدون إنشاء حساب!</div></div>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>Vercel وNetlify وGitHub Pages كلها مجانية لمواقع HTML/CSS</li><li>GitHub Pages الأبسط: repo → Settings → Pages → اختر branch</li><li>Netlify Drop الأسرع: اسحب المجلد وانشر فوراً</li><li>اسم الملف الرئيسي يجب أن يكون index.html</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 54 ══ -->
+<div class="lesson-card" id="lesson-54">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 54</div><div class="lesson-header-text"><h2>خاصية title — التلميح</h2><p>Tooltip عند التمرير — يعمل على أي عنصر HTML</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-demo">🎨</div>جرّب — مرّر الفأرة</div>
+      <div class="demo-box"><div class="demo-label">LIVE — مرّر الفأرة فوق العناصر</div><div class="demo-content" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+        <button title="هذا زر إرسال النموذج" style="background:var(--orange);color:white;border:none;padding:10px 20px;border-radius:8px;font-family:'Tajawal',sans-serif;font-size:0.9rem;cursor:pointer;">إرسال ✉️</button>
+        <img src="https://via.placeholder.com/60x60/F4631E/white?text=IMG" alt="صورة" title="هذه صورة توضيحية — 60×60 بيكسل" style="border-radius:8px;">
+        <abbr title="HyperText Markup Language" style="border-bottom:2px dotted var(--orange);cursor:help;color:var(--orange);">HTML</abbr>
+        <span title="هذا نص عادي مع title" style="border-bottom:2px dashed var(--blue);cursor:help;color:var(--blue);">مرّر هنا</span>
+      </div></div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-code">💻</div>الكود</div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML — title Attribute</span></div>
+<pre><span class="cm">&lt;!-- title على زر --&gt;</span>
+<span class="kw">&lt;button</span> <span class="at">title</span>=<span class="st">"انقر لإرسال النموذج"</span><span class="kw">&gt;</span>
+  <span class="tx">إرسال</span>
+<span class="tg">&lt;/button&gt;</span>
+
+<span class="cm">&lt;!-- title على صورة (معلومة إضافية) --&gt;</span>
+<span class="kw">&lt;img</span> <span class="at">src</span>=<span class="st">"photo.jpg"</span>
+     <span class="at">alt</span>=<span class="st">"صورة المنتج"</span>
+     <span class="at">title</span>=<span class="st">"المنتج الأكثر مبيعاً لعام 2025"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- title على رابط --&gt;</span>
+<span class="kw">&lt;a</span> <span class="at">href</span>=<span class="st">"https://example.com"</span>
+   <span class="at">title</span>=<span class="st">"سيفتح في نفس التبويب"</span><span class="kw">&gt;</span>
+  <span class="tx">اضغط هنا</span>
+<span class="tg">&lt;/a&gt;</span>
+
+<span class="cm">&lt;!-- title على أي عنصر --&gt;</span>
+<span class="kw">&lt;span</span> <span class="at">title</span>=<span class="st">"هذا مصطلح تقني"</span><span class="kw">&gt;</span>
+  <span class="tx">API</span>
+<span class="tg">&lt;/span&gt;</span></pre></div>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>title خاصية عالمية تعمل على أي عنصر HTML</li><li>تظهر كـ tooltip عند التمرير فوق العنصر</li><li>مفيدة للاختصارات، الأزرار، الروابط والصور</li><li>لا تعتمد عليها للمعلومات المهمة — لا تظهر على الموبايل</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 55 ══ -->
+<div class="lesson-card" id="lesson-55">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 55</div><div class="lesson-header-text"><h2>نقاط مهمة في HTML</h2><p>أخطاء شائعة ونصائح احترافية يجب أن تعرفها</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-tip">💡</div>أخطاء شائعة وكيف تتجنبها</div>
+      <div class="compare-grid">
+        <div class="compare-card bad"><div class="cc-head">❌ أخطاء شائعة</div>
+          <ul><li>نسيان alt على الصور</li><li>استخدام &lt;div&gt; بدلاً من الوسوم الدلالية</li><li>حقول بدون name — لا تُرسَل</li><li>نسيان charset=UTF-8</li><li>&lt;title&gt; فارغ أو غير موجود</li><li>مسارات ملفات خاطئة</li></ul>
+        </div>
+        <div class="compare-card good"><div class="cc-head">✅ ممارسات احترافية</div>
+          <ul><li>alt وصفي على كل صورة</li><li>HTML Semantic دائماً</li><li>name على كل حقل نموذج</li><li>charset أول شيء في head</li><li>title فريد ووصفي في كل صفحة</li><li>مسارات نسبية صحيحة</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-attrs">⚙️</div>قواعد الجودة في HTML</div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML Best Practices</span></div>
+<pre><span class="cm">&lt;!-- ✅ صواب: alt وصفي --&gt;</span>
+<span class="kw">&lt;img</span> <span class="at">src</span>=<span class="st">"cat.jpg"</span> <span class="at">alt</span>=<span class="st">"قطة برتقالية تنام"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- ❌ خطأ: alt فارغ --&gt;</span>
+<span class="kw">&lt;img</span> <span class="at">src</span>=<span class="st">"cat.jpg"</span> <span class="at">alt</span>=<span class="st">""</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- ✅ صواب: H1 مرة واحدة فقط --&gt;</span>
+<span class="kw">&lt;h1&gt;</span><span class="tx">عنوان الصفحة الرئيسي</span><span class="tg">&lt;/h1&gt;</span>
+<span class="kw">&lt;h2&gt;</span><span class="tx">عنوان فرعي</span><span class="tg">&lt;/h2&gt;</span>
+
+<span class="cm">&lt;!-- ❌ خطأ: h1 متعدد لأغراض التصميم --&gt;</span>
+<span class="kw">&lt;h1&gt;</span><span class="tx">عنوان</span><span class="tg">&lt;/h1&gt;</span>
+<span class="kw">&lt;h1&gt;</span><span class="tx">عنوان آخر كبير</span><span class="tg">&lt;/h1&gt;</span>
+
+<span class="cm">&lt;!-- ✅ صواب: أزرار بـ type --&gt;</span>
+<span class="kw">&lt;button</span> <span class="at">type</span>=<span class="st">"button"</span><span class="kw">&gt;</span><span class="tx">زر عادي</span><span class="tg">&lt;/button&gt;</span>
+
+<span class="cm">&lt;!-- ❌ خطأ: زر بدون type داخل form --&gt;</span>
+<span class="kw">&lt;button&gt;</span><span class="tx">قد يُرسل النموذج دون قصد!</span><span class="tg">&lt;/button&gt;</span></pre></div>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>H1 مرة واحدة فقط في الصفحة — الباقي H2 H3...</li><li>alt على كل صورة — وصفي وليس "صورة"</li><li>كل حقل نموذج يحتاج name ليُرسَل</li><li>أزرار داخل form تحتاج type صريح</li><li>تحقق من الكود عبر validator.w3.org</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 56 ══ -->
+<div class="lesson-card" id="lesson-56">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 56</div><div class="lesson-header-text"><h2>عنصر NoScript</h2><p>ماذا تعرض للمستخدمين الذين أوقفوا JavaScript؟</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-theory">📖</div>ما هو &lt;noscript&gt;؟</div>
+      <div class="prose"><p>عنصر <strong>&lt;noscript&gt;</strong> يعرض محتواه فقط عندما يكون JavaScript معطّلاً في المتصفح. يُستخدم لعرض رسالة للمستخدم تطلب منه تفعيل JS، أو محتوى بديل.</p></div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-code">💻</div>الكود</div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML — NoScript</span></div>
+<pre><span class="cm">&lt;!-- في head — عادةً CSS بديل --&gt;</span>
+<span class="kw">&lt;noscript&gt;</span>
+  <span class="kw">&lt;link</span> <span class="at">rel</span>=<span class="st">"stylesheet"</span> <span class="at">href</span>=<span class="st">"no-js.css"</span><span class="kw">&gt;</span>
+<span class="tg">&lt;/noscript&gt;</span>
+
+<span class="cm">&lt;!-- في body — رسالة للمستخدم --&gt;</span>
+<span class="kw">&lt;noscript&gt;</span>
+  <span class="kw">&lt;div</span> <span class="at">class</span>=<span class="st">"no-js-banner"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;p&gt;</span>
+      <span class="tx">⚠️ هذا الموقع يحتاج JavaScript لعمله
+      بشكل صحيح.</span>
+    <span class="tg">&lt;/p&gt;</span>
+    <span class="kw">&lt;p&gt;</span>
+      <span class="tx">الرجاء تفعيل JavaScript في إعدادات
+      المتصفح.</span>
+    <span class="tg">&lt;/p&gt;</span>
+  <span class="tg">&lt;/div&gt;</span>
+<span class="tg">&lt;/noscript&gt;</span>
+
+<span class="cm">&lt;!-- محتوى الموقع العادي --&gt;</span>
+<span class="kw">&lt;main&gt;</span><span class="tx">...</span><span class="tg">&lt;/main&gt;</span></pre></div>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>&lt;noscript&gt; يُظهر محتواه فقط إذا كان JS معطّلاً</li><li>يمكن وضعه في head (لـ CSS بديل) أو body (لرسالة للمستخدم)</li><li>مهم لمواقع React وVue التي تعتمد على JS كلياً</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 57 ══ -->
+<div class="lesson-card" id="lesson-57">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 57</div><div class="lesson-header-text"><h2>Meta Theme-Color</h2><p>تلوين شريط عنوان المتصفح على الموبايل</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-theory">📖</div>ما هو Theme-Color؟</div>
+      <div class="prose"><p>وسم <strong>theme-color</strong> يُلوّن شريط عنوان المتصفح على Android Chrome وSafari iOS ليتطابق مع لون موقعك — تفصيل صغير يُحسّن التجربة البصرية كثيراً خاصةً عند تثبيت الموقع كـ PWA.</p></div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-code">💻</div>الكود</div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML — Theme Color</span></div>
+<pre><span class="kw">&lt;head&gt;</span>
+  <span class="cm">&lt;!-- لون ثابت --&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="at">name</span>=<span class="st">"theme-color"</span>
+        <span class="at">content</span>=<span class="st">"#F4631E"</span><span class="kw">&gt;</span>
+
+  <span class="cm">&lt;!-- لون مختلف للوضع الليلي --&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="at">name</span>=<span class="st">"theme-color"</span>
+        <span class="at">content</span>=<span class="st">"#F4631E"</span>
+        <span class="at">media</span>=<span class="st">"(prefers-color-scheme: light)"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="at">name</span>=<span class="st">"theme-color"</span>
+        <span class="at">content</span>=<span class="st">"#111111"</span>
+        <span class="at">media</span>=<span class="st">"(prefers-color-scheme: dark)"</span><span class="kw">&gt;</span>
+<span class="tg">&lt;/head&gt;</span></pre></div>
+      <div class="demo-box"><div class="demo-label">تأثير theme-color</div><div class="demo-content" style="display:flex;gap:16px;flex-wrap:wrap;">
+        <div style="border-radius:10px;overflow:hidden;border:1px solid var(--border);width:140px;">
+          <div style="background:#F4631E;padding:8px 12px;font-size:0.72rem;color:white;font-family:'Fira Code',monospace;">شريط المتصفح</div>
+          <div style="background:white;padding:12px;font-size:0.8rem;color:var(--text);">محتوى الصفحة</div>
+        </div>
+        <div style="border-radius:10px;overflow:hidden;border:1px solid var(--border);width:140px;">
+          <div style="background:#111111;padding:8px 12px;font-size:0.72rem;color:white;font-family:'Fira Code',monospace;">Dark Mode</div>
+          <div style="background:#1a1a1a;padding:12px;font-size:0.8rem;color:#eee;">محتوى الصفحة</div>
+        </div>
+      </div></div>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>theme-color يُلوّن شريط العنوان في Chrome وSafari على الموبايل</li><li>يدعم media query لتغيير اللون حسب وضع النظام (فاتح/داكن)</li><li>مهم عند بناء PWA لتجربة أقرب للتطبيقات الأصيلة</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 58 ══ -->
+<div class="lesson-card" id="lesson-58">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 58</div><div class="lesson-header-text"><h2>Meta UTF-8 — تعمق</h2><p>ما هو الترميز ولماذا UTF-8 الحل الأمثل؟</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-theory">📖</div>ما هو الترميز (Encoding)؟</div>
+      <div class="prose">
+        <p>الحاسوب يخزّن كل شيء كأرقام (0 و 1). الترميز هو الجدول الذي يحدد: أي رقم يقابل أي حرف. مثلاً في ASCII، الرقم 65 = A. لكن ASCII لا يتضمن الحروف العربية ولا الصينية ولا الرموز التعبيرية.</p>
+        <p><strong>UTF-8</strong> (Unicode Transformation Format) يُمثّل أكثر من 140,000 حرف من جميع لغات العالم والرموز — هو المعيار العالمي اليوم.</p>
+      </div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-attrs">⚙️</div>مقارنة الترميزات</div>
+      <table class="attr-table"><thead><tr><th>الترميز</th><th>اللغات المدعومة</th><th>الحجم</th></tr></thead><tbody>
+        <tr><td><code>ASCII</code></td><td>الإنجليزية فقط — 128 حرف</td><td>1 بايت</td></tr>
+        <tr><td><code>ISO-8859-6</code></td><td>العربية + الإنجليزية</td><td>1 بايت</td></tr>
+        <tr><td><code>UTF-16</code></td><td>جميع اللغات</td><td>2-4 بايت</td></tr>
+        <tr><td><code>UTF-8</code></td><td>جميع اللغات + الرموز 🌍</td><td>1-4 بايت متغير</td></tr>
+      </tbody></table>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML — charset</span></div>
+<pre><span class="cm">&lt;!-- يجب أن يكون أول شيء في head --&gt;</span>
+<span class="kw">&lt;meta</span> <span class="at">charset</span>=<span class="st">"UTF-8"</span><span class="kw">&gt;</span>
+
+<span class="cm">&lt;!-- بدون هذا قد تظهر هكذا: --&gt;</span>
+<span class="cm">&lt;!-- Ù…Ø±Ø­Ø¨Ø§ Ø¨Ø§Ù„Ø¹Ø§Ù„Ù… --&gt;</span>
+<span class="cm">&lt;!-- بدلاً من: مرحباً بالعالم --&gt;</span>
+
+<span class="cm">&lt;!-- ملف HTML يجب حفظه بـ UTF-8 أيضاً
+     في VS Code: أسفل اليمين → UTF-8 --&gt;</span></pre></div>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>UTF-8 يدعم جميع لغات العالم والرموز والإيموجي</li><li>بدون charset="UTF-8" قد تظهر الحروف العربية مكسورة</li><li>يجب أن يكون أول سطر في head — قبل أي نص</li><li>احفظ ملف HTML بترميز UTF-8 في محررك أيضاً</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 59 ══ -->
+<div class="lesson-card" id="lesson-59">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 59</div><div class="lesson-header-text"><h2>HTML Emojis</h2><p>إضافة الرموز التعبيرية في HTML بطريقة صحيحة</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-theory">📖</div>طرق إضافة Emoji في HTML</div>
+      <div class="prose"><p>يمكن إضافة الإيموجي في HTML بثلاث طرق: لصقها مباشرةً، استخدام رمز Unicode hex، أو رمز decimal.</p></div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-demo">🎨</div>أمثلة Emoji</div>
+      <div class="emoji-grid">
+        <div class="emoji-cell"><span class="ec-sym">😀</span><span class="ec-code">&amp;#128512;</span></div>
+        <div class="emoji-cell"><span class="ec-sym">🌍</span><span class="ec-code">&amp;#127757;</span></div>
+        <div class="emoji-cell"><span class="ec-sym">❤️</span><span class="ec-code">&amp;#10084;</span></div>
+        <div class="emoji-cell"><span class="ec-sym">⭐</span><span class="ec-code">&amp;#11088;</span></div>
+        <div class="emoji-cell"><span class="ec-sym">🚀</span><span class="ec-code">&amp;#128640;</span></div>
+        <div class="emoji-cell"><span class="ec-sym">💻</span><span class="ec-code">&amp;#128187;</span></div>
+        <div class="emoji-cell"><span class="ec-sym">🔥</span><span class="ec-code">&amp;#128293;</span></div>
+        <div class="emoji-cell"><span class="ec-sym">✅</span><span class="ec-code">&amp;#9989;</span></div>
+      </div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-code">💻</div>الكود</div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML — Emojis</span></div>
+<pre><span class="cm">&lt;!-- الطريقة 1: لصق مباشر (الأسهل) --&gt;</span>
+<span class="kw">&lt;p&gt;</span><span class="tx">أهلاً بالعالم 🌍🚀💻</span><span class="tg">&lt;/p&gt;</span>
+
+<span class="cm">&lt;!-- الطريقة 2: رمز Decimal --&gt;</span>
+<span class="kw">&lt;p&gt;</span><span class="tx">&#128512; &#127757; &#128640;</span><span class="tg">&lt;/p&gt;</span>
+<span class="cm">&lt;!-- اكتبها هكذا: &amp;#128512; --&gt;</span>
+
+<span class="cm">&lt;!-- الطريقة 3: رمز Hex --&gt;</span>
+<span class="kw">&lt;p&gt;</span><span class="tx">&#x1F600; &#x1F30D;</span><span class="tg">&lt;/p&gt;</span>
+<span class="cm">&lt;!-- اكتبها هكذا: &amp;#x1F600; --&gt;</span>
+
+<span class="cm">&lt;!-- emoji في aria-label للوصولية --&gt;</span>
+<span class="kw">&lt;span</span> <span class="at">role</span>=<span class="st">"img"</span> <span class="at">aria-label</span>=<span class="st">"قلب أحمر"</span><span class="kw">&gt;</span>
+  <span class="tx">❤️</span>
+<span class="tg">&lt;/span&gt;</span></pre></div>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>أسهل طريقة: لصق الإيموجي مباشرةً في الكود</li><li>&#x1F600; رمز hex أو &#128512; رمز decimal يعملان أيضاً</li><li>تأكد من charset="UTF-8" وإلا لن تظهر الإيموجي صحيح</li><li>أضف aria-label للإيموجي الوظيفية لأسباب الوصولية</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 60 ══ -->
+<div class="lesson-card" id="lesson-60">
+  <div class="lesson-header"><div class="lesson-num-badge">LESSON 60</div><div class="lesson-header-text"><h2>HTML Symbols — الرموز الخاصة</h2><p>HTML Entities — الكيانات والرموز الخاصة</p></div></div>
+  <div class="lesson-body">
+    <div class="section"><div class="section-title"><div class="section-icon icon-theory">📖</div>لماذا HTML Entities؟</div>
+      <div class="prose"><p>بعض الرموز لها معنى خاص في HTML — مثل &lt; و&gt; و& — لو كتبتها مباشرةً سيفسّرها المتصفح كـ HTML. الحل: استخدام Entities.</p></div>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-demo">🎨</div>جدول الرموز الأساسية</div>
+      <table class="attr-table"><thead><tr><th>الرمز</th><th>الكيان</th><th>الاسم</th></tr></thead><tbody>
+        <tr><td style="font-size:1.1rem;">&lt;</td><td><code>&amp;lt;</code></td><td>أقل من (Less Than)</td></tr>
+        <tr><td style="font-size:1.1rem;">&gt;</td><td><code>&amp;gt;</code></td><td>أكبر من (Greater Than)</td></tr>
+        <tr><td style="font-size:1.1rem;">&amp;</td><td><code>&amp;amp;</code></td><td>And (&)</td></tr>
+        <tr><td style="font-size:1.1rem;">&quot;</td><td><code>&amp;quot;</code></td><td>علامة اقتباس</td></tr>
+        <tr><td style="font-size:1.1rem;">&copy;</td><td><code>&amp;copy;</code></td><td>حقوق النشر</td></tr>
+        <tr><td style="font-size:1.1rem;">&reg;</td><td><code>&amp;reg;</code></td><td>علامة مسجلة</td></tr>
+        <tr><td style="font-size:1.1rem;">&trade;</td><td><code>&amp;trade;</code></td><td>علامة تجارية</td></tr>
+        <tr><td style="font-size:1.1rem;">&nbsp;</td><td><code>&amp;nbsp;</code></td><td>مسافة غير قابلة للكسر</td></tr>
+        <tr><td style="font-size:1.1rem;">&rarr;</td><td><code>&amp;rarr;</code></td><td>سهم لليمين →</td></tr>
+        <tr><td style="font-size:1.1rem;">&larr;</td><td><code>&amp;larr;</code></td><td>سهم لليسار ←</td></tr>
+        <tr><td style="font-size:1.1rem;">&hearts;</td><td><code>&amp;hearts;</code></td><td>قلب ♥</td></tr>
+        <tr><td style="font-size:1.1rem;">&euro;</td><td><code>&amp;euro;</code></td><td>رمز اليورو €</td></tr>
+      </tbody></table>
+    </div>
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-code">💻</div>الكود</div>
+      <div class="code-block" dir="ltr"><div class="code-header"><div class="code-dots"><span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span></div><span class="code-lang">HTML — Entities</span></div>
+<pre><span class="cm">&lt;!-- لعرض &lt; و&gt; كنص --&gt;</span>
+<span class="kw">&lt;p&gt;</span><span class="tx">وسم الفقرة يُكتب هكذا: &amp;lt;p&amp;gt;</span><span class="tg">&lt;/p&gt;</span>
+
+<span class="cm">&lt;!-- حقوق النشر --&gt;</span>
+<span class="kw">&lt;footer&gt;</span>
+  <span class="tx">&amp;copy; 2025 — جميع الحقوق محفوظة</span>
+<span class="tg">&lt;/footer&gt;</span>
+
+<span class="cm">&lt;!-- مسافة إضافية غير قابلة للكسر --&gt;</span>
+<span class="kw">&lt;p&gt;</span><span class="tx">الوحدة 1&amp;nbsp;&amp;nbsp;&amp;nbsp;الوحدة 2</span><span class="tg">&lt;/p&gt;</span>
+
+<span class="cm">&lt;!-- رموز مالية --&gt;</span>
+<span class="kw">&lt;p&gt;</span><span class="tx">السعر: 99&amp;euro; أو 149 MAD</span><span class="tg">&lt;/p&gt;</span></pre></div>
+    </div>
+    <div class="summary-box"><h3>// ملخص</h3><ul class="summary-list"><li>&amp;lt; و&amp;gt; لعرض أقواس HTML كنص بدون تفسيرها</li><li>&amp;amp; لعرض & كنص</li><li>&amp;nbsp; مسافة لا تُكسر السطر عندها</li><li>&amp;copy; لرمز حقوق النشر © في التذييل</li></ul></div>
+  </div>
+</div>
+
+<!-- ══ LESSON 61 ══ -->
+<div class="lesson-card" id="lesson-61">
+  <div class="lesson-header"><div class="lesson-num-badge">FIN</div><div class="lesson-header-text"><h2>نهاية دورة </h2><p>استكمال متطلبات الدورة والحصول على شهادة الإتمام</p></div></div>
+  <div class="lesson-body">
+    <div class="cert-banner">
+      <div class="cert-icon">🏆</div>
+      <div class="cert-title">تهانينا! أتممت الدورة كاملاً</div>
+      <div class="cert-desc">لقد أكملت 60 درساً HTML الاحترافية بالعربية</div>
+      <!--<button class="cert-btn" onclick="alert('سيتم توجيهك لصفحة طلب الشهادة!')">📜 اطلب شهادتك الآن</button>-->
+    </div>
+    <!--<div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-tip">💡</div>متطلبات الشهادة</div>
+      <ul class="steps-list">
+        <li><span class="step-num">✓</span><span class="step-text"><strong>إتمام جميع الدروس</strong> — مشاهدة الـ 63 درس كاملاً</span></li>
+        <li><span class="step-num">✓</span><span class="step-text"><strong>تسليم المشروع النهائي</strong> — صفحة HTML/CSS متكاملة</span></li>
+        <li><span class="step-num">✓</span><span class="step-text"><strong>اجتياز الاختبار</strong> — 70% كحد أدنى للنجاح</span></li>
+        <li><span class="step-num">✓</span><span class="step-text"><strong>ملء نموذج الطلب</strong> — الاسم الكامل والبريد الإلكتروني</span></li>
+      </ul>
+    </div>
+  -->
+    
+    <div class="lesson-divider"></div>
+    <div class="section"><div class="section-title"><div class="section-icon icon-theory">📖</div>ماذا تتعلم بعد الدورة؟</div>
+      <div class="concept-grid">
+        <div class="concept-card"><div class="cc-icon">🎨</div><div class="cc-title">CSS متقدم</div><div class="cc-desc">Flexbox · Grid · Animations · Variables · Media Queries</div></div>
+        <div class="concept-card"><div class="cc-icon">⚡</div><div class="cc-title">JavaScript</div><div class="cc-desc">DOM · Events · Fetch API · ES6+ · Async/Await</div></div>
+        <div class="concept-card"><div class="cc-icon">⚛️</div><div class="cc-title">React</div><div class="cc-desc">Components · Hooks · State · Props · React Router</div></div>
+        <div class="concept-card"><div class="cc-icon">🔧</div><div class="cc-title">Git & GitHub</div><div class="cc-desc">Version Control · Branches · Pull Requests · CI/CD</div></div>
+      </div>
+    </div>
+    <div class="summary-box"><h3>// رحلتك لم تنتهِ — بدأت فقط!</h3><ul class="summary-list"><li>أتقنت HTML الكاملة — الأساس الذي يبنى عليه كل شيء</li><li>الخطوة التالية: CSS متقدم (Flexbox وGrid) ثم JavaScript</li><li>ابنِ مشروعاً حقيقياً وانشره </li><li>انضم لمجتمع المطورين — تعلّم ببطء وبثبات</li></ul></div>
+  </div>
+</div>
+
+</div><!-- end main-wrap -->
+
+<footer class="course-footer">
+  <div class="footer-nav">
+    <a href="5.html"><button class="footer-badge">← الوحدة الخامسة</button></a>
+    <button class="complete-btn" onclick="alert('🎉 أحسنت! أتممت دورة HTML وCSS الكاملة بالعربية!\n\n60 درساً · 6 وحدات · مبروك 🏆')">
+      🏆 إتمام الدورة — 60 درساً ✦
+    </button>
+  </div>
+  <p>الوحدة 6 من 6 — الوحدة الأخيرة &nbsp;·&nbsp; دورة HTML والـ CSS الكاملة بالعربية &nbsp;·&nbsp; 60 درساً</p>
+  <p style="margin-top:8px;font-size:0.78rem;color:rgba(0,0,0,0.3);">المحاضر: زكرياء · ISPITS · النادي العلمي</p>
+</footer>
+
+<script>
+function toggleAnswer(btn){const c=btn.nextElementSibling;c.classList.toggle('visible');btn.textContent=c.classList.contains('visible')?'▲ إخفاء الحل':'▼ عرض الحل';}
+function scrollToLesson(id,btn){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});if(btn){document.querySelectorAll('.idx-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}}
+const lessons=['lesson-36','lesson-37','lesson-38','lesson-39','lesson-40','lesson-41','lesson-42','lesson-43','lesson-44','lesson-45','lesson-46','lesson-47','lesson-48','lesson-49','lesson-50','lesson-51','lesson-52','lesson-53','lesson-54','lesson-55','lesson-56','lesson-57','lesson-58','lesson-59','lesson-60','lesson-61'];
+const buttons=document.querySelectorAll('.idx-btn');
+const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){const idx=lessons.indexOf(entry.target.id);if(idx>-1){buttons.forEach(b=>b.classList.remove('active'));if(buttons[idx])buttons[idx].classList.add('active');}}}),{rootMargin:'-25% 0px -65% 0px'}});
+lessons.forEach(id=>{const el=document.getElementById(id);if(el)observer.observe(el);});
+</script>
+</body>
+</html>
